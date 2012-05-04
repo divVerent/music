@@ -1,5 +1,6 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES ?= timidity lmms-mdaPiano
+OUTTYPES ?= timidity
+# lmms-mdaPiano
 DO_MANUAL ?= no
 
 CP ?= cp

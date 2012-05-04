@@ -19,7 +19,7 @@ OGGENCFLAGS ?= -q3
 FLAC ?= flac
 FLACFLAGS ?= -8
 
-RG = $(shell echo */*.rg)
+RG = $(shell ls */*.rg | grep -v -- -ramp)
 RAMP_RG = $(patsubst %.rg,%-ramp.rg,$(RG))
 MID = $(patsubst %.rg,%.mid,$(RG))
 FORMAT0_MID = $(patsubst %.rg,%-format0.mid,$(RG))

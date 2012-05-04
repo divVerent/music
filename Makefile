@@ -1,5 +1,5 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES ?= timidity
+OUTTYPES ?= timidity lmms-mdaPiano
 
 CP ?= cp
 PATCH ?= patch
@@ -32,14 +32,35 @@ WAV = $(patsubst %.rg,%.wav,$(RG))
 AUDIO = $(foreach OUTTYPE,$(OUTTYPES),$(foreach OUTFORMAT,$(OUTFORMATS),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 
 
+CLEANTEMP = $(RM) *.tmp */*.tmp
+
 
 all: audio sheet
 
 audio: $(AUDIO)
+	$(CLEANTEMP)
 
 sheet: $(PDF)
+	$(CLEANTEMP)
 
 manual: $(MID) $(MMP) $(LY_ORIG)
+	$(CLEANTEMP)
+
+
+support/mdaPiano.dll:
+	mkdir -p support && cd support && wget -O- http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download | bsdtar xvf - mdaPiano.dll
+
+support-files: support/mdaPiano.dll
+
+
+LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
+
+
+# mda Piano (LMMS)
+%-lmms-mdaPiano.lmms.tmp: %.mmp
+	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $@
+%.wav: %.lmms.tmp support-files
+	lmms -r $< -o $@
 
 
 # Format 0 (for LMMS)
@@ -117,7 +138,9 @@ manual: $(MID) $(MMP) $(LY_ORIG)
 
 # Cleanup
 clean:
+	$(CLEANTEMP)
 	$(RM) $(AUDIO) $(WAV) $(LY) $(PDF)
 
 realclean: clean
-	$(RM) $(RAMP_RG) $(LY_ORIG) $(MID) $(MMP) $(FORMAT0_MID)
+	$(CLEANTEMP)
+	$(RM) support $(RAMP_RG) $(LY_ORIG) $(MID) $(MMP) $(FORMAT0_MID)

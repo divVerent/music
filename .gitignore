@@ -5,3 +5,5 @@
 */*.wav
 */*.ly
 */*.pdf
+support/
+*/*.tmp

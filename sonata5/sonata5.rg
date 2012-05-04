@@ -40,155 +40,36 @@
   <timesignature time="0" numerator="4" denominator="4"/>
 
   <tempo time="0" bph="7200" tempo="12000000"/>
-  <tempo time="130560" bph="7260" tempo="12100000"/>
-  <tempo time="134400" bph="7320" tempo="12200000"/>
-  <tempo time="138240" bph="7380" tempo="12300000"/>
-  <tempo time="142080" bph="7440" tempo="12400000"/>
-  <tempo time="145920" bph="7500" tempo="12500000"/>
-  <tempo time="149760" bph="7560" tempo="12600000"/>
-  <tempo time="153600" bph="7620" tempo="12700000"/>
-  <tempo time="157440" bph="7680" tempo="12800000"/>
-  <tempo time="161280" bph="7740" tempo="12900000"/>
-  <tempo time="165120" bph="7800" tempo="13000000"/>
-  <tempo time="168960" bph="7860" tempo="13100000"/>
-  <tempo time="172800" bph="7920" tempo="13200000"/>
-  <tempo time="176640" bph="7980" tempo="13300000"/>
-  <tempo time="180480" bph="8040" tempo="13400000"/>
-  <tempo time="184320" bph="8100" tempo="13500000"/>
-  <tempo time="188160" bph="8160" tempo="13600000"/>
-  <tempo time="192000" bph="8220" tempo="13700000"/>
-  <tempo time="195840" bph="8280" tempo="13800000"/>
-  <tempo time="199680" bph="8340" tempo="13900000"/>
-  <tempo time="203520" bph="8400" tempo="14000000"/>
-  <tempo time="207360" bph="8460" tempo="14100000"/>
-  <tempo time="211200" bph="8520" tempo="14200000"/>
-  <tempo time="215040" bph="8580" tempo="14300000"/>
-  <tempo time="218880" bph="8640" tempo="14400000"/>
-  <tempo time="222720" bph="8700" tempo="14500000"/>
-  <tempo time="226560" bph="8760" tempo="14600000"/>
-  <tempo time="230400" bph="8820" tempo="14700000"/>
-  <tempo time="234240" bph="8880" tempo="14800000"/>
-  <tempo time="238080" bph="8940" tempo="14900000"/>
+  <tempo time="130560" bph="7200" tempo="12000000" target="0"/>
   <tempo time="241920" bph="9000" tempo="15000000"/>
-  <tempo time="245760" bph="8400" tempo="14000000"/>
-  <tempo time="246720" bph="7800" tempo="13000000"/>
-  <tempo time="247680" bph="7200" tempo="12000000"/>
+  <tempo time="245760" bph="9000" tempo="15000000" target="0"/>
   <tempo time="248640" bph="6600" tempo="11000000"/>
   <tempo time="249600" bph="8400" tempo="14000000"/>
-  <tempo time="296640" bph="8100" tempo="13500000"/>
-  <tempo time="297600" bph="7800" tempo="13000000"/>
-  <tempo time="298560" bph="7500" tempo="12500000"/>
+  <tempo time="296640" bph="8400" tempo="14000000" target="0"/>
   <tempo time="299520" bph="7200" tempo="12000000"/>
-  <tempo time="437760" bph="7260" tempo="12100000"/>
-  <tempo time="441600" bph="7320" tempo="12200000"/>
-  <tempo time="445440" bph="7380" tempo="12300000"/>
-  <tempo time="449280" bph="7440" tempo="12400000"/>
-  <tempo time="453120" bph="7500" tempo="12500000"/>
-  <tempo time="456960" bph="7560" tempo="12600000"/>
-  <tempo time="460800" bph="7620" tempo="12700000"/>
-  <tempo time="464640" bph="7680" tempo="12800000"/>
-  <tempo time="468480" bph="7740" tempo="12900000"/>
-  <tempo time="472320" bph="7800" tempo="13000000"/>
-  <tempo time="476160" bph="7860" tempo="13100000"/>
-  <tempo time="480000" bph="7920" tempo="13200000"/>
-  <tempo time="483840" bph="7980" tempo="13300000"/>
-  <tempo time="487680" bph="8040" tempo="13400000"/>
-  <tempo time="491520" bph="8100" tempo="13500000"/>
-  <tempo time="495360" bph="8160" tempo="13600000"/>
-  <tempo time="499200" bph="8220" tempo="13700000"/>
-  <tempo time="503040" bph="8280" tempo="13800000"/>
-  <tempo time="506880" bph="8340" tempo="13900000"/>
-  <tempo time="510720" bph="8400" tempo="14000000"/>
-  <tempo time="514560" bph="8460" tempo="14100000"/>
-  <tempo time="518400" bph="8520" tempo="14200000"/>
-  <tempo time="522240" bph="8580" tempo="14300000"/>
-  <tempo time="526080" bph="8640" tempo="14400000"/>
-  <tempo time="529920" bph="8700" tempo="14500000"/>
-  <tempo time="533760" bph="8760" tempo="14600000"/>
-  <tempo time="537600" bph="8820" tempo="14700000"/>
-  <tempo time="541440" bph="8880" tempo="14800000"/>
-  <tempo time="545280" bph="8940" tempo="14900000"/>
+  <tempo time="437760" bph="7200" tempo="12000000" target="0"/>
   <tempo time="549120" bph="9000" tempo="15000000"/>
-  <tempo time="552960" bph="8400" tempo="14000000"/>
-  <tempo time="553920" bph="7800" tempo="13000000"/>
-  <tempo time="554880" bph="7200" tempo="12000000"/>
+  <tempo time="552960" bph="9000" tempo="15000000" target="0"/>
   <tempo time="555840" bph="6600" tempo="11000000"/>
   <tempo time="556800" bph="8400" tempo="14000000"/>
-  <tempo time="603840" bph="8100" tempo="13500000"/>
-  <tempo time="604800" bph="7800" tempo="13000000"/>
-  <tempo time="605760" bph="7500" tempo="12500000"/>
+  <tempo time="603840" bph="8400" tempo="14000000" target="0"/>
   <tempo time="606720" bph="7200" tempo="12000000"/>
   <tempo time="712320" bph="2400" tempo="4000000"/>
   <tempo time="713280" bph="7200" tempo="12000000"/>
-  <tempo time="840960" bph="7260" tempo="12100000"/>
-  <tempo time="844800" bph="7320" tempo="12200000"/>
-  <tempo time="848640" bph="7380" tempo="12300000"/>
-  <tempo time="852480" bph="7440" tempo="12400000"/>
-  <tempo time="856320" bph="7500" tempo="12500000"/>
-  <tempo time="860160" bph="7560" tempo="12600000"/>
-  <tempo time="864000" bph="7620" tempo="12700000"/>
-  <tempo time="867840" bph="7680" tempo="12800000"/>
-  <tempo time="871680" bph="7740" tempo="12900000"/>
-  <tempo time="875520" bph="7800" tempo="13000000"/>
-  <tempo time="879360" bph="7860" tempo="13100000"/>
-  <tempo time="883200" bph="7920" tempo="13200000"/>
-  <tempo time="887040" bph="7980" tempo="13300000"/>
-  <tempo time="890880" bph="8040" tempo="13400000"/>
-  <tempo time="894720" bph="8100" tempo="13500000"/>
-  <tempo time="898560" bph="8160" tempo="13600000"/>
-  <tempo time="902400" bph="8220" tempo="13700000"/>
-  <tempo time="906240" bph="8280" tempo="13800000"/>
-  <tempo time="910080" bph="8340" tempo="13900000"/>
-  <tempo time="913920" bph="8400" tempo="14000000"/>
-  <tempo time="917760" bph="8460" tempo="14100000"/>
-  <tempo time="921600" bph="8520" tempo="14200000"/>
-  <tempo time="925440" bph="8580" tempo="14300000"/>
-  <tempo time="929280" bph="8640" tempo="14400000"/>
-  <tempo time="933120" bph="8700" tempo="14500000"/>
-  <tempo time="936960" bph="8760" tempo="14600000"/>
-  <tempo time="940800" bph="8820" tempo="14700000"/>
-  <tempo time="944640" bph="8880" tempo="14800000"/>
-  <tempo time="948480" bph="8940" tempo="14900000"/>
+  <tempo time="840960" bph="7200" tempo="12000000" target="0"/>
   <tempo time="952320" bph="9000" tempo="15000000"/>
-  <tempo time="956160" bph="8400" tempo="14000000"/>
-  <tempo time="957120" bph="7800" tempo="13000000"/>
-  <tempo time="958080" bph="7200" tempo="12000000"/>
+  <tempo time="956160" bph="9000" tempo="15000000" target="0"/>
   <tempo time="959040" bph="6600" tempo="11000000"/>
   <tempo time="960000" bph="8400" tempo="14000000"/>
-  <tempo time="1007040" bph="8100" tempo="13500000"/>
-  <tempo time="1008000" bph="7800" tempo="13000000"/>
-  <tempo time="1008960" bph="7500" tempo="12500000"/>
+  <tempo time="1007040" bph="8400" tempo="14000000" target="0"/>
   <tempo time="1009920" bph="7200" tempo="12000000"/>
-  <tempo time="1021440" bph="7020" tempo="11700000"/>
-  <tempo time="1022400" bph="6840" tempo="11400000"/>
-  <tempo time="1023360" bph="6660" tempo="11100000"/>
-  <tempo time="1024320" bph="6480" tempo="10800000"/>
-  <tempo time="1025280" bph="6300" tempo="10500000"/>
-  <tempo time="1026240" bph="6120" tempo="10200000"/>
-  <tempo time="1027200" bph="5940" tempo="9900000"/>
-  <tempo time="1028160" bph="5760" tempo="9600000"/>
-  <tempo time="1029120" bph="5580" tempo="9300000"/>
-  <tempo time="1030080" bph="5400" tempo="9000000"/>
-  <tempo time="1031040" bph="5220" tempo="8700000"/>
-  <tempo time="1032000" bph="5040" tempo="8400000"/>
-  <tempo time="1032960" bph="4860" tempo="8100000"/>
-  <tempo time="1033920" bph="4680" tempo="7800000"/>
+  <tempo time="1021440" bph="7200" tempo="12000000" target="0"/>
   <tempo time="1034880" bph="4500" tempo="7500000"/>
 
 <metadata>
 <property name="copyright" value="Copyright (c) 2012 Rudolf Polzer"/>
-<property name="composer" value=""/>
 <property name="title" value="Sonata 5"/>
 <property name="subtitle" value="in em"/>
-<property name="arranger" value=""/>
-<property name="dedication" value=""/>
-<property name="subsubtitle" value=""/>
-<property name="poet" value=""/>
-<property name="meter" value=""/>
-<property name="opus" value=""/>
-<property name="instrument" value=""/>
-<property name="piece" value=""/>
-<property name="tagline" value=""/>
 
 
 </metadata>
@@ -205,7 +86,7 @@
 
 
 <configuration>
-    <zoomlevel type="Int">1536000</zoomlevel>
+    <zoomlevel type="Int">384000</zoomlevel>
     <transportmode type="String">RealMode</transportmode>
 </configuration>
 

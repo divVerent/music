@@ -61,10 +61,15 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 %-lmms-mdaPiano.lmms.tmp: %.mmp
 	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $@
 %.wav: %.lmms.tmp support-files
-	lmms -r $< -o $@
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Please export as $@
+	@echo
+	@echo
+	lmms $@
 
 
-ifeq (yes,$(DO_MANUAL))
 # Format 0 (for LMMS)
 %-format0.mid: %.mid
 	bin/to_format0.pl $< $@
@@ -97,7 +102,6 @@ ifeq (yes,$(DO_MANUAL))
 	@echo
 	rosegarden $< >/dev/null 2>&1
 	[ -f $@ ]
-endif
 
 
 # Rosegarden -> Lilypond (MANUAL)

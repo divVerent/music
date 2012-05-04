@@ -1,0 +1,374 @@
+--- sonata5.ly.orig	2012-05-04 12:44:49.990379863 +0200
++++ sonata5.ly	2012-05-04 13:40:57.522136378 +0200
+@@ -7,149 +7,14 @@
+     title = "Sonata 5"
+     tagline = "Created using Rosegarden 11.11 and LilyPond"
+ }
+-#(set-global-staff-size 23)
++#(set-global-staff-size 22)
+ #(set-default-paper-size "a4")
+ global = { 
+     \time 4/4
+     
+ }
+ globalTempo = {
+-    \tempo 4 = 120  \skip 1*33 \skip 4 
+-    \override Score.MetronomeMark #'transparent = ##t
+-    \tempo 4 = 121  \skip 1 
+-    \tempo 4 = 122  \skip 1 
+-    \tempo 4 = 123  \skip 1 
+-    \tempo 4 = 124  \skip 1 
+-    \tempo 4 = 125  \skip 1 
+-    \tempo 4 = 126  \skip 1 
+-    \tempo 4 = 127  \skip 1 
+-    \tempo 4 = 128  \skip 1 
+-    \tempo 4 = 129  \skip 1 
+-    \tempo 4 = 130  \skip 1 
+-    \tempo 4 = 131  \skip 1 
+-    \tempo 4 = 132  \skip 1 
+-    \tempo 4 = 133  \skip 1 
+-    \tempo 4 = 134  \skip 1 
+-    \tempo 4 = 135  \skip 1 
+-    \tempo 4 = 136  \skip 1 
+-    \tempo 4 = 137  \skip 1 
+-    \tempo 4 = 138  \skip 1 
+-    \tempo 4 = 139  \skip 1 
+-    \tempo 4 = 140  \skip 1 
+-    \tempo 4 = 141  \skip 1 
+-    \tempo 4 = 142  \skip 1 
+-    \tempo 4 = 143  \skip 1 
+-    \tempo 4 = 144  \skip 1 
+-    \tempo 4 = 145  \skip 1 
+-    \tempo 4 = 146  \skip 1 
+-    \tempo 4 = 147  \skip 1 
+-    \tempo 4 = 148  \skip 1 
+-    \tempo 4 = 149  \skip 1 
+-    \tempo 4 = 150  \skip 1 
+-    \tempo 4 = 140  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 120  \skip 4 
+-    \tempo 4 = 110  \skip 4 
+-    \tempo 4 = 140  \skip 4 \skip 2 \skip 1*11 \skip 2 
+-    \tempo 4 = 135  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 125  \skip 4 
+-    \tempo 4 = 120  \skip 1*36 
+-    \tempo 4 = 121  \skip 1 
+-    \tempo 4 = 122  \skip 1 
+-    \tempo 4 = 123  \skip 1 
+-    \tempo 4 = 124  \skip 1 
+-    \tempo 4 = 125  \skip 1 
+-    \tempo 4 = 126  \skip 1 
+-    \tempo 4 = 127  \skip 1 
+-    \tempo 4 = 128  \skip 1 
+-    \tempo 4 = 129  \skip 1 
+-    \tempo 4 = 130  \skip 1 
+-    \tempo 4 = 131  \skip 1 
+-    \tempo 4 = 132  \skip 1 
+-    \tempo 4 = 133  \skip 1 
+-    \tempo 4 = 134  \skip 1 
+-    \tempo 4 = 135  \skip 1 
+-    \tempo 4 = 136  \skip 1 
+-    \tempo 4 = 137  \skip 1 
+-    \tempo 4 = 138  \skip 1 
+-    \tempo 4 = 139  \skip 1 
+-    \tempo 4 = 140  \skip 1 
+-    \tempo 4 = 141  \skip 1 
+-    \tempo 4 = 142  \skip 1 
+-    \tempo 4 = 143  \skip 1 
+-    \tempo 4 = 144  \skip 1 
+-    \tempo 4 = 145  \skip 1 
+-    \tempo 4 = 146  \skip 1 
+-    \tempo 4 = 147  \skip 1 
+-    \tempo 4 = 148  \skip 1 
+-    \tempo 4 = 149  \skip 1 
+-    \tempo 4 = 150  \skip 1 
+-    \tempo 4 = 140  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 120  \skip 4 
+-    \tempo 4 = 110  \skip 4 
+-    \tempo 4 = 140  \skip 4 \skip 2 \skip 1*11 \skip 2 
+-    \tempo 4 = 135  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 125  \skip 4 
+-    \tempo 4 = 120  \skip 2 \skip 1*27 
+-    \tempo 4 = 40  \skip 4 
+-    \tempo 4 = 120  \skip 1*33 \skip 4 
+-    \tempo 4 = 121  \skip 1 
+-    \tempo 4 = 122  \skip 1 
+-    \tempo 4 = 123  \skip 1 
+-    \tempo 4 = 124  \skip 1 
+-    \tempo 4 = 125  \skip 1 
+-    \tempo 4 = 126  \skip 1 
+-    \tempo 4 = 127  \skip 1 
+-    \tempo 4 = 128  \skip 1 
+-    \tempo 4 = 129  \skip 1 
+-    \tempo 4 = 130  \skip 1 
+-    \tempo 4 = 131  \skip 1 
+-    \tempo 4 = 132  \skip 1 
+-    \tempo 4 = 133  \skip 1 
+-    \tempo 4 = 134  \skip 1 
+-    \tempo 4 = 135  \skip 1 
+-    \tempo 4 = 136  \skip 1 
+-    \tempo 4 = 137  \skip 1 
+-    \tempo 4 = 138  \skip 1 
+-    \tempo 4 = 139  \skip 1 
+-    \tempo 4 = 140  \skip 1 
+-    \tempo 4 = 141  \skip 1 
+-    \tempo 4 = 142  \skip 1 
+-    \tempo 4 = 143  \skip 1 
+-    \tempo 4 = 144  \skip 1 
+-    \tempo 4 = 145  \skip 1 
+-    \tempo 4 = 146  \skip 1 
+-    \tempo 4 = 147  \skip 1 
+-    \tempo 4 = 148  \skip 1 
+-    \tempo 4 = 149  \skip 1 
+-    \tempo 4 = 150  \skip 1 
+-    \tempo 4 = 140  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 120  \skip 4 
+-    \tempo 4 = 110  \skip 4 
+-    \tempo 4 = 140  \skip 4 \skip 2 \skip 1*11 \skip 2 
+-    \tempo 4 = 135  \skip 4 
+-    \tempo 4 = 130  \skip 4 
+-    \tempo 4 = 125  \skip 4 
+-    \tempo 4 = 120  \skip 1*3 
+-    \tempo 4 = 117  \skip 4 
+-    \tempo 4 = 114  \skip 4 
+-    \tempo 4 = 111  \skip 4 
+-    \tempo 4 = 108  \skip 4 
+-    \tempo 4 = 105  \skip 4 
+-    \tempo 4 = 102  \skip 4 
+-    \tempo 4 = 99  \skip 4 
+-    \tempo 4 = 96  \skip 4 
+-    \tempo 4 = 93  \skip 4 
+-    \tempo 4 = 90  \skip 4 
+-    \tempo 4 = 87  \skip 4 
+-    \tempo 4 = 84  \skip 4 
+-    \tempo 4 = 81  \skip 4 
+-    \tempo 4 = 78  \skip 4 
+-    \tempo 4 = 75  
++    \tempo 4 = 120
+ }
+ \score {
+ << % common
+@@ -178,21 +43,21 @@
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' \< fis' 8 g'  |
+ %% 5
+-                    g' 32 -\f \! a' 8.. g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
++                    \acciaccatura g' 8 a' 4 -\f  g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' \< fis' 8 g'  |
+-                    fis' 32 -\f \! a' 8.. fis' 8 \> dis' e' 4 g' 8 -\mp \! fis'  |
++                    \acciaccatura fis' 8 a' 4 -\f fis' 8 \> dis' e' 4 g' 8 -\mp \! fis'  |
+ %% 10
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' \< fis' 8 g'  |
+-                    g' 32 -\f \! a' 8.. g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
++                    \acciaccatura g' 8 a' 4 -\f  g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
+                     g' 4 h e' g' 8 fis'  |
+ %% 15
+                     g' 4 h e' g' 8 fis'  |
+                     g' 4 h e' \< fis' 8 g'  |
+-                    fis' 32 -\f \! a' 8.. fis' 8 dis' e' 4 r  |
++                    \acciaccatura fis' 8 a' 4 -\f fis' 8 dis' e' 4 r  |
+                     g' 4 -\mp e' 8 h g' 4 e' 8 h  |
+                     a' 4 fis' 8 dis' a' 4 fis' 8 dis'  |
+ %% 20
+@@ -273,7 +138,7 @@
+                     < e' h' > 1 ^\markup { \bold \large "a tempo" }  |
+ %% 80
+                     < h' g'' > 2 < h' fis'' >  |
+-                    < g'' h' > 2.  |
++                    < g'' h' > 2.
+                  } % close repeat
+             } % Voice
+ 
+@@ -283,19 +148,19 @@
+ 
+                 \skip 4 \skip 1*79 \skip 2 \skip 4 
+                 \clef "treble"
+-                \key e \minor
++                %\key e \minor
+                 g' 8 _\markup { \bold \italic "" } -\mf -\accent fis' -\accent  |
+                 g' 4 -\accent h e' g' 8 fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' fis' 8 g'  |
+ %% 165
+-                g' 32 a' 8.. g' 8 fis' e' 4 d'' 8 -\accent cis'' -\accent  |
++                \acciaccatura g' 8 a' 4 g' 8 fis' e' 4 d'' 8 -\accent cis'' -\accent  |
+                 d'' 4 -\accent fis'' h' d'' 8 cis''  |
+                 d'' 4 fis'' h' d'' 8 cis''  |
+                 d'' 4 fis'' h' cis'' 8 d''  |
+-                d'' 32 e'' 8.. d'' 8 cis'' h' 4 h' 8 a'  |
++                \acciaccatura d'' 8 e'' 4 d'' 8 cis'' h' 4 h' 8 a'  |
+ %% 170
+-                a' 32 g' 8.. g' 8 fis' e' 4 < e' h' g'' > -\accent  |
++                \acciaccatura a' 8 g' 4 g' 8 fis' e' 4 < e' h' g'' > -\accent  |
+                 e' 4. \> e' 8 e' 4 h 
+                 % warning: overlong bar truncated here |
+                 fis' 4. fis' 8 fis' 4 h  |
+@@ -315,7 +180,7 @@
+                 fis' 4. fis' 8 fis' 4 h  |
+ %% 185
+                 g' 8 -\mp \! fis' g' a' g' 4 fis'  |
+-                h' 4 -\f dis' e' -\fermata  |
++                h' 4 -\f dis' e' -\fermata
+             } % Voice
+ 
+             \context Voice = "voice 3" {
+@@ -324,27 +189,27 @@
+ 
+                 \skip 4 \skip 1*104 \skip 2 \skip 4 
+                 \clef "treble"
+-                \key e \minor
++                %\key e \minor
+                 g' 8 -\mp fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' \< fis' 8 g'  |
+ %% 190
+-                g' 32 -\f \! a' 8.. g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
++                \acciaccatura g' 8 a' 4 -\f g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' \< fis' 8 g'  |
+-                fis' 32 -\f \! a' 8.. fis' 8 \> dis' e' 4 g' 8 -\mp \! fis'  |
++                \acciaccatura fis' 8 a' 4 -\f fis' 8 \> dis' e' 4 g' 8 -\mp \! fis'  |
+ %% 195
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' \< fis' 8 g'  |
+-                g' 32 -\f \! a' 8.. g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
++                \acciaccatura g' 4 a' 4 -\f g' 8 \> fis' e' 4 g' 8 -\mp \! fis'  |
+                 g' 4 h e' g' 8 fis'  |
+ %% 200
+                 g' 4 h e' g' 8 fis'  |
+                 g' 4 h e' \< fis' 8 g'  |
+-                fis' 32 -\f \! a' 8.. fis' 8 dis' e' 4 r  |
++                \acciaccatura fis' 8 a' 4 -\f fis' 8 dis' e' 4 r  |
+                 g' 4 -\mp e' 8 h g' 4 e' 8 h  |
+                 a' 4 fis' 8 dis' a' 4 fis' 8 dis'  |
+ %% 205
+@@ -409,7 +274,7 @@
+                 a' 4. d' 8 d' 4 a'  |
+                 h' 4 h' d' 2  |
+ %% 255
+-                \key e \minor
++                %\key e \minor
+                 a' 4. d' 8 d' 4 a'  |
+                 g' 4. e' 8 e' 4 g'  |
+                 h' 4. dis' 8 dis' 4 h'  |
+@@ -423,7 +288,7 @@
+                 < e' h' > 1 ^\markup { \bold \large "a tempo" }  |
+ %% 265
+                 < h' g'' > 2 < h' fis'' >  |
+-                < g'' h' > 2.  |
++                < g'' h' > 2.
+             } % Voice
+ 
+             \context Voice = "voice 4" {
+@@ -432,7 +297,7 @@
+ 
+                 \skip 4 \skip 1*184 \skip 2 \skip 4 
+                 \clef "treble"
+-                \key e \minor
++		%\key e \minor
+                 \stemUp e'' 8 -\ff dis'' \stemNeutral  |
+                 \stemUp e'' 4 ^\markup { \bold \large "rit." } < h' gis' > < c'' a' > e'' 8 dis'' \stemNeutral  |
+                 \stemUp e'' 4 < fis'' dis'' c'' a' > h' e'' 8 dis'' \stemNeutral  |
+@@ -560,7 +425,7 @@
+                     < e g > 1  |
+ %% 80
+                     < e h, > 2 < dis h,, >  |
+-                    < e e, > 2.  |
++                    < e e, > 2.
+                  } % close repeat
+             } % Voice
+ 
+@@ -570,39 +435,39 @@
+ 
+                 \skip 4 \skip 1*79 \skip 2 \skip 4 
+                 \clef "bass"
+-                \key e \minor
++                %\key e \minor
+                 r4-\mf   |
+                 e 2 h,  |
+                 d 4 \stemUp d 8 -\accent cis -\accent d 4 -\accent \stemNeutral fis,  |
+                 h, 4 d 8 cis d 4 fis,  |
+ %% 165
+                 h, 4 d 8 cis d 4 \stemDown fis, \stemNeutral  |
+-                \stemDown h, 4 \stemNeutral < cis g > 8 -\accent < d fis > -\accent < d g > 32 -\accent _~ \stemDown < g e > 8.. \stemNeutral e, 8 h,  |
++                \stemDown h, 4 \stemNeutral < cis g > 8 -\accent < d fis > -\accent \acciaccatura d 8 -\accent \stemDown < g e > 4 \stemNeutral e, 8 h,  |
+                 e 4 g 8 fis g 4 h,  |
+                 e 4 g 8 fis g 4 h,  |
+-                e 4 fis 8 g g 32 a 8.. g 8 fis  |
++                e 4 fis 8 g \acciaccatura g 8 a 4 g 8 fis  |
+ %% 170
+                 e 4 g 8 dis e 4 e, -\accent  |
+                 g 4 -\accent \< h, e g 8 fis 
+                 % warning: overlong bar truncated here |
+                 fis 4 h, dis g 8 fis  |
+                 g 4 h, e fis 8 g  |
+-                g 32 a 8.. e 8 c a, 4 g 8 -\accent fis -\accent  |
++                \acciaccatura g 8 a 4 e 8 c a, 4 g 8 -\accent fis -\accent  |
+ %% 175
+                 g 4 -\accent h, e g 8 fis  |
+                 fis 4 h, dis g 8 fis  |
+                 g 4 h, e fis 8 g  |
+-                g 32 h 8.. fis 8 dis h, 4 g 8 -\accent fis -\accent  |
++                \acciaccatura g 8 h 4 fis 8 dis h, 4 g 8 -\accent fis -\accent  |
+                 g 4 -\accent h, e g 8 fis  |
+ %% 180
+                 fis 4 h, dis g 8 fis  |
+                 g 4 h, e fis 8 g  |
+-                g 32 a 8.. e 8 c a, 4 g 8 -\accent fis -\accent  |
++                \acciaccatura g 8 a 4 e 8 c a, 4 g 8 -\accent fis -\accent  |
+                 g 4 -\accent h, e g 8 fis  |
+                 fis 4 h, dis g 8 fis  |
+ %% 185
+                 g 4 \! h, -\f e fis 8 g  |
+-                g 32 fis 8.. fis, 8 h, e 4 -\fermata  |
++                \acciaccatura g 8 fis 4 fis, 8 h, e 4 -\fermata
+             } % Voice
+ 
+             \context Voice = "voice 7" {
+@@ -611,7 +476,7 @@
+ 
+                 \skip 4 \skip 1*104 \skip 2 \skip 4 
+                 \clef "bass"
+-                \key e \minor
++                %\key e \minor
+                 r4-\p   |
+                 e, 4 g, h, e  |
+                 e, 4 g, h, e  |
+@@ -696,7 +561,7 @@
+                 < fis c > 1  |
+                 < g, g > 1  |
+ %% 255
+-                \key e \minor
++                %\key e \minor
+                 < c fis > 1  |
+                 < h, g > 1  |
+                 < fis h, > 1  |
+@@ -710,7 +575,7 @@
+                 < e g > 1  |
+ %% 265
+                 < e h, > 2 < dis h,, >  |
+-                < e e, > 2.  |
++                < e e, > 2.
+             } % Voice
+ 
+             \context Voice = "voice 8" {
+@@ -719,7 +584,7 @@
+ 
+                 \skip 4 \skip 1*184 \skip 2 \skip 4 
+                 \clef "bass"
+-                \key e \minor
++                %\key e \minor
+                 r4-\ff   |
+                 \stemDown < e e, > 1 _~ \stemNeutral  |
+                 \stemDown < e e, > 1 _~ \stemNeutral  |

@@ -1,0 +1,121 @@
+--- sonata1.ly	2011-05-26 06:28:54.349979184 +0200
++++ sonata1-fixed.ly	2011-05-26 06:32:13.273301741 +0200
+@@ -6,14 +6,14 @@
+     title = "Sonata 1 in Eb"
+     tagline = "Created using Rosegarden 11.02 and LilyPond"
+ }
+-#(set-global-staff-size 26)
++#(set-global-staff-size 24)
+ #(set-default-paper-size "a4")
+ global = { 
+     \time 2/4
+-    \skip 2*220  %% 1-220
++    %\skip 2*220  %% 1-220
+ }
+ globalTempo = {
+-    \tempo 4 = 150  \skip 2*60 
++    \tempo 4 = 150 %{ \skip 2*60 
+     \override Score.MetronomeMark #'transparent = ##t
+     \tempo 4 = 140  \skip 2 
+     \tempo 4 = 130  \skip 2 
+@@ -30,6 +30,7 @@
+     \tempo 4 = 104  \skip 2 
+     \tempo 4 = 89  \skip 2*2 
+     \tempo 4 = 150  
++    %}
+ }
+ \score {
+ << % common
+@@ -78,7 +79,7 @@
+                 bes' 16 ees'' g' ees'' ees' ees'' bes' ees''  |
+                 a' 16 d'' f' d'' d' d'' f' d''  |
+                 aes' 16 aes'' c'' aes'' ees'' aes'' f'' aes''  |
+-                d'' 16 -\f \! g'' bes' g'' < g' g'' > -\accent r-\accent 8.  |
++                d'' 16 -\f \! g'' bes' g'' < g' g'' > -\accent r 8.  |
+ %% 25
+                 \key g \minor
+                 g'' 8. -\f bes'' 16 a'' 8 f''  |
+@@ -129,7 +130,7 @@
+                 c'' 4 _\markup { \bold \italic "ritard." } aes'  |
+                 bes' 4 g'  |
+                 aes' 4 f'  |
+-                ees' 8 -\f \! ees' ees' 4 r32 
++                ees' 8 -\f \! ees' ees' 4 
+                 % warning: overlong bar truncated here |
+              } % close repeat
+         } % Voice
+@@ -138,9 +139,9 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 2*128 
++            \skip 2*64 
+             \clef "treble"
+-            \key ees \major
++            %\key ees \major
+             c' 4 -\p _\markup { \bold \italic "a tempo" } \< aes' 
+             % warning: overlong bar truncated here |
+ %% 130
+@@ -175,7 +176,7 @@
+             g'' 8 c''' c''' 4  |
+             g'' 8. bes'' 16 a'' 8 f''  |
+ %% 155
+-            g'' 8 g'' g'' 4 r32 
++            g'' 8 g'' g'' 4 
+             % warning: overlong bar truncated here |
+         } % Voice
+ 
+@@ -183,9 +184,9 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 2*155 
++            \skip 2*91 
+             \clef "treble"
+-            \key ees \major
++            %\key ees \major
+             ees' 4 -\mf \times 2/3 { c'' 8 bes' aes' }  |
+             g' 4 \times 2/3 { ees'' 8 d'' c'' }  |
+             bes' 4 ees''  |
+@@ -364,7 +365,7 @@
+                 < f aes, c > 2  |
+                 < g d bes, > 2  |
+                 < bes, aes d > 2  |
+-                < g bes, ees > 2 -\f \! r32.  |
++                < g bes, ees > 2 -\f \!  |
+              } % close repeat
+         } % Voice
+ 
+@@ -372,9 +373,9 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 2*128 
++            \skip 2*64 
+             \clef "bass"
+-            \key ees \major
++            %\key ees \major
+             < ees c aes > 2 -\p \< _~ 
+             % warning: overlong bar truncated here |
+ %% 130
+@@ -409,7 +410,7 @@
+             c' 4 \times 2/3 { aes' 8 g' f' }  |
+             ees' 4 aes'  |
+ %% 155
+-            bes' 8 g' ees' 4 r32 
++            bes' 8 g' ees' 4 
+             % warning: overlong bar truncated here |
+         } % Voice
+ 
+@@ -417,9 +418,9 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 2*155 
++            \skip 2*91 
+             \clef "bass"
+-            \key ees \major
++            %\key ees \major
+             < g ees bes > 2 -\mp  |
+             < bes d g > 2  |
+             < bes, g ees > 2  |

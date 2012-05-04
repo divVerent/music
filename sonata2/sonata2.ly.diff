@@ -1,0 +1,263 @@
+--- sonata2.ly.orig	2011-05-23 21:02:36.000000000 +0200
++++ sonata2.ly	2011-05-23 22:06:22.000000000 +0200
+@@ -5,7 +5,7 @@
+     title = "Sonata No. 2 in A minor"
+     tagline = "Created using Rosegarden 11.02 and LilyPond"
+ }
+-#(set-global-staff-size 26)
++#(set-global-staff-size 21)
+ #(set-default-paper-size "a4")
+ global = { 
+     \partial 64*16
+@@ -13,7 +13,7 @@
+     \skip 4 \skip 1*217 \skip 2 \skip 4  %% 1-219
+ }
+ globalTempo = {
+-    \tempo 4 = 160  \skip 2*39 \skip 4 \skip 4 
++    \tempo 4 = 160  %{ \skip 2*39 \skip 4 \skip 4 
+     \tempo 4 = 155  \skip 4 
+     \tempo 4 = 150  \skip 4 
+     \tempo 4 = 145  \skip 4 
+@@ -127,10 +127,12 @@
+     \tempo 4 = 120  \skip 4 
+     \tempo 4 = 115  \skip 4 
+     \tempo 4 = 110  \skip 2*4 \skip 4 
++    %}
+ }
+ \score {
+ << % common
+ 
++\partial 4*1
+     \context Staff = "track 1" << 
+         \set Staff.instrumentName = \markup { \column { " " } }
+         \set Staff.midiInstrument = "Acoustic Grand Piano"
+@@ -159,9 +161,8 @@
+                 c' 4 b a 2 _~  |
+ %% 10
+                 a 2 f' 4 e'  |
+-                d' 4 c' b 2 
+-                % warning: overlong bar truncated here |
+-                \skip 2 g' 4 f'  |
++                d' 4 c' b 2 _~ |
++                b 2 g' 4 f'  |
+                 e' 4 d' c' d'  |
+                 e' 4 f' e' d'  |
+ %% 15
+@@ -199,25 +200,25 @@
+                 e' 4. fis' 8 gis' 4 fis'  |
+ %% 40
+                 e' 4 -\accent dis' -\accent e' 2 -\accent  |
+-                e' 8 -\mf ^\markup { \bold \large "accel." } r e' r-\accent  e' 4 r8 fis'  |
++                e' 8 -\mf ^\markup { \bold \large "accel." } r e' r  e' 4 r8 fis'  |
+                 gis' 8 r e' r e' 4 r8 e'  |
+                 fis' 8 r fis' r fis' gis' a' fis'  |
+-                gis' 8 -\accent r-\accent  e' -\accent r-\accent  e' 4. -\accent r8  |
++                gis' 8 -\accent r  e' -\accent r  e' 4. -\accent r8  |
+ %% 45
+                 e' 8 r e' r e' 4 r8 fis'  |
+                 gis' 8 r e' r e' 4 r8 e'  |
+                 fis' 8 r fis' r fis' gis' a' dis'  |
+-                e' 8 -\accent r-\accent  b -\accent r-\accent  e' 4. -\accent r8  |
++                e' 8 -\accent r  b -\accent r  e' 4. -\accent r8  |
+                 < e' b > 8 -\mf r < e' b > r < b e' > 4 r8 < dis' fis' >  |
+ %% 50
+                 < e' gis' > 8 r < b e' > r < e' b > 4 r8 < b e' >  |
+-                < fis' dis' > 8 r < fis' dis' > r < dis' fis' > 4 gis' 8 a' < dis' fis' >  |
+-                < gis' e' > 8 -\accent r-\accent  < b e' > -\accent r-\accent  < e' b > 4. -\accent r8  |
++                < fis' dis' > 8 r < fis' dis' > r < dis' fis' > gis' a' < dis' fis' >  |
++                < gis' e' > 8 -\accent r  < b e' > -\accent r  < e' b > 4. -\accent r8  |
+                 < e' b > 8 r < b e' > r < b e' > 4 r8 < dis' fis' >  |
+                 < gis' e' > 8 r < e' b > r < b e' > 4 r8 < e' b >  |
+ %% 55
+                 < dis' fis' > 8 r < fis' dis' > r < fis' dis' > gis' a' < dis' b >  |
+-                < b e' > 8 -\accent r-\accent  b -\accent r-\accent  e' 4. -\accent r8  |
++                < b e' > 8 -\accent r  b -\accent r  e' 4. -\accent r8  |
+                 e' 8 -\f ^\markup { \bold \large "Presto" } fis' gis' e' fis' gis' a' fis'  |
+                 gis' 8 a' b' gis' a' b' cis'' 4  |
+                 < e' gis' b' > 2 -\mp < fis' dis' b' >  |
+@@ -229,7 +230,7 @@
+                 c'' 8 -\f ^\markup { \bold \large "ritard." } b' a' c'' b' a' g' b'  |
+                 a' 8 g' f' a' g' f' gis' 4 -\accent  |
+ %% 65
+-                a' 2. ^\markup { \bold \large "a tempo" } r16  |
++                a' 2. ^\markup { \bold \large "a tempo" }
+              } % close repeat
+         } % Voice
+ 
+@@ -238,14 +239,14 @@
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+             \skip 4 \skip 1*127 
+-            r2  |
++            r4 |
+ %% 130
+             \key a \minor
+-            c' 8 -\mf ^\markup { \bold \large "a tempo" } -\accent r-\accent  c' -\accent r-\accent  c' 4. -\accent r8  |
++            c' 8 -\mf -\accent r  c' -\accent r  c' 4. -\accent r8  |
+             c' 4. d' 8 e' 4. r8  |
+             d' 4 r8 d' d' 4 c' 8 -\accent r  |
+             d' 4. e' 8 f' 4. r8  |
+-            c' 8 -\accent r-\accent  c' -\accent r-\accent  c' 4. -\accent r8  |
++            c' 8 -\accent r  c' -\accent r  c' 4. -\accent r8  |
+ %% 135
+             c' 4. d' 8 e' 4. r8  |
+             d' 4. r8-\ff  e' 4 ^\markup { \bold \large "ritard." } \sustainOn d'  |
+@@ -259,7 +260,7 @@
+             c' 4. -\accent d' 8 -\accent e' 4. -\accent r8  |
+             d' 4. r8-\ff  e' 4 ^\markup { \bold \large "ritard." } \sustainOn d'  |
+ %% 145
+-            b 4 gis < a e' c' > \sustainOff  |
++            b 4 gis < a e' c' > \sustainOff
+         } % Voice
+ 
+         \context Voice = "voice 3" {
+@@ -282,9 +283,8 @@
+             c' 4 b a 2 _~  |
+             a 2 f' 4 e'  |
+ %% 155
+-            d' 4 c' b 2 
+-            % warning: overlong bar truncated here |
+-            \skip 2 g' 4 f'  |
++            d' 4 c' b 2 _~ |
++            b 2 g' 4 f'  |
+             e' 4 d' c' d'  |
+             e' 4 f' e' d'  |
+             \key d \minor
+@@ -325,22 +325,22 @@
+             a' 8 -\mf ^\markup { \bold \large "accel." } r a' r a' 4 r8 b'  |
+             c'' 8 r a' r a' 4 r8 a'  |
+             b' 8 r b' r b' c'' d'' b'  |
+-            c'' 8 -\accent r-\accent  a' -\accent r-\accent  a' 4. -\accent r8  |
++            c'' 8 -\accent r  a' -\accent r  a' 4. -\accent r8  |
+             a' 8 r a' r a' 4 r8 b'  |
+ %% 190
+             c'' 8 r a' r a' 4 r8 a'  |
+             b' 8 r b' r b' c'' d'' gis'  |
+-            a' 8 -\accent r-\accent  e' -\accent r-\accent  a' 4. -\accent r8  |
+-            < a' e' > 8 -\mf -\accent r-\accent  < a' e' > -\accent r-\accent  < e' a' > 4 -\accent r-\accent 8 < gis' b' >  |
++            a' 8 -\accent r  e' -\accent r  a' 4. -\accent r8  |
++            < a' e' > 8 -\mf -\accent r  < a' e' > -\accent r  < e' a' > 4 -\accent r8-\accent < gis' b' >  |
+             < a' c'' > 8 r < e' a' > r < a' e' > 4 r8 < e' a' >  |
+ %% 195
+-            < b' gis' > 8 r < b' gis' > r < gis' b' > 4 c'' 8 d'' < gis' b' >  |
+-            < c'' a' > 8 -\accent r-\accent  < e' a' > -\accent r-\accent  < a' e' > 4. -\accent r8  |
+-            < a' e' > 8 -\accent r-\accent  < e' a' > -\accent r-\accent  < e' a' > 4 -\accent r8 < gis' b' >  |
++            < b' gis' > 8 r < b' gis' > r < gis' b' > c'' 8 d'' < gis' b' >  |
++            < c'' a' > 8 -\accent r  < e' a' > -\accent r  < a' e' > 4. -\accent r8  |
++            < a' e' > 8 -\accent r  < e' a' > -\accent r  < e' a' > 4 -\accent r8 < gis' b' >  |
+             < c'' a' > 8 r < a' e' > r < e' a' > 4 r8 < a' e' >  |
+             < gis' b' > 8 r < b' gis' > r < b' gis' > c'' d'' < gis' e' >  |
+ %% 200
+-            < e' a' > 8 -\accent r-\accent  e' -\accent r-\accent  a' 4. -\accent r8  |
++            < e' a' > 8 -\accent r  e' -\accent r  a' 4. -\accent r8  |
+             a' 8 -\f ^\markup { \bold \large "Presto" } b' c'' a' b' c'' d'' b'  |
+             c'' 8 d'' e'' c'' d'' e'' f'' 4  |
+             < a' c'' e'' > 2 -\mp < b' gis' e'' >  |
+@@ -351,7 +351,7 @@
+             \key a \minor
+             c'' 8 -\f ^\markup { \bold \large "ritard." } b' a' c'' b' a' g' b'  |
+             a' 8 g' f' a' g' f' gis' 4 -\accent  |
+-            a' 2. ^\markup { \bold \large "a tempo" } r16  |
++            a' 2. ^\markup { \bold \large "a tempo" }
+         } % Voice
+ 
+         \context Voice = "voice 4" {
+@@ -361,7 +361,7 @@
+             \skip 4 \skip 1*207 
+             \clef "treble"
+             \key a \minor
+-            a 4 -\mf ^\markup { \bold \large "Allegro" }  |
++            a 4 -\mf  |
+ %% 210
+             c' 4. d' 8 e' 4 a  |
+             c' 4. d' 8 e' 4 a  |
+@@ -373,8 +373,7 @@
+             c' 4. ^\markup { \bold \large "ritard." } d' 8 e' 4 a  |
+             c' 4. \! d' 8 -\ff e' 4 -\accent \sustainOn d' -\accent  |
+             b 4 -\accent gis -\accent a \sustainOff r8 r32 r16. \sustainOn  |
+-            a 1 -\accent-\fermata  |
+-            r2 \sustainOff r4  |
++            a2. -\accent-\fermata
+             \bar "|."
+         } % Voice
+     >> % Staff ends
+@@ -407,9 +406,8 @@
+                 < a e c > 4 \> < e gis, b, > < a, c e > 2 _~  |
+ %% 10
+                 < e c a, > 2 -\mf \! < a, f d > 4 < d a, >  |
+-                < e c a, > 4 < e c d a, > < e gis, d > 2 
+-                % warning: overlong bar truncated here |
+-                \skip 2 < e cis a, > 4 < cis a, >  |
++                < e c a, > 4 < e c d a, > < e gis, d > 2 _~
++                < e gis, d > 2 < e cis a, > 4 < cis a, >  |
+                 < e gis b, > 4 < e b, > < a, e > < d a, f >  |
+                 < a, e c > 4 \> < a, d > < cis a, e > \! < a, d f > -\p  |
+ %% 15
+@@ -429,7 +427,7 @@
+ %% 25
+                 < a, e a > 2. _~ < e a, > 4  |
+                 < d f a > 2. _~ < d f > 4  |
+-                < f d a > 2 < f b, ees > -\accent  |
++                < f d a > 2 < f b, dis > -\accent  |
+                 < b, gis e > 2. _~ < b, e > 4  |
+                 < e gis b, > 2. _~ < e b, > 4  |
+ %% 30
+@@ -479,7 +477,7 @@
+                 < a, e, c > 2 -\f \! \> < gis, e b, >  |
+                 < e, a, c > 2 -\mp \! < b, e gis, >  |
+ %% 65
+-                < e c a, > 2. r16  |
++                < e c a, > 2.
+              } % close repeat
+         } % Voice
+ 
+@@ -488,7 +486,8 @@
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+             \skip 4 \skip 1*127 
+-            r2  |
++            \partial 4*1
++            r4 |
+ %% 130
+             \clef "bass"
+             \key a \minor
+@@ -536,9 +535,8 @@
+             < a e c > 4 \> < e gis, b, > < a, c e > 2 _~  |
+             < e c a, > 2 -\mf \! < a, f d > 4 < d a, >  |
+ %% 155
+-            < e c a, > 4 < e c d a, > < e gis, d > 2 
+-            % warning: overlong bar truncated here |
+-            \skip 2 < e cis a, > 4 < cis a, >  |
++            < e c a, > 4 < e c d a, > < e gis, d > 2 _~ 
++            <e gis, d> 2 < e cis a, > 4 < cis a, >  |
+             < e gis b, > 4 < e b, > < a, e > < d a, f >  |
+             < a, e c > 4 \> < a, d > < cis a, e > \! < a, d f > -\p  |
+             \key d \minor
+@@ -558,7 +556,7 @@
+             < a, e a > 2. _~ < e a, > 4  |
+ %% 170
+             < d f a > 2. _~ < d f > 4  |
+-            < f d a > 2 < f b, ees > -\accent  |
++            < f d a > 2 < f b, dis > -\accent  |
+             < b, gis e > 2. _~ < b, e > 4  |
+             < e gis b, > 2. _~ < e b, > 4  |
+             < a, a e > 2. _~ < a, e > 4  |
+@@ -606,7 +604,7 @@
+             \key a \minor
+             < a, e, c > 2 -\f \! \> < gis, e b, >  |
+             < e, a, c > 2 -\mp \! < b, e gis, >  |
+-            < e c a, > 2. r16  |
++            < e c a, > 2.
+         } % Voice
+ 
+         \context Voice = "voice 8" {
+@@ -628,8 +626,7 @@
+             < a, c e > 4 < a, c > < a, e > < c a, >  |
+             < a, c e > 4 \! < c a, > -\ff d -\accent \sustainOn gis, -\accent  |
+             b, 4 -\accent e -\accent a, \sustainOff r8 r32 a, \sustainOn c e  |
+-            R1  |
+-            r2 \sustainOff r4  |
++            r2.
+             \bar "|."
+         } % Voice
+     >> % Staff (final) ends

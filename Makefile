@@ -1,5 +1,6 @@
 OUTFORMATS ?= flac mp3 ogg wav
 OUTTYPES ?= timidity lmms-mdaPiano
+DO_MANUAL ?= no
 
 CP ?= cp
 PATCH ?= patch
@@ -63,6 +64,7 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 	lmms -r $< -o $@
 
 
+ifeq (yes,$(DO_MANUAL))
 # Format 0 (for LMMS)
 %-format0.mid: %.mid
 	bin/to_format0.pl $< $@
@@ -95,6 +97,7 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 	@echo
 	rosegarden $< >/dev/null 2>&1
 	[ -f $@ ]
+endif
 
 
 # Rosegarden -> Lilypond (MANUAL)

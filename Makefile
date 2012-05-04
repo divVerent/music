@@ -39,7 +39,7 @@ CLEANTEMP = $(RM) *.tmp */*.tmp
 
 all: audio sheet
 
-audio: $(AUDIO)
+audio: $(FORMAT0_MID) $(AUDIO)
 	$(CLEANTEMP)
 
 sheet: $(PDF)
@@ -59,16 +59,15 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 
 
 # mda Piano (LMMS)
-%-lmms-mdaPiano.lmms.tmp: %.mmp
-	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $@
-%.wav: %.lmms.tmp support-files
+%-lmms-mdaPiano.wav: %.mmp support-files
+	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdaPiano.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
 	@echo Please export as $@
 	@echo
 	@echo
-	lmms $@
+	lmms $*-lmms-mdaPiano.tmp
 
 
 # Format 0 (for LMMS)
@@ -88,20 +87,16 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 	[ -f $@ ]
 
 
-# Ramps
-%-ramp.rg: %.rg
-	< $< gunzip | bin/autoramp.pl | gzip > $@
-
-
 # Rosegarden -> MIDI (MANUAL)
-%.mid: %-ramp.rg
+%.mid: %.rg
+	< $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
 	@echo Please export to MIDI as $@
 	@echo
 	@echo
-	rosegarden $< >/dev/null 2>&1
+	rosegarden $*-ramp.tmp >/dev/null 2>&1
 	[ -f $@ ]
 
 

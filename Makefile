@@ -119,7 +119,7 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 
 # Audio codecs
 %.flac: %.wav
-	$(FLAC) $(FLACFLAGS) -f -o $@ $<
+	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
 
 %.mp3: %.wav
 	$(LAME) $(LAMEFLAGS) $< $@

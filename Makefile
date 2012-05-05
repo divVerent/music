@@ -112,39 +112,36 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)
-%.mmp: %.mid
-	[ ! -f $@ ] || touch $@
-	[ -f $@ ] || bin/to_format0.pl $< $*-format0.tmp
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo MANUAL TASK:
-	@[ -f $@ ] || echo Please import $*-format0.tmp as MIDI and save as $@
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	[ -f $@ ] || lmms >/dev/null 2>&1
+%.mmp: | %.mid
+	bin/to_format0.pl $< $*-format0.tmp
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Please import $*-format0.tmp as MIDI and save as $@
+	@echo
+	@echo
+	lmms >/dev/null 2>&1
 	[ -f $@ ]
 
-%.mid: %.rg
-	[ ! -f $@ ] || touch $@
-	[ -f $@ ] || < $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo MANUAL TASK:
-	@[ -f $@ ] || echo Please export to MIDI as $@
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	[ -f $@ ] || rosegarden $*-ramp.tmp >/dev/null 2>&1
+%.mid: | %.rg
+	< $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Please export to MIDI as $@
+	@echo
+	@echo
+	rosegarden $*-ramp.tmp >/dev/null 2>&1
 	[ -f $@ ]
 
-%.ly.orig: %.rg
-	[ ! -f $@ ] || touch $@
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo MANUAL TASK:
-	@[ -f $@ ] || echo Please export to Lilypond as $@
-	@[ -f $@ ] || echo
-	@[ -f $@ ] || echo
-	[ -f $@ ] || rosegarden $< >/dev/null 2>&1
+%.ly.orig: | %.rg
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Please export to Lilypond as $@
+	@echo
+	@echo
+	rosegarden $< >/dev/null 2>&1
 	[ -f $@ ]
 
 

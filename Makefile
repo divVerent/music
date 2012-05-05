@@ -113,7 +113,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)
 %.mmp: | %.mid
-	bin/to_format0.pl $< $*-format0.tmp
+	bin/to_format0.pl $*.mid $*-format0.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -124,7 +124,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 	[ -f $@ ]
 
 %.mid: | %.rg
-	< $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
+	< $*.rg gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -141,7 +141,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 	@echo Please export to Lilypond as $@
 	@echo
 	@echo
-	rosegarden $< >/dev/null 2>&1
+	rosegarden $*.rg >/dev/null 2>&1
 	[ -f $@ ]
 
 

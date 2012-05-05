@@ -80,9 +80,9 @@ support/000_Acoustic_Grand_Piano.pat:
 
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
-TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)/support\nsoundfont 
+TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)/support\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
-TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)/support\nbank 0\n0 
+TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)/support\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
 
 
@@ -102,13 +102,13 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # Audio renderers
 %-timidity-fluidr3.wav: %.mid support/FluidR3GM.SF2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/FluidR3GM.SF2$(TIMIDITY_SETSOUNDFONT_POST)              -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/FluidR3GM.SF2                $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2                                                                 
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/CampbellsPianoBeta2.sf2$(TIMIDITY_SETSOUNDFONT_POST)    -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/CampbellsPianoBeta2.sf2      $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-timidity-roland.wav: %.mid support/RolandNicePiano.sf2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/RolandNicePiano.sf2$(TIMIDITY_SETSOUNDFONT_POST) -EI1   -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/RolandNicePiano.sf2          $(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
 %-timidity-freepats.wav: %.mid support/000_Acoustic_Grand_Piano.pat
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)support/000_Acoustic_Grand_Piano.pat$(TIMIDITY_SETGUSPATCH_POST) -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)

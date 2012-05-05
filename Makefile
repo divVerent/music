@@ -85,14 +85,15 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # mda Piano (LMMS)
 %-lmms-mdapiano.wav: %.mmp support/mdaPiano.dll
-	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdaPiano.tmp
+	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
 	@echo Please export as $@
 	@echo
 	@echo
-	lmms $*-lmms-mdaPiano.tmp
+	lmms $*-lmms-mdapiano.tmp
+	[ -f $@ ]
 
 
 # MIDI -> LMMS (MANUAL)

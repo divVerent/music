@@ -146,14 +146,17 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # Audio codecs
+
 %.flac: %.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
 
 %.mp3: %.wav
 	$(LAME) $(LAMEFLAGS) $< $@
+	mp3gain -r -k $@
 
 %.ogg: %.wav
 	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
+	vorbisgain $@
 
 
 # PDF making

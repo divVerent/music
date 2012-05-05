@@ -1,7 +1,6 @@
 OUTFORMATS ?= flac mp3 ogg wav
 OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland
 OUTTYPES_EVIL ?= lmms-mdapiano
-# lmms-mdaPiano
 DO_MANUAL ?= no
 
 CP ?= cp
@@ -85,7 +84,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # mda Piano (LMMS)
-%-lmms-mdaPiano.wav: %.mmp support/mdaPiano.dll
+%-lmms-mdapiano.wav: %.mmp support/mdaPiano.dll
 	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdaPiano.tmp
 	@echo
 	@echo

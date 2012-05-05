@@ -1,5 +1,5 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES ?= timidity
+OUTTYPES ?= timidity-fluidr3
 # lmms-mdaPiano
 DO_MANUAL ?= no
 
@@ -56,6 +56,10 @@ support-files: support/mdaPiano.dll
 
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
+TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)/support" -x "soundfont 
+TIMIDITY_SETSOUNDFONT_POST = "
+TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)/support" -x "bank 0" -x "000 
+TIMIDITY_SETGUSPATCH_POST = "
 
 
 # mda Piano (LMMS)
@@ -70,17 +74,13 @@ LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_se
 	lmms $*-lmms-mdaPiano.tmp
 
 
-# Format 0 (for LMMS)
-%-format0.mid: %.mid
-	bin/to_format0.pl $< $@
-
-
 # MIDI -> LMMS (MANUAL)
-%.mmp: %-format0.mid
+%.mmp: %.mid
+	bin/to_format0.pl $< $*-format0.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
-	@echo Please import $< and save as $@
+	@echo Please import $*-format0.tmp as MIDI and save as $@
 	@echo
 	@echo
 	lmms >/dev/null 2>&1
@@ -146,4 +146,4 @@ clean:
 
 realclean: clean
 	$(CLEANTEMP)
-	$(RM) support $(RAMP_RG) $(LY_ORIG) $(MID) $(MMP) $(FORMAT0_MID)
+	$(RM) support $(LY_ORIG) $(MID) $(MMP)

@@ -1,5 +1,6 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES ?= timidity-fluidr3 timidity-campbell timidity-roland
+OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland
+OUTTYPES_EVIL ?= lmms-mdapiano
 # lmms-mdaPiano
 DO_MANUAL ?= no
 
@@ -28,8 +29,8 @@ LY_DIFF = $(patsubst %.rg,%.ly.diff,$(RG))
 LY = $(patsubst %.rg,%.ly,$(RG))
 PDF = $(patsubst %.rg,%.pdf,$(RG))
 MMP = $(patsubst %.rg,%.mmp,$(RG))
-WAV = $(patsubst %.rg,%.wav,$(RG))
-AUDIO = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
+AUDIO_NICE = $(foreach OUTFORMAT,wav $(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_NICE),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
+AUDIO_EVIL = $(foreach OUTFORMAT,wav $(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_EVIL),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 
 
 CLEANTEMP = $(RM) *.tmp */*.tmp
@@ -37,7 +38,10 @@ CLEANTEMP = $(RM) *.tmp */*.tmp
 
 all: audio sheet
 
-audio: $(AUDIO)
+audio: $(AUDIO_NICE)
+	$(CLEANTEMP)
+
+audio-evil: $(AUDIO_EVIL)
 	$(CLEANTEMP)
 
 sheet: $(PDF)
@@ -164,8 +168,12 @@ TIMIDITY_SETGUSPATCH_POST = "
 # Cleanup
 clean:
 	$(CLEANTEMP)
-	$(RM) $(AUDIO) $(WAV) $(LY) $(PDF)
+	$(RM) $(AUDIO_NICE) $(WAV) $(LY) $(PDF)
 
-realclean: clean
+clean-evil: clean
+	$(CLEANTEMP)
+	$(RM) $(AUDIO_EVIL)
+
+realclean: clean-evil
 	$(CLEANTEMP)
 	$(RM) support $(LY_ORIG) $(MID) $(MMP)

@@ -1,6 +1,7 @@
 OUTFORMATS ?= flac mp3 ogg wav
 OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats
 OUTTYPES_EVIL ?= lmms-mdapiano
+# lmms-pianobello
 DO_MANUAL ?= no
 
 CP ?= cp
@@ -89,6 +90,19 @@ TIMIDITY_SETGUSPATCH_POST = "
 # mda Piano (LMMS)
 %-lmms-mdapiano.wav: %.mmp support/mdaPiano.dll
 	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano.tmp
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Please export as $@
+	#echo Furthermore, complain to LMMS guys why --render does not work.
+	@echo
+	@echo
+	lmms $*-lmms-mdapiano.tmp
+	[ -f $@ ]
+
+# Kontakt 5, Pianobello (LMMS)
+%-lmms-pianobello.wav: %.mmp
+	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:

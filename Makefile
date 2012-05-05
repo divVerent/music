@@ -1,5 +1,5 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES ?= timidity-fluidr3
+OUTTYPES ?= timidity-fluidr3 timidity-campbell timidity-roland
 # lmms-mdaPiano
 DO_MANUAL ?= no
 
@@ -10,7 +10,7 @@ LILYPOND ?= lilypond
 LILYPONDFLAGS ?=
 
 TIMIDITY ?= timidity
-TIMIDITYFLAGS ?= -EFreverb=G,70 -EFchorus=n,40
+TIMIDITYFLAGS ?=
 
 LAME ?= lame
 LAMEFLAGS ?= --preset standard
@@ -22,16 +22,14 @@ FLAC ?= flac
 FLACFLAGS ?= -8
 
 RG = $(shell ls */*.rg | grep -v -- -ramp)
-RAMP_RG = $(patsubst %.rg,%-ramp.rg,$(RG))
 MID = $(patsubst %.rg,%.mid,$(RG))
-FORMAT0_MID = $(patsubst %.rg,%-format0.mid,$(RG))
 LY_ORIG = $(patsubst %.rg,%.ly.orig,$(RG))
 LY_DIFF = $(patsubst %.rg,%.ly.diff,$(RG))
 LY = $(patsubst %.rg,%.ly,$(RG))
 PDF = $(patsubst %.rg,%.pdf,$(RG))
 MMP = $(patsubst %.rg,%.mmp,$(RG))
 WAV = $(patsubst %.rg,%.wav,$(RG))
-AUDIO = $(foreach OUTTYPE,$(OUTTYPES),$(foreach OUTFORMAT,$(OUTFORMATS),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
+AUDIO = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 
 
 CLEANTEMP = $(RM) *.tmp */*.tmp
@@ -39,7 +37,7 @@ CLEANTEMP = $(RM) *.tmp */*.tmp
 
 all: audio sheet
 
-audio: $(FORMAT0_MID) $(AUDIO)
+audio: $(AUDIO)
 	$(CLEANTEMP)
 
 sheet: $(PDF)
@@ -49,10 +47,30 @@ manual: $(MID) $(MMP) $(LY_ORIG)
 	$(CLEANTEMP)
 
 
-support/mdaPiano.dll:
-	mkdir -p support && cd support && wget -O- http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download | bsdtar xvf - mdaPiano.dll
 
-support-files: support/mdaPiano.dll
+support/mdaPiano.dll:
+	mkdir -p support
+	cd support && wget -qO- 'http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download' | bsdtar xf - mdaPiano.dll
+
+support/FluidR3GM.SF2:
+	mkdir -p support
+	cd support && wget -O 'FluidR3122501.zip' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;FluidR3122501.zip;699'
+	cd support && unzip 'FluidR3122501.zip' 'FluidR3 GM.sfArk'
+	cd support && rm -f 'FluidR3122501.zip'
+	cd support && sfarkxtc 'FluidR3 GM.sfArk' 'FluidR3GM.SF2'
+	cd support && rm -f 'FluidR3 GM.sfArk'
+
+support/CampbellsPianoBeta2.sf2:
+	mkdir -p support
+	cd support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
+	cd support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
+	cd support && rm -f 'CampbellsPianoBeta2.rar'
+
+support/RolandNicePiano.sf2:
+	mkdir -p support
+	cd support && wget -O 'RolandNicePiano.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;RolandNicePiano.rar;639'
+	cd support && unrar x 'RolandNicePiano.rar' 'RolandNicePiano.sf2'
+	cd support && rm -f 'RolandNicePiano.rar'
 
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
@@ -63,7 +81,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # mda Piano (LMMS)
-%-lmms-mdaPiano.wav: %.mmp support-files
+%-lmms-mdaPiano.wav: %.mmp support/mdaPiano.dll
 	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdaPiano.tmp
 	@echo
 	@echo
@@ -113,8 +131,12 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # Audio renderers
-%-timidity.wav: %.mid
-	$(TIMIDITY) $(TIMIDITYFLAGS) -Ow -o $@ $<
+%-timidity-fluidr3.wav: %.mid support/FluidR3GM.SF2
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/FluidR3GM.SF2$(TIMIDITY_SETSOUNDFONT_POST)            -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/CampbellsPianoBeta2.sf2$(TIMIDITY_SETSOUNDFONT_POST)  -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+%-timidity-roland.wav: %.mid support/RolandNicePiano.sf2
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/RolandNicePiano.sf2$(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
 
 
 # Audio codecs

@@ -80,9 +80,9 @@ support/000_Acoustic_Grand_Piano.pat:
 
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
-TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)/support\nsoundfont
+TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
-TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)/support\nbank 0\n0
+TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)\nfont exclude 0 0\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
 
 

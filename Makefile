@@ -2,7 +2,6 @@ OUTFORMATS ?= flac mp3 ogg wav
 OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats
 OUTTYPES_EVIL ?= lmms-mdapiano
 # lmms-pianobello
-DO_MANUAL ?= no
 
 CP ?= cp
 PATCH ?= patch
@@ -102,7 +101,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # Kontakt 5, Pianobello (LMMS)
 %-lmms-pianobello.wav: %.mmp
-	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano.tmp
+	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -110,7 +109,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 	#echo Furthermore, complain to LMMS guys why --render does not work.
 	@echo
 	@echo
-	lmms $*-lmms-mdapiano.tmp
+	lmms $*-lmms-pianobello.tmp
 	[ -f $@ ]
 
 

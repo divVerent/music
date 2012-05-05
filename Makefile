@@ -1,5 +1,5 @@
-OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats
+OUTFORMATS ?= flac mp3 ogg
+OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc
 OUTTYPES_EVIL ?= lmms-mdapiano
 # lmms-pianobello
 
@@ -28,11 +28,11 @@ LY_DIFF = $(patsubst %.rg,%.ly.diff,$(RG))
 LY = $(patsubst %.rg,%.ly,$(RG))
 PDF = $(patsubst %.rg,%.pdf,$(RG))
 MMP = $(patsubst %.rg,%.mmp,$(RG))
-AUDIO_NICE = $(foreach OUTFORMAT,wav $(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_NICE),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
-AUDIO_EVIL = $(foreach OUTFORMAT,wav $(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_EVIL),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
+AUDIO_NICE = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_NICE),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
+AUDIO_EVIL = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_EVIL),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 
 
-CLEANTEMP = $(RM) *.tmp */*.tmp
+CLEANTEMP = $(RM) *.tmp */*.tmp *.wav */*.wav
 
 
 all: audio sheet
@@ -87,8 +87,8 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # mda Piano (LMMS)
-%-lmms-mdapiano.wav: %.mmp support/mdaPiano.dll
-	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano.tmp
+%-lmms-mdapiano-raw.wav: %.mmp support/mdaPiano.dll
+	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano-raw.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -100,8 +100,8 @@ TIMIDITY_SETGUSPATCH_POST = "
 	[ -f $@ ]
 
 # Kontakt 5, Pianobello (LMMS)
-%-lmms-pianobello.wav: %.mmp
-	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello.tmp
+%-lmms-pianobello-raw.wav: %.mmp
+	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello-raw.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -114,15 +114,21 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # Audio renderers
-%-timidity-fluidr3.wav: %.mid support/FluidR3GM.SF2
+%-timidity-fluidr3-raw.wav: %.mid support/FluidR3GM.SF2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/FluidR3GM.SF2                $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2
+%-timidity-campbell-raw.wav: %.mid support/CampbellsPianoBeta2.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/CampbellsPianoBeta2.sf2      $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-roland.wav: %.mid support/RolandNicePiano.sf2
+%-timidity-roland-raw.wav: %.mid support/RolandNicePiano.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/RolandNicePiano.sf2          $(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
-%-timidity-freepats.wav: %.mid support/000_Acoustic_Grand_Piano.pat
+%-timidity-freepats-raw.wav: %.mid support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+%-linuxsampler-pleyelp190-raw.wav: %.mid support/PleyelP190.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
+%-linuxsampler-steinwayc-raw.wav: %.mid support/SteinwayC.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
 
+%.wav: %-raw.wav
+	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)
 %.mmp: | %.mid

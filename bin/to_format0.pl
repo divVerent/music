@@ -6,7 +6,7 @@ use MIDI;
 use MIDI::Opus;
 use POSIX;
 
-my ($filename, $outfilename) = @ARGV;
+my ($filename, $outfilename, $extratime, $collapse_channels) = @ARGV;
 my $opus = MIDI::Opus->new({from_file => $filename});
 
 # where is channel stored in which events?
@@ -46,12 +46,13 @@ $opus->format(0);
 my @outevents = reltime sort { ($a->[1] <=> $b->[1]) or (($a->[0] eq 'note_on') <=> ($b->[0] eq 'note_on')) } map { abstime $_->events() } $opus->tracks();
 my %notehash = ();
 my $t = 0;
+my $tempo = 500000;
 for my $e(@outevents)
 {
 	$t += $e->[1];
 	my $p = $chanpos{$e->[0]};
 	$e->[$p] = 0
-		if defined $p;
+		if defined $p and $collapse_channels;
 	if($e->[0] eq 'note_on')
 	{
 		warn "Note @{[note $e->[3]]} is played twice at @{[ $t * 2 ]}\n" # times 2 for rosegarden units
@@ -61,7 +62,26 @@ for my $e(@outevents)
 	{
 		delete $notehash{$e->[3]}
 	}
+	if($e->[0] eq 'set_tempo')
+	{
+		$tempo = $e->[2];
+	}
 }
+warn "Notes still on at end: " .  join ' ', keys %notehash
+	if keys %notehash;
+
+if($extratime)
+{
+	# calculate delta time for 5 seconds
+	# tempo is encoded as microseconds per quarter note
+	my $time_per_tick = $tempo * 0.000001 / $opus->ticks();
+	my $dtime = int($extratime / $time_per_tick);
+
+	# add a redundant note-off at the end 5 seconds later to let notes cool down
+	push @outevents, ['note_off', $dtime, 0, 0, 0];
+	#push @outevents, ['end_track', $dtime];
+}
+
 $opus->tracks([$opus->tracks()]->[0]);
 [$opus->tracks()]->[0]->events(@outevents);
 

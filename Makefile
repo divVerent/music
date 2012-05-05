@@ -123,16 +123,18 @@ TIMIDITY_SETGUSPATCH_POST = "
 %-timidity-freepats-raw.wav: %.mid support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-linuxsampler-pleyelp190-raw.wav: %.mid support/PleyelP190.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
+	bin/to_format0.pl $*.mid $*-linuxsampler-pleyelp190-format0.tmp 5 0
+	bin/linuxsampler.sh $*-linuxsampler-pleyelp190-format0.tmp $(CURDIR)/support/PleyelP190.gig $@
 %-linuxsampler-steinwayc-raw.wav: %.mid support/SteinwayC.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
+	bin/to_format0.pl $*.mid $*-linuxsampler-steinwayc-format0.tmp 5 0
+	bin/linuxsampler.sh $*-linuxsampler-steinwayc-format0.tmp $(CURDIR)/support/SteinwayC.gig $@
 
 %.wav: %-raw.wav
 	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)
 %.mmp: | %.mid
-	bin/to_format0.pl $*.mid $*-format0.tmp
+	bin/to_format0.pl $*.mid $*-format0.tmp 0 1
 	@echo
 	@echo
 	@echo MANUAL TASK:

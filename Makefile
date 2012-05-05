@@ -1,5 +1,5 @@
 OUTFORMATS ?= flac mp3 ogg wav
-OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland
+OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats
 OUTTYPES_EVIL ?= lmms-mdapiano
 DO_MANUAL ?= no
 
@@ -50,7 +50,6 @@ manual: $(MID) $(MMP) $(LY_ORIG)
 	$(CLEANTEMP)
 
 
-
 support/mdaPiano.dll:
 	mkdir -p support
 	cd support && wget -qO- 'http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download' | bsdtar xf - mdaPiano.dll
@@ -75,6 +74,10 @@ support/RolandNicePiano.sf2:
 	cd support && unrar x 'RolandNicePiano.rar' 'RolandNicePiano.sf2'
 	cd support && rm -f 'RolandNicePiano.rar'
 
+support/000_Acoustic_Grand_Piano.pat:
+	mkdir -p support
+	cd support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
+
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)/support" -x "soundfont 
@@ -90,57 +93,59 @@ TIMIDITY_SETGUSPATCH_POST = "
 	@echo
 	@echo MANUAL TASK:
 	@echo Please export as $@
+	#echo Furthermore, complain to LMMS guys why --render does not work.
 	@echo
 	@echo
 	lmms $*-lmms-mdapiano.tmp
 	[ -f $@ ]
 
 
-# MIDI -> LMMS (MANUAL)
-%.mmp: %.mid
-	bin/to_format0.pl $< $*-format0.tmp
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Please import $*-format0.tmp as MIDI and save as $@
-	@echo
-	@echo
-	lmms >/dev/null 2>&1
-	[ -f $@ ]
-
-
-# Rosegarden -> MIDI (MANUAL)
-%.mid: %.rg
-	< $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Please export to MIDI as $@
-	@echo
-	@echo
-	rosegarden $*-ramp.tmp >/dev/null 2>&1
-	[ -f $@ ]
-
-
-# Rosegarden -> Lilypond (MANUAL)
-%.ly.orig: %.rg
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Please export to Lilypond as $@
-	@echo
-	@echo
-	rosegarden $< >/dev/null 2>&1
-	[ -f $@ ]
-
-
 # Audio renderers
 %-timidity-fluidr3.wav: %.mid support/FluidR3GM.SF2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/FluidR3GM.SF2$(TIMIDITY_SETSOUNDFONT_POST)            -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/CampbellsPianoBeta2.sf2$(TIMIDITY_SETSOUNDFONT_POST)  -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/FluidR3GM.SF2$(TIMIDITY_SETSOUNDFONT_POST)              -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2                                                                 
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/CampbellsPianoBeta2.sf2$(TIMIDITY_SETSOUNDFONT_POST)    -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-timidity-roland.wav: %.mid support/RolandNicePiano.sf2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/RolandNicePiano.sf2$(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE)support/RolandNicePiano.sf2$(TIMIDITY_SETSOUNDFONT_POST) -EI1   -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
+%-timidity-freepats.wav: %.mid support/000_Acoustic_Grand_Piano.pat
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)support/000_Acoustic_Grand_Piano.pat$(TIMIDITY_SETGUSPATCH_POST) -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+
+
+# Project conversion (ANNOYING, so we only perform it if the file is missing)
+%.mmp: %.mid
+	[ ! -f $@ ] || touch $@
+	[ -f $@ ] || bin/to_format0.pl $< $*-format0.tmp
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo MANUAL TASK:
+	@[ -f $@ ] || echo Please import $*-format0.tmp as MIDI and save as $@
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	[ -f $@ ] || lmms >/dev/null 2>&1
+	[ -f $@ ]
+
+%.mid: %.rg
+	[ ! -f $@ ] || touch $@
+	[ -f $@ ] || < $< gunzip | bin/autoramp.pl | gzip > $*-ramp.tmp
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo MANUAL TASK:
+	@[ -f $@ ] || echo Please export to MIDI as $@
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	[ -f $@ ] || rosegarden $*-ramp.tmp >/dev/null 2>&1
+	[ -f $@ ]
+
+%.ly.orig: %.rg
+	[ ! -f $@ ] || touch $@
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo MANUAL TASK:
+	@[ -f $@ ] || echo Please export to Lilypond as $@
+	@[ -f $@ ] || echo
+	@[ -f $@ ] || echo
+	[ -f $@ ] || rosegarden $< >/dev/null 2>&1
+	[ -f $@ ]
 
 
 # Audio codecs
@@ -154,26 +159,24 @@ TIMIDITY_SETGUSPATCH_POST = "
 	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
 
 
-# Fixing Lilypond file by included patch
+# PDF making
 %.ly: %.ly.diff %.ly.orig
 	$(CP) $*.ly.orig $*.ly
 	$(PATCH) $*.ly $*.ly.diff 
 
-
-# Lilypond -> PDF
 %.pdf: %.ly
 	$(LILYPOND) $(LILYPONDFLAGS) -o $* $<
 
 
 # Cleanup
-clean:
+mostlyclean:
 	$(CLEANTEMP)
 	$(RM) $(AUDIO_NICE) $(WAV) $(LY) $(PDF)
 
-clean-evil: clean
+clean:
 	$(CLEANTEMP)
 	$(RM) $(AUDIO_EVIL)
 
-realclean: clean-evil
+realclean: clean
 	$(CLEANTEMP)
 	$(RM) support $(LY_ORIG) $(MID) $(MMP)

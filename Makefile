@@ -103,7 +103,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 # Audio renderers
 %-timidity-fluidr3.wav: %.mid support/FluidR3GM.SF2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/FluidR3GM.SF2                $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2                                                                 
+%-timidity-campbell.wav: %.mid support/CampbellsPianoBeta2.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/CampbellsPianoBeta2.sf2      $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-timidity-roland.wav: %.mid support/RolandNicePiano.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/RolandNicePiano.sf2          $(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
@@ -159,7 +159,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 # PDF making
 %.ly: %.ly.diff %.ly.orig
 	$(CP) $*.ly.orig $*.ly
-	$(PATCH) $*.ly $*.ly.diff 
+	$(PATCH) $*.ly $*.ly.diff
 
 %.pdf: %.ly
 	$(LILYPOND) $(LILYPONDFLAGS) -o $* $<

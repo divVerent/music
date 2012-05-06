@@ -70,7 +70,7 @@ support/000_Acoustic_Grand_Piano.pat: | support
 	cd support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
 support/maestro_concert_grand_v2.gig: | support
-	cd support && wget -c -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
+	cd support && wget -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
 	cd support && unrar x 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
 	cd support && rm -f 'maestro_concert_grand_v2.rar'
 
@@ -174,7 +174,8 @@ TIMIDITY_SETGUSPATCH_POST = "
 %-linuxsampler-steinwayc-raw.wav: %-format0.mid support/SteinwayC.gig
 	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
 %-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $@
+	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig - | sox - $*-linuxsampler-maestro-tmp.wav
+	sox $*-linuxsampler-maestro-tmp.wav $@ reverb 50 50 60 100 0 0
 
 %.wav: %-raw.wav
 	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse

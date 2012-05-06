@@ -1,6 +1,11 @@
 #!/bin/sh
 
 set -e
+
+# only intended output may go to stdout
+exec 3>&1
+exec 1>&2
+
 killpids=
 atexit()
 {
@@ -88,7 +93,7 @@ EOF
 if [ -n "$outfile" ]; then
 	(
 		rm -f "$outfile"
-		jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
+		jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" >&3 & cappid=$!
 		# wait till there is more than just the WAV header in the outfile
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
 			sleep 0.1

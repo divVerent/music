@@ -1,8 +1,21 @@
 #!/bin/sh
 
+set -e
+killpids=
+atexit()
+{
+	if [ -n "$killpids" ]; then
+		kill $killpids
+		killpids=
+	fi
+}
+trap atexit EXIT
+trap 'exit 1' INT
+
 midifile=$1
 gigfile=$2
 outfile=$3
+extracommands=$4
 
 export JACK_DEFAULT_SERVER=midiconvert.$$
 export LSCP_PORT=8888
@@ -13,19 +26,25 @@ while nc -z localhost $LSCP_PORT; do
 done
 
 echo "Starting jackd..."
-jackd -d dummy & jackpid=$!
+if [ -n "$outfile" ]; then
+	jackd -d dummy & jackpid=$!
+else
+	jackd -d alsa & jackpid=$!
+fi
+killpids=$killpids" $jackpid"
 while ! jack_lsp >/dev/null 2>/dev/null; do
 	sleep 0.1
 done
 
 echo "Starting LinuxSampler..."
 linuxsampler --lscp-port $LSCP_PORT & samppid=$!
-while ! nc -z localhost $LSCP_PORT; do
+killpids=$killpids" $samppid"
+while ! echo QUIT | ncat -i10 localhost $LSCP_PORT | grep .; do
 	sleep 0.1
 done
 
 echo "Configuring LinuxSampler..."
-nc -v localhost $LSCP_PORT <<EOF
+ncat -i10 localhost $LSCP_PORT <<EOF || true
 RESET
 SET VOLUME 0.10
 CREATE MIDI_INPUT_DEVICE JACK NAME='LinuxSampler'
@@ -44,22 +63,47 @@ SET CHANNEL MIDI_INSTRUMENT_MAP 0 NONE
 SET CHANNEL AUDIO_OUTPUT_DEVICE 0 0
 LOAD INSTRUMENT '$gigfile' 0 0
 QUIT
+QUIT
+QUIT
 EOF
-while ! jack_lsp | grep LinuxSampler:0; do
-	sleep 0.1
-done
 
-(
- 	rm -f "$outfile"
-	jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
-	# wait till there is more than just the WAV header in the outfile
-	while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
-		sleep 0.1
-	done
+if [ -n "$extracommands" ]; then
+	{
+		while :; do
+			case "$extracommands" in
+				'')
+					break
+					;;
+				*,*)
+					echo "${extracommands%%,*}"
+					extracommands=${extracommands#*,}
+					;;
+				*)
+					echo "$extracommands"
+					break
+					;;
+			esac
+		done;
+		echo QUIT
+		echo QUIT
+		echo QUIT
+	} | ncat -i10 localhost $LSCP_PORT || true
+fi
+
+if [ -n "$outfile" ]; then
+	(
+		rm -f "$outfile"
+		jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
+		# wait till there is more than just the WAV header in the outfile
+		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
+			sleep 0.1
+		done
+		jack-smf-player -t -n -a LinuxSampler:midi_in_0 "$midifile"
+		kill $cappid
+		wait
+	)
+else
+	jack_connect LinuxSampler:0 system:playback_1
+	jack_connect LinuxSampler:1 system:playback_2
 	jack-smf-player -t -n -a LinuxSampler:midi_in_0 "$midifile"
-	kill $cappid
-	wait
-)
-
-kill $samppid
-kill $jackpid
+fi

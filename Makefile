@@ -43,7 +43,7 @@ AUDIO_NICE = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_NICE
 AUDIO_EVIL = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES_EVIL),$(patsubst %.rg,%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 
 
-CLEANTEMP = $(RM) *.tmp */*.tmp *.wav */*.wav
+CLEANTEMP = $(RM) *.tmp */*.tmp
 
 
 all: audio sheet
@@ -150,8 +150,8 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 
 # Kontakt 5, Pianobello (LMMS)
-%-lmms-pianobello-raw.wav: %.mmp support/Kontakt5.dll support/pianobello.nki
-	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello-raw.tmp
+%-lmms-pianobello-uncut.wav: %.mmp support/Kontakt5.dll support/pianobello.nki
+	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello-uncut.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
@@ -168,19 +168,23 @@ TIMIDITY_SETGUSPATCH_POST = "
 	bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
-%-timidity-campbell-raw.wav: %.mid support/CampbellsPianoBeta2.sf2
+%-timidity-campbell-uncut.wav: %.mid support/CampbellsPianoBeta2.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/CampbellsPianoBeta2.sf2      $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-freepats-raw.wav: %.mid support/000_Acoustic_Grand_Piano.pat
+%-timidity-freepats-uncut.wav: %.mid support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-linuxsampler-pleyelp190-raw.wav: %-format0.mid support/PleyelP190.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
-%-linuxsampler-steinwayc-raw.wav: %-format0.mid support/SteinwayC.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
-%-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $*-linuxsampler-maestro-tmp.wav
-	sox $*-linuxsampler-maestro-tmp.wav $@ reverb 50 50 60 100 0 0
 
-%.wav: %-raw.wav
+%-linuxsampler-pleyelp190-uncut.wav: %-format0.mid support/PleyelP190.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
+%-linuxsampler-steinwayc-uncut.wav: %-format0.mid support/SteinwayC.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
+
+# hack: needs extra reverb
+%-linuxsampler-maestro-uncut.wav: %-linuxsampler-maestro-raw.wav
+	sox $< $@ reverb 50 50 60 100 0 0
+%-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $@
+
+%.wav: %-uncut.wav
 	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)

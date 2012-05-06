@@ -50,10 +50,13 @@ while ! jack_lsp | grep LinuxSampler:0; do
 done
 
 (
+ 	rm -f "$outfile"
 	jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
-	sleep 0.5 # cut this out later with sox
+	# wait till there is more than just the WAV header in the outfile
+	while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
+		sleep 0.1
+	done
 	jack-smf-player -t -n -a LinuxSampler:midi_in_0 "$midifile"
-	sleep 5 # cut this out later with sox
 	kill $cappid
 	wait
 )

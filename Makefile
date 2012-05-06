@@ -90,7 +90,41 @@ support/000_Acoustic_Grand_Piano.pat: | support
 support/maestro_concert_grand_v2.gig: | support
 	cd support && wget -c -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
 	cd support && unrar x 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
+	cd support && rm -f 'maestro_concert_grand_v2.rar'
 
+support/classicpianos-pleyel_ambient_p190.giga-*.rar: | support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Register at http://www.gigfiles.com/freebees.php
+	@echo and download the FREE Piano set
+	@echo Pleyel Ambient P190
+	@echo
+	@echo Place the downloaded file named
+	@echo $@
+	@echo in support/ to proceed.
+	@echo
+	@echo
+	@false
+support/PleyelP190.gig: | support support/classicpianos-pleyel_ambient_p190.giga-*.rar
+	cd support && unrar x classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'PleyelP190.gig'
+
+support/classicpianos-steinway_c.giga-*.rar: | support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Register at http://www.gigfiles.com/freebees.php
+	@echo and download the FREE Piano set
+	@echo Steinway C
+	@echo
+	@echo Place the downloaded file named
+	@echo $@
+	@echo in support/ to proceed.
+	@echo
+	@echo
+	@false
+support/SteinwayC.gig: | support support/classicpianos-steinway_c.giga-*.rar
+	cd support && unrar x classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)\nsoundfont
@@ -127,7 +161,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # Format 0 MIDI (friendly for the synths)
 %-format0.mid: %.mid
-	bin/to_format0.pl $< $@ 5 1
+	bin/to_format0.pl $< $@ 1 5 1
 
 # Audio renderers
 %-timidity-fluidr3-raw.wav: %.mid support/FluidR3GM.SF2

@@ -6,7 +6,7 @@ use MIDI;
 use MIDI::Opus;
 use POSIX;
 
-my ($filename, $outfilename, $extratime, $collapse_channels) = @ARGV;
+my ($filename, $outfilename, $extratime_pre, $extratime_post, $collapse_channels) = @ARGV;
 my $opus = MIDI::Opus->new({from_file => $filename});
 
 # where is channel stored in which events?
@@ -47,6 +47,19 @@ my @outevents = reltime sort { ($a->[1] <=> $b->[1]) or (($a->[0] eq 'note_on') 
 my %notehash = ();
 my $t = 0;
 my $tempo = 500000;
+
+if($extratime_pre)
+{
+	# calculate delta time for 5 seconds
+	# tempo is encoded as microseconds per quarter note
+	my $time_per_tick = $tempo * 0.000001 / $opus->ticks();
+	my $dtime = int($extratime_pre / $time_per_tick);
+
+	# add a redundant note-off at the end 5 seconds later to let notes cool down
+	unshift @outevents, ['note_off', $dtime, 0, 0, 0];
+	#unshift @outevents, ['text_event', $dtime, ''];
+}
+
 for my $e(@outevents)
 {
 	$t += $e->[1];
@@ -70,16 +83,16 @@ for my $e(@outevents)
 warn "Notes still on at end: " .  join ' ', keys %notehash
 	if keys %notehash;
 
-if($extratime)
+if($extratime_post)
 {
 	# calculate delta time for 5 seconds
 	# tempo is encoded as microseconds per quarter note
 	my $time_per_tick = $tempo * 0.000001 / $opus->ticks();
-	my $dtime = int($extratime / $time_per_tick);
+	my $dtime = int($extratime_post / $time_per_tick);
 
 	# add a redundant note-off at the end 5 seconds later to let notes cool down
 	push @outevents, ['note_off', $dtime, 0, 0, 0];
-	#push @outevents, ['end_track', $dtime];
+	#push @outevents, ['text_event', $dtime, ''];
 }
 
 $opus->tracks([$opus->tracks()]->[0]);

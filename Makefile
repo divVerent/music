@@ -161,7 +161,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 
 # Format 0 MIDI (friendly for the synths)
 %-format0.mid: %.mid
-	bin/to_format0.pl $< $@ 1 5 1
+	bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
 %-timidity-fluidr3-raw.wav: %.mid support/FluidR3GM.SF2
@@ -174,7 +174,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-linuxsampler-pleyelp190-raw.wav: %-format0.mid support/PleyelP190.gig
 	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
-%-linuxsampler-steinwayc-raw.wav: %.-format0.mid support/SteinwayC.gig
+%-linuxsampler-steinwayc-raw.wav: %-format0.mid support/SteinwayC.gig
 	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
 %-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
 	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $@

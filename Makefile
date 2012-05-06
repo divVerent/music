@@ -8,7 +8,10 @@ OUTTYPES_NICE += linuxsampler-maestro
 # Outputting these is a bit broken/manual. Avoid it.
 OUTTYPES_EVIL += linuxsampler-pleyelp190
 OUTTYPES_EVIL += linuxsampler-steinwayc
-OUTTYPES_EVIL += lmms-pianobello
+
+# No longer support this one at all
+# because there seems to be no way to get that .nki file
+#OUTTYPES_EVIL += lmms-pianobello
 
 CP ?= cp
 PATCH ?= patch

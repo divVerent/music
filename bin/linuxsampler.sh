@@ -92,7 +92,7 @@ EOF
 
 if [ -n "$outfile" ]; then
 	(
-		rm -f "$outfile"
+		: > "$outfile"
 		jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" >&3 & cappid=$!
 		# wait till there is more than just the WAV header in the outfile
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do

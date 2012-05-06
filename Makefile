@@ -2,7 +2,6 @@ OUTFORMATS ?= flac mp3 ogg
 
 # These generally output fine
 OUTTYPES_NICE += timidity-campbell
-OUTTYPES_NICE += timidity-roland
 OUTTYPES_NICE += timidity-freepats
 OUTTYPES_NICE += linuxsampler-maestro
 
@@ -66,11 +65,6 @@ support/CampbellsPianoBeta2.sf2: | support
 	cd support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
 	cd support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
 	cd support && rm -f 'CampbellsPianoBeta2.rar'
-
-support/RolandNicePiano.sf2: | support
-	cd support && wget -O 'RolandNicePiano.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;RolandNicePiano.rar;639'
-	cd support && unrar x 'RolandNicePiano.rar' 'RolandNicePiano.sf2'
-	cd support && rm -f 'RolandNicePiano.rar'
 
 support/000_Acoustic_Grand_Piano.pat: | support
 	cd support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
@@ -171,12 +165,8 @@ TIMIDITY_SETGUSPATCH_POST = "
 	bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
-%-timidity-fluidr3-raw.wav: %.mid support/FluidR3GM.SF2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/FluidR3GM.SF2                $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-timidity-campbell-raw.wav: %.mid support/CampbellsPianoBeta2.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/CampbellsPianoBeta2.sf2      $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-timidity-roland-raw.wav: %.mid support/RolandNicePiano.sf2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/RolandNicePiano.sf2          $(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
 %-timidity-freepats-raw.wav: %.mid support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 %-linuxsampler-pleyelp190-raw.wav: %-format0.mid support/PleyelP190.gig

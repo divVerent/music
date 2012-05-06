@@ -44,7 +44,8 @@ while ! echo QUIT | ncat -i10 localhost $LSCP_PORT | grep .; do
 done
 
 echo "Configuring LinuxSampler..."
-ncat -i10 localhost $LSCP_PORT <<EOF || true
+{
+	cat <<EOF
 RESET
 SET VOLUME 0.10
 CREATE MIDI_INPUT_DEVICE JACK NAME='LinuxSampler'
@@ -63,12 +64,8 @@ SET CHANNEL MIDI_INSTRUMENT_MAP 0 NONE
 SET CHANNEL AUDIO_OUTPUT_DEVICE 0 0
 LOAD INSTRUMENT '$gigfile' 0 0
 QUIT
-QUIT
-QUIT
 EOF
-
-if [ -n "$extracommands" ]; then
-	{
+	if [ -n "$extracommands" ]; then
 		while :; do
 			case "$extracommands" in
 				'')
@@ -84,11 +81,9 @@ if [ -n "$extracommands" ]; then
 					;;
 			esac
 		done;
-		echo QUIT
-		echo QUIT
-		echo QUIT
-	} | ncat -i10 localhost $LSCP_PORT || true
-fi
+	fi
+	echo QUIT
+} | ncat -i10 localhost $LSCP_PORT || true
 
 if [ -n "$outfile" ]; then
 	(

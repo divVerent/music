@@ -18,7 +18,7 @@ outfile=$3
 extracommands=$4
 
 export JACK_DEFAULT_SERVER=midiconvert.$$
-export LSCP_PORT=8888
+export LSCP_PORT=$((($RANDOM + 8888 - 1024) % 64512 + 1024))
 
 echo "Finding free port..."
 while nc -z localhost $LSCP_PORT; do

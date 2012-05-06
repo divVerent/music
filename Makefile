@@ -1,6 +1,16 @@
 OUTFORMATS ?= flac mp3 ogg
-OUTTYPES_NICE ?= timidity-fluidr3 timidity-campbell timidity-roland timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc
+
+# These generally output fine
+OUTTYPES_NICE += timidity-fluidr3
+OUTTYPES_NICE += timidity-campbell
+OUTTYPES_NICE += timidity-roland
+OUTTYPES_NICE += timidity-freepats
+OUTTYPES_NICE += linuxsampler-maestro
+
+# Outputting these is a bit broken/manual. Avoid it.
 OUTTYPES_EVIL ?= lmms-mdapiano
+OUTTYPES_EVIL += linuxsampler-pleyelp190
+OUTTYPES_EVIL += linuxsampler-steinwayc
 # lmms-pianobello
 
 CP ?= cp
@@ -23,6 +33,7 @@ FLACFLAGS ?= -8
 
 RG = $(shell ls */*.rg | grep -v -- -ramp)
 MID = $(patsubst %.rg,%.mid,$(RG))
+MID_FORMAT0 = $(patsubst %.rg,%-format0.mid,$(RG))
 LY_ORIG = $(patsubst %.rg,%.ly.orig,$(RG))
 LY_DIFF = $(patsubst %.rg,%.ly.diff,$(RG))
 LY = $(patsubst %.rg,%.ly,$(RG))
@@ -50,33 +61,35 @@ manual: $(MID) $(MMP) $(LY_ORIG)
 	$(CLEANTEMP)
 
 
-support/mdaPiano.dll:
+support:
 	mkdir -p support
+
+support/mdaPiano.dll: | support
 	cd support && wget -qO- 'http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download' | bsdtar xf - mdaPiano.dll
 
-support/FluidR3GM.SF2:
-	mkdir -p support
+support/FluidR3GM.SF2: | support
 	cd support && wget -O 'FluidR3122501.zip' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;FluidR3122501.zip;699'
 	cd support && unzip 'FluidR3122501.zip' 'FluidR3 GM.sfArk'
 	cd support && rm -f 'FluidR3122501.zip'
 	cd support && sfarkxtc 'FluidR3 GM.sfArk' 'FluidR3GM.SF2'
 	cd support && rm -f 'FluidR3 GM.sfArk'
 
-support/CampbellsPianoBeta2.sf2:
-	mkdir -p support
+support/CampbellsPianoBeta2.sf2: | support
 	cd support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
 	cd support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
 	cd support && rm -f 'CampbellsPianoBeta2.rar'
 
-support/RolandNicePiano.sf2:
-	mkdir -p support
+support/RolandNicePiano.sf2: | support
 	cd support && wget -O 'RolandNicePiano.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;RolandNicePiano.rar;639'
 	cd support && unrar x 'RolandNicePiano.rar' 'RolandNicePiano.sf2'
 	cd support && rm -f 'RolandNicePiano.rar'
 
-support/000_Acoustic_Grand_Piano.pat:
-	mkdir -p support
+support/000_Acoustic_Grand_Piano.pat: | support
 	cd support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
+
+support/maestro_concert_grand_v2.gig: | support
+	cd support && wget -c -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
+	cd support && unrar x 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
 
 
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
@@ -112,6 +125,9 @@ TIMIDITY_SETGUSPATCH_POST = "
 	lmms $*-lmms-pianobello.tmp
 	[ -f $@ ]
 
+# Format 0 MIDI (friendly for the synths)
+%-format0.mid: %.mid
+	bin/to_format0.pl $< $@ 5 1
 
 # Audio renderers
 %-timidity-fluidr3-raw.wav: %.mid support/FluidR3GM.SF2
@@ -122,23 +138,22 @@ TIMIDITY_SETGUSPATCH_POST = "
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) support/RolandNicePiano.sf2          $(TIMIDITY_SETSOUNDFONT_POST) -EI1 -EFreverb=G,70 -EFchorus=n,10 -Ow -o $@ $<
 %-timidity-freepats-raw.wav: %.mid support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  support/000_Acoustic_Grand_Piano.pat $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
-%-linuxsampler-pleyelp190-raw.wav: %.mid support/PleyelP190.gig
-	bin/to_format0.pl $*.mid $*-linuxsampler-pleyelp190-format0.tmp 5 0
-	bin/linuxsampler.sh $*-linuxsampler-pleyelp190-format0.tmp $(CURDIR)/support/PleyelP190.gig $@
-%-linuxsampler-steinwayc-raw.wav: %.mid support/SteinwayC.gig
-	bin/to_format0.pl $*.mid $*-linuxsampler-steinwayc-format0.tmp 5 0
-	bin/linuxsampler.sh $*-linuxsampler-steinwayc-format0.tmp $(CURDIR)/support/SteinwayC.gig $@
+%-linuxsampler-pleyelp190-raw.wav: %-format0.mid support/PleyelP190.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/PleyelP190.gig $@
+%-linuxsampler-steinwayc-raw.wav: %.-format0.mid support/SteinwayC.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
+%-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
+	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $@
 
 %.wav: %-raw.wav
 	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
 
 # Project conversion (ANNOYING, so we only perform it if the file is missing)
-%.mmp: | %.mid
-	bin/to_format0.pl $*.mid $*-format0.tmp 0 1
+%.mmp: | %-format0.mid
 	@echo
 	@echo
 	@echo MANUAL TASK:
-	@echo Please import $*-format0.tmp as MIDI and save as $@
+	@echo Please import $*-format0.mid as MIDI and save as $@
 	@echo
 	@echo
 	lmms >/dev/null 2>&1
@@ -192,7 +207,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 # Cleanup
 mostlyclean:
 	$(CLEANTEMP)
-	$(RM) $(AUDIO_NICE) $(WAV) $(LY) $(PDF)
+	$(RM) $(AUDIO_NICE) $(WAV) $(LY) $(PDF) $(MID_FORMAT0)
 
 clean:
 	$(CLEANTEMP)

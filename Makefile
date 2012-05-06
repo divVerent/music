@@ -1,17 +1,15 @@
 OUTFORMATS ?= flac mp3 ogg
 
 # These generally output fine
-OUTTYPES_NICE += timidity-fluidr3
 OUTTYPES_NICE += timidity-campbell
 OUTTYPES_NICE += timidity-roland
 OUTTYPES_NICE += timidity-freepats
 OUTTYPES_NICE += linuxsampler-maestro
 
 # Outputting these is a bit broken/manual. Avoid it.
-OUTTYPES_EVIL ?= lmms-mdapiano
 OUTTYPES_EVIL += linuxsampler-pleyelp190
 OUTTYPES_EVIL += linuxsampler-steinwayc
-# lmms-pianobello
+OUTTYPES_EVIL += lmms-pianobello
 
 CP ?= cp
 PATCH ?= patch
@@ -63,16 +61,6 @@ manual: $(MID) $(MMP) $(LY_ORIG)
 
 support:
 	mkdir -p support
-
-support/mdaPiano.dll: | support
-	cd support && wget -qO- 'http://sourceforge.net/projects/mda-vst/files/mda-vst/mda-vst-src%20100214/mda-vst-bin-win-32-2010-02-14.zip/download' | bsdtar xf - mdaPiano.dll
-
-support/FluidR3GM.SF2: | support
-	cd support && wget -O 'FluidR3122501.zip' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;FluidR3122501.zip;699'
-	cd support && unzip 'FluidR3122501.zip' 'FluidR3 GM.sfArk'
-	cd support && rm -f 'FluidR3122501.zip'
-	cd support && sfarkxtc 'FluidR3 GM.sfArk' 'FluidR3GM.SF2'
-	cd support && rm -f 'FluidR3 GM.sfArk'
 
 support/CampbellsPianoBeta2.sf2: | support
 	cd support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
@@ -126,6 +114,37 @@ support/classicpianos-steinway_c.giga-*.rar: | support
 support/SteinwayC.gig: | support support/classicpianos-steinway_c.giga-*.rar
 	cd support && unrar x classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
 
+support/Kontakt5.dll: | support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Download and install the Kontakt 5 Player using WINE.
+	@echo Then locate the Kontakt 5.dll in .wine/drive_c
+	@echo
+	@echo Symlink the file to
+	@echo $@
+	@echo in support/ to proceed.
+	@echo
+	@echo
+	@false
+
+support/pianobello.nki: | support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Get pianobello.nki.
+	@echo
+	@echo Place the downloaded file named
+	@echo $@
+	@echo in support/ to proceed.
+	@echo
+	@echo As pianobello.com is down currently,
+	@echo GOOD LUCK
+	@echo
+	@echo
+	@false
+
+
 LMMS_SETINSTRUMENT = sed -e 's,%LMMS_SUPPORT%,$(CURDIR)/support,g' | bin/lmms_setinstrument.pl
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir $(CURDIR)\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
@@ -133,27 +152,15 @@ TIMIDITY_SETGUSPATCH_PRE = -x "dir $(CURDIR)\nfont exclude 0 0\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
 
 
-# mda Piano (LMMS)
-%-lmms-mdapiano-raw.wav: %.mmp support/mdaPiano.dll
-	< instruments/mdaPiano.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-mdapiano-raw.tmp
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Please export as $@
-	#echo Furthermore, complain to LMMS guys why --render does not work.
-	@echo
-	@echo
-	lmms $*-lmms-mdapiano.tmp
-	[ -f $@ ]
-
 # Kontakt 5, Pianobello (LMMS)
-%-lmms-pianobello-raw.wav: %.mmp
+%-lmms-pianobello-raw.wav: %.mmp support/Kontakt5.dll support/pianobello.nki
 	< instruments/kontakt5-pianobello.lmms $(LMMS_SETINSTRUMENT) $< $*-lmms-pianobello-raw.tmp
 	@echo
 	@echo
 	@echo MANUAL TASK:
-	@echo Please export as $@
-	#echo Furthermore, complain to LMMS guys why --render does not work.
+	@echo Please load
+	@echo $(CURDIR)/support/pianobello.nki
+	@echo into Kontakt 5, then export as $@
 	@echo
 	@echo
 	lmms $*-lmms-pianobello.tmp

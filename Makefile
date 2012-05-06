@@ -177,7 +177,7 @@ TIMIDITY_SETGUSPATCH_POST = "
 %-linuxsampler-steinwayc-raw.wav: %-format0.mid support/SteinwayC.gig
 	bin/linuxsampler.sh $< $(CURDIR)/support/SteinwayC.gig $@
 %-linuxsampler-maestro-raw.wav: %-format0.mid support/maestro_concert_grand_v2.gig
-	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig - | sox - $*-linuxsampler-maestro-tmp.wav
+	bin/linuxsampler.sh $< $(CURDIR)/support/maestro_concert_grand_v2.gig $*-linuxsampler-maestro-tmp.wav
 	sox $*-linuxsampler-maestro-tmp.wav $@ reverb 50 50 60 100 0 0
 
 %.wav: %-raw.wav

@@ -201,7 +201,7 @@ clean:
 	$(RM) $(OUTPUT) $(INTERMEDIATE)
 
 distclean: clean
-	$(RM) $(FETCH)
+	$(RM) $(FETCH) Makefile config.status config.log
 
 realclean: disclean
 	$(RM) $(SECONDARY)

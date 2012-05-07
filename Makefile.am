@@ -1,11 +1,13 @@
 OUTFORMATS ?= flac mp3 ogg
 
 # These generally output fine
+OUTTYPES_NICE =
 OUTTYPES_NICE += timidity-campbell
 OUTTYPES_NICE += timidity-freepats
 OUTTYPES_NICE += linuxsampler-maestro
 
 # Outputting these is a bit broken/manual. Avoid it.
+OUTTYPES_EVIL =
 OUTTYPES_EVIL += linuxsampler-pleyelp190
 OUTTYPES_EVIL += linuxsampler-steinwayc
 

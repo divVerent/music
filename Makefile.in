@@ -65,7 +65,7 @@ $(BUILD)/support:
 
 $(BUILD)/support/CampbellsPianoBeta2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
-$(BUILD)/support/CampbellsPianoBeta2.sf2: $(BUILD)/support/CampbellsPianoBeta2.rar
+$(BUILD)/support/CampbellsPianoBeta2.sf2: | $(BUILD)/support/CampbellsPianoBeta2.rar
 	cd $(BUILD)/support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
 
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
@@ -73,7 +73,7 @@ $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
-$(BUILD)/support/maestro_concert_grand_v2.gig: $(BUILD)/support/maestro_concert_grand_v2.rar
+$(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concert_grand_v2.rar
 	cd $(BUILD)/support && unrar x 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
 
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
@@ -90,7 +90,7 @@ $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/suppor
 	@echo
 	@echo
 	@false
-$(BUILD)/support/PleyelP190.gig: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
+$(BUILD)/support/PleyelP190.gig: | $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 	cd $(BUILD)/support && unrar x classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'PleyelP190.gig'
 
 $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
@@ -107,7 +107,7 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 	@echo
 	@echo
 	@false
-$(BUILD)support/SteinwayC.gig: $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
+$(BUILD)support/SteinwayC.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 	cd $(BUILD)/support && unrar x classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
 
 

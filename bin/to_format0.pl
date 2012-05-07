@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use MIDI;
 use MIDI::Opus;
 use POSIX;
 

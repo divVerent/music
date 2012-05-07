@@ -142,7 +142,6 @@ $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.w
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-.SECONDARY: %.mid
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
 	< $< gunzip | $(SRC)/bin/autoramp.pl | gzip > $@
@@ -157,7 +156,6 @@ $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	rosegarden $| >/dev/null 2>&1
 	[ -f $@ ]
 
-.SECONDARY: %.ly.orig
 $(SRC)/%.ly.orig: | $(SRC)/%.rg
 	@echo
 	@echo

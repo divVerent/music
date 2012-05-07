@@ -20,24 +20,40 @@ OUTTYPES =
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
 
 # Programs we use
-CP ?= cp
-PATCH ?= patch
-LILYPOND ?= lilypond
-LILYPONDFLAGS ?=
-TIMIDITY ?= timidity
-TIMIDITYFLAGS ?=
+CP = @cp@
+PATCH = @patch@
+LILYPOND = @lilypond@
+LILYPONDFLAGS = @lilypond_flags@
+TIMIDITY = @timidity@
+TIMIDITYFLAGS = @timidity_flags@
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir /\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
 TIMIDITY_SETGUSPATCH_PRE = -x "dir /\nfont exclude 0 0\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
-FLUIDSYNTH ?= fluidsynth
-FLUIDSYNTHFLAGS ?=
-LAME ?= lame
-LAMEFLAGS ?= --preset standard
-OGGENC ?= oggenc
-OGGENCFLAGS ?= -q3
-FLAC ?= flac
-FLACFLAGS ?= -8
+FLUIDSYNTH = @fluidsynth@
+FLUIDSYNTHFLAGS = @fluidsynth_flags@
+LAME = @lame@
+LAMEFLAGS = @lame_flags@
+OGGENC = @oggenc@
+OGGENCFLAGS = @oggenc_flags@
+FLAC = @flac@
+FLACFLAGS = @flac_flags@
+WGET = @wget@
+WGETFLAGS = @wget_flags@
+UNRAR = @unrar@
+UNRARFLAGS = @unrar_flags@
+SOX = @sox@
+SOXFLAGS = @sox_flags@
+GZIP = @gzip@
+GZIPFLAGS = @gzip_flags@
+GUNZIP = @gunzip@
+GUNZIPFLAGS = @gunzip_flags@
+ROSEGARDEN = @rosegarden@
+ROSEGARDENFLAGS = @rosegarden_flags@
+MP3GAIN = @mp3gain@
+MP3GAINFLAGS = @mp3gain_flags@
+VORBISGAIN = @vorbisgain@
+VORBISGAINFLAGS = @vorbisgain_flags@
 
 # Source files
 RG = $(wildcard $(SRC)/*/*.rg)
@@ -78,32 +94,32 @@ FETCH =
 
 .INTERMEDIATE: $(BUILD)/support/CampbellsPianoBeta2.rar
 $(BUILD)/support/CampbellsPianoBeta2.rar: | $(BUILD)/support
-	cd $(BUILD)/support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
 @timidity_TRUE@ FETCH += $(BUILD)/support/CampbellsPianoBeta2.sf2
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/CampbellsPianoBeta2.sf2
 $(BUILD)/support/CampbellsPianoBeta2.sf2: | $(BUILD)/support/CampbellsPianoBeta2.rar
-	cd $(BUILD)/support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
-	cd $(BUILD)/support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
 $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && wget -O 'acoustic_grand_piano_ydp_20080910.sf2' 'http://zenvoid.org/audio/acoustic_grand_piano_ydp_20080910.sf2'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_grand_piano_ydp_20080910.sf2' 'http://zenvoid.org/audio/acoustic_grand_piano_ydp_20080910.sf2'
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && wget -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
 
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
-	cd $(BUILD)/support && wget -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
 @linuxsampler_TRUE@ FETCH += $(BUILD)/support/maestro_concert_grand_v2.gig
 $(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concert_grand_v2.rar
-	cd $(BUILD)/support && unrar x 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
@@ -122,7 +138,7 @@ $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/suppor
 	@false
 @linuxsampler_pleyelp190_TRUE@ FETCH += $(BUILD)/support/PleyelP190.gig
 $(BUILD)/support/PleyelP190.gig: | $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
-	cd $(BUILD)/support && unrar x classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'PleyelP190.gig'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'PleyelP190.gig'
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
@@ -141,7 +157,7 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 	@false
 @linuxsampler_steinwayc_TRUE@ FETCH += $(BUILD)/support/SteinwayC.gig
 $(BUILD)/support/SteinwayC.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
-	cd $(BUILD)/support && unrar x classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
 
 fetch: $(FETCH)
 
@@ -175,11 +191,11 @@ $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/s
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.wav
-	sox $< $@ reverb 50 50 60 100 0 0
+	$(SOX) $(SOXFLAGS) $< $@ reverb 50 50 60 100 0 0
 
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
-	< $< gunzip | $(SRC)/bin/autoramp.pl | gzip > $@
+	< $< $(GUNZIP) $(GUNZIPFLAGS) | $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo
@@ -188,7 +204,7 @@ $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo Please export to MIDI as $@
 	@echo
 	@echo
-	rosegarden $| >/dev/null 2>&1
+	$(ROSEGARDEN) $(ROSEGARDENFLAGS) $| >/dev/null 2>&1
 	[ -f $@ ]
 
 $(SRC)/%.ly.orig: | $(SRC)/%.rg
@@ -198,25 +214,25 @@ $(SRC)/%.ly.orig: | $(SRC)/%.rg
 	@echo Please export to Lilypond as $@
 	@echo
 	@echo
-	rosegarden $| >/dev/null 2>&1
+	$(ROSEGARDEN) $(ROSEGARDENFLAGS) $| >/dev/null 2>&1
 	[ -f $@ ]
 
 
 # Audio transforms
 
 $(BUILD)/%.wav: $(BUILD)/%-uncut.wav
-	sox $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
+	$(SOX) $(SOXFLAGS) $< $@ silence 1 0 0% reverse silence 1 0 0% reverse
 
 $(BUILD)/%.flac: $(BUILD)/%.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
 
 $(BUILD)/%.mp3: $(BUILD)/%.wav
 	$(LAME) $(LAMEFLAGS) $< $@
-	mp3gain -r -k $@
+	$(MP3GAIN) $(MP3GAINFLAGS) -r -k $@
 
 $(BUILD)/%.ogg: $(BUILD)/%.wav
 	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
-	vorbisgain $@
+	$(VORBISGAIN) $(VORBISGAINFLAGS) $@
 
 
 # PDF making

@@ -1,10 +1,2 @@
-*/*.ogg
-*/*.wav
-*/*.flac
-*/*.mp3
-*/*.wav
-*/*.ly
-*/*.pdf
-support/
-*/*.tmp
-*/*-format0.mid
+autom4te.cache/
+configure

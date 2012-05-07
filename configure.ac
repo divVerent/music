@@ -28,7 +28,7 @@ AS_IF(
 				[],
 			[test -z [$]$1],
 				[AC_MSG_FAILURE([--with-$1 was given, but $1 was not found])])])
-RP_CONDITIONAL($1,[test -n $1])
+RP_CONDITIONAL($1,[test x != x$1])
 AC_SUBST($1,[[$]$1])
 AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 ])
@@ -39,7 +39,7 @@ AC_PATH_PROG($1,$1,[])
 AS_IF(
 	[test -z [$]$1],
 		[AC_MSG_FAILURE([--with-$1 was given, but $1 was not found])])
-RP_CONDITIONAL($1,[test -n $1])
+RP_CONDITIONAL($1,[test x != x$1])
 AC_SUBST($1,[[$]$1])
 AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 ])
@@ -49,7 +49,7 @@ AC_DEFUN([RP_NEEDPROG_FORCEIFNOTEXIST],
 AC_PATH_PROG($1,$1,[])
 AS_IF(
 	[test -z [$]$1],[$1=$1])
-RP_CONDITIONAL($1,[test -n $1])
+RP_CONDITIONAL($1,[test x != x$1])
 AC_SUBST($1,[[$]$1])
 AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 ])
@@ -83,26 +83,26 @@ AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use L
 RP_PROGOPTION(linuxsampler)
 
 AC_ARG_WITH(linuxsampler-pleyelp190, AS_HELP_STRING([--with-linuxsampler-pleyelp190], [Use Pleyel P190.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_pleyelp190=$withval], [with_linuxsampler_pleyelp190=no])
-RP_CONDITIONAL(linuxsampler_pleyelp190,[test -n $with_linuxsampler_pleyelp190])
+RP_CONDITIONAL(linuxsampler_pleyelp190,[test xno != x$with_linuxsampler_pleyelp190])
 
 AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
-RP_CONDITIONAL(linuxsampler_steinwayc,[test -n $with_linuxsampler_steinwayc])
+RP_CONDITIONAL(linuxsampler_steinwayc,[test xno != x$with_linuxsampler_steinwayc])
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
 
 AS_IF(
-	[test -n $lilypond],[],
-	[test -n $lame],[],
-	[test -n $oggenc],[],
-	[test -n $flac],[],
+	[test x != x$lilypond],[],
+	[test x != x$lame],[],
+	[test x != x$oggenc],[],
+	[test x != x$flac],[],
 	[AC_MSG_FAILURE([no output would be generated (missing audio encoders)])])
 
 AS_IF(
-	[test -n $lilypond],[],
-	[test -n $timidity],[],
-	[test -n $fluidsynth],[],
-	[test -n $linuxsampler],[],
+	[test x != x$lilypond],[],
+	[test x != x$timidity],[],
+	[test x != x$fluidsynth],[],
+	[test x != x$linuxsampler],[],
 	[AC_MSG_FAILURE([no output would be generated (missing synthesizers)])])
 
 dnl These are ALWAYS required:

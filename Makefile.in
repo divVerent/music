@@ -44,10 +44,10 @@ UNRAR = @unrar@
 UNRARFLAGS = @unrar_flags@
 SOX = @sox@
 SOXFLAGS = @sox_flags@
-GZIP = @gzip@
-GZIPFLAGS = @gzip_flags@
-GUNZIP = @gunzip@
-GUNZIPFLAGS = @gunzip_flags@
+GZ = @gz@
+GZFLAGS = @gz_flags@
+UNGZ = @ungz@
+UNGZFLAGS = @ungz_flags@
 ROSEGARDEN = @rosegarden@
 ROSEGARDENFLAGS = @rosegarden_flags@
 MP3GAIN = @mp3gain@
@@ -210,7 +210,7 @@ $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.w
 
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
-	< $< $(GUNZIP) $(GUNZIPFLAGS) --force --stdout | $(PERL) $(PERLFLAGS) $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) --stdout > $@
+	< $< $(UNGZ) $(UNGZFLAGS) --force --stdout | $(PERL) $(PERLFLAGS) $(SRC)/bin/autoramp.pl | $(GZ) $(GZFLAGS) --stdout > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo

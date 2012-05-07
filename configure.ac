@@ -147,8 +147,9 @@ RP_NEEDPROG(unrar)
 RP_NEEDPROG(sox)
 
 dnl These are only needed for "make manual"
-RP_NEEDPROG_FORCEIFNOTEXIST(gzip)
-RP_NEEDPROG_FORCEIFNOTEXIST(gunzip)
+dnl (we must avoid the GZIP env variable here)
+RP_NEEDPROG_FORCEIFNOTEXIST(gz,gzip)
+RP_NEEDPROG_FORCEIFNOTEXIST(ungz,gunzip)
 RP_NEEDPROG_FORCEIFNOTEXIST(rosegarden)
 
 AC_CONFIG_FILES([Makefile])

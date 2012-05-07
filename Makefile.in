@@ -1,6 +1,9 @@
 # @configure_input@
+
 SRC = @abs_srcdir@
 BUILD = @abs_builddir@
+
+.DEFAULT_GOAL: all
 
 OUTFORMATS =
 OUTTYPES =
@@ -40,11 +43,18 @@ LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 MID = $(patsubst $(SRC)/%.rg,$(SRC)/%.mid,$(RG))
 LY_ORIG = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.orig,$(RG))
 MANUAL = $(MID) $(LY_ORIG)
+.SECONDARY: $(MANUAL)
 
 # Intermediate files
 MID_FORMAT0 = $(patsubst $(SRC)/%.rg,$(BUILD)/%-format0.mid,$(RG))
 LY = $(patsubst $(SRC)/%.rg,$(BUILD)/%.ly,$(RG))
 INTERMEDIATE = $(MID_FORMAT0) $(LY)
+.INTERMEDIATE: $(INTERMEDIATE)
+
+# Secondary files
+AUDIO_UNCUT_AND_RAW = $(foreach TEMPTYPE,uncut raw,$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE)-$(TEMPTYPE).wav,$(RG))))
+SECONDARY = $(AUDIO_UNCUT_AND_RAW)
+.SECONDARY: $(SECONDARY)
 
 # Output files
 PDF = $(patsubst $(SRC)/%.rg,$(BUILD)/%.pdf,$(RG))
@@ -54,7 +64,6 @@ OUTPUT = $(PDF) $(AUDIO)
 .PHONY: all
 all: $(OUTPUT)
 
-.SECONDARY: $(MANUAL)
 .PHONY: manual
 manual: $(MANUAL)
 
@@ -128,21 +137,24 @@ $(BUILD)/%-format0.mid: $(SRC)/%.mid
 	$(SRC)/bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
+
 $(BUILD)/%-timidity-campbell-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/CampbellsPianoBeta2.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) $| $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+
 $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
+
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SteinwayC.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb
-$(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.wav
-	sox $< $@ reverb 50 50 60 100 0 0
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
+$(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.wav
+	sox $< $@ reverb 50 50 60 100 0 0
 
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
@@ -199,7 +211,7 @@ $(BUILD)/%.pdf: $(BUILD)/%.ly
 # Cleanup
 .PHONY: clean
 clean:
-	$(RM) $(OUTPUT) $(INTERMEDIATE)
+	$(RM) $(OUTPUT) $(INTERMEDIATE) $(SECONDARY)
 
 .PHONY: distclean
 distclean: clean

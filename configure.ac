@@ -56,7 +56,7 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 
 AS_IF([test -z $LAMEFLAGS],[LAMEFLAGS="--preset standard"])
 AS_IF([test -z $OGGENCFLAGS],[OGGENCFLAGS="-q3"])
-AS_IF([test -z $FLACFLAGS],[FLACFLAGS="-8"])
+AS_IF([test -z $FLACFLAGS],[FLACFLAGS="--replay-gain -8"])
 
 AC_ARG_WITH(lame, AS_HELP_STRING([--without-lame], [Do not use LAME to make .mp3 output files]), [with_lame=$withval], [with_lame=check])
 RP_PROGOPTION(lame)

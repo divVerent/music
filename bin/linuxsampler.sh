@@ -5,7 +5,7 @@ killpids=
 atexit()
 {
 	if [ -n "$killpids" ]; then
-		kill $killpids
+		kill $killpids || true
 		killpids=
 	fi
 }

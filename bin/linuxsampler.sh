@@ -27,9 +27,9 @@ done
 
 echo "Starting jackd..."
 if [ -n "$outfile" ]; then
-	jackd -d dummy & jackpid=$!
+	jackd -r -d dummy & jackpid=$!
 else
-	jackd -d alsa & jackpid=$!
+	jackd -r -d alsa & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
 while ! jack_lsp >/dev/null 2>/dev/null; do

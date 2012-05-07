@@ -23,6 +23,14 @@ AS_IF(
 	[test x$with_[]$1 = xno],
 		[$1=],
 	[
+		$1=$with_[]$1
+		case $[]$1 in
+			[[\\/]]* | ?:[[\\/]]*)
+				;;
+			*)
+				$1=[$]m4_toupper($1)
+				;;
+		esac
 		AS_IF([test -z $2],
 			[AC_PATH_PROG($1,$1,[])],
 			[AC_PATH_PROG($1,$2,[])])

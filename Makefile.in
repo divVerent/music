@@ -14,6 +14,7 @@ OUTTYPES =
 @timidity_TRUE@                OUTTYPES += timidity-campbell
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 @timidity_TRUE@                OUTTYPES += timidity-disklavier
+@timidity_TRUE@                OUTTYPES += timidity-imis
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
@@ -88,6 +89,10 @@ $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'acoustic_grand_piano_ydp_20080910.sf2' 'http://zenvoid.org/audio/acoustic_grand_piano_ydp_20080910.sf2'
 
+@timidity_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
+$(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
+	cd $(BUILD)/support && wget -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
+
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
@@ -150,7 +155,10 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 
 $(BUILD)/%-timidity-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
-	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) $| $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+
+$(BUILD)/%-timidity-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
+	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) $| $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@

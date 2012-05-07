@@ -18,6 +18,7 @@ AC_DEFUN([RP_CONDITIONAL],
 
 AC_DEFUN([RP_PROGOPTION],
 [
+$1=[$]m4_toupper($1)
 AS_IF(
 	[test x$with_[]$1 = xno],
 		[$1=],
@@ -37,6 +38,7 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 
 AC_DEFUN([RP_NEEDPROG],
 [
+$1=[$]m4_toupper($1)
 AS_IF([test -z $2],
 	[AC_PATH_PROG($1,$1,[])],
 	[AC_PATH_PROG($1,$2,[])])
@@ -50,6 +52,7 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 
 AC_DEFUN([RP_NEEDPROG_FORCEIFNOTEXIST],
 [
+$1=[$]m4_toupper($1)
 AS_IF([test -z $2],
 	[AC_PATH_PROG($1,$1,[])],
 	[AC_PATH_PROG($1,$2,[])])

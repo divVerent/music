@@ -113,6 +113,7 @@ $(BUILD)support/SteinwayC.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-
 
 # Format 0 MIDI (friendly for the synths)
 $(BUILD)/%-format0.mid: $(SRC)/%.mid
+	d=$@ && mkdir $${d%/*}
 	$(SRC)/bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
@@ -134,6 +135,7 @@ $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppo
 
 .SECONDARY: %.mid
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
+	d=$@ && mkdir $${d%/*}
 	< $< gunzip | $(SRC)/bin/autoramp.pl | gzip > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
@@ -177,6 +179,7 @@ $(BUILD)/%.ogg: $(BUILD)/%.wav
 
 # PDF making
 $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig
+	d=$@ && mkdir $${d%/*}
 	set -- $^ && $(CP) $$2 $@
 	set -- $^ && $(PATCH) $@ $$1
 

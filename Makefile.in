@@ -113,7 +113,7 @@ $(BUILD)support/SteinwayC.gig: $(BUILD)/support/classicpianos-steinway_c.giga-*.
 
 # Format 0 MIDI (friendly for the synths)
 $(BUILD)/%-format0.mid: $(SRC)/%.mid
-	bin/to_format0.pl $< $@ 0 5 1
+	$(SRC)/bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
 $(BUILD)/%-timidity-campbell-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/CampbellsPianoBeta2.sf2
@@ -122,19 +122,19 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
-	bin/linuxsampler.sh $< $| $@
+	$(SRC)/bin/linuxsampler.sh $< $| $@
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SteinwayC.gig
-	bin/linuxsampler.sh $< $| $@
+	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb
 $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.wav
 	sox $< $@ reverb 50 50 60 100 0 0
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
-	bin/linuxsampler.sh $< $| $@
+	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 .SECONDARY: %.mid
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
-	< $< gunzip | bin/autoramp.pl | gzip > $@
+	< $< gunzip | $(SRC)/bin/autoramp.pl | gzip > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo

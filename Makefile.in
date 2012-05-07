@@ -210,7 +210,7 @@ $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.w
 
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
-	< $< $(GUNZIP) $(GUNZIPFLAGS) | $(PERL) $(PERLFLAGS) $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) > $@
+	< $< $(GUNZIP) $(GUNZIPFLAGS) --force --stdout | $(PERL) $(PERLFLAGS) $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) --stdout > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo

@@ -72,18 +72,7 @@
 
 <metadata>
 <property name="copyright" value="Copyright (c) 2011 Rudolf Polzer"/>
-<property name="composer" value=""/>
 <property name="title" value="Sonata 4 in C Major"/>
-<property name="subtitle" value=""/>
-<property name="arranger" value=""/>
-<property name="dedication" value=""/>
-<property name="subsubtitle" value=""/>
-<property name="poet" value=""/>
-<property name="meter" value=""/>
-<property name="opus" value=""/>
-<property name="instrument" value=""/>
-<property name="piece" value=""/>
-<property name="tagline" value=""/>
 
 
 </metadata>
@@ -3045,7 +3034,7 @@
     </device>
 
 
-    <device id="1" name="General MIDI Synth" direction="play" variation="" connection="130:0 Synth input port (8051:0) (write)" type="midi">
+    <device id="1" name="General MIDI Synth" direction="play" variation="" connection="" type="midi">
 
         <librarian name="Michael McIntyre" email="dmmcintyr@users.sourceforge.net"/>
         <metronome instrument="2009" barpitch="37" beatpitch="37" subbeatpitch="37" depth="2" barvelocity="120" beatvelocity="100" subbeatvelocity="80"/>
@@ -3195,9 +3184,9 @@
         <instrument id="2048" channel="0" type="midi">
             <bank send="true" percussion="false" msb="0" lsb="0"/>
             <program id="0" send="true"/>
-            <pan value="96"/>
+            <pan value="64"/>
             <volume value="100"/>
-            <controlchange type="10" value="96"/>
+            <controlchange type="10" value="64"/>
             <controlchange type="93" value="0"/>
             <controlchange type="7" value="100"/>
             <controlchange type="91" value="0"/>
@@ -3208,9 +3197,9 @@
         <instrument id="2049" channel="1" type="midi">
             <bank send="true" percussion="false" msb="0" lsb="0"/>
             <program id="0" send="true"/>
-            <pan value="32"/>
+            <pan value="64"/>
             <volume value="100"/>
-            <controlchange type="10" value="32"/>
+            <controlchange type="10" value="64"/>
             <controlchange type="93" value="0"/>
             <controlchange type="7" value="100"/>
             <controlchange type="91" value="0"/>

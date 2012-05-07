@@ -51,9 +51,11 @@ PDF = $(patsubst $(SRC)/%.rg,$(BUILD)/%.pdf,$(RG))
 AUDIO = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 OUTPUT = $(PDF) $(AUDIO)
 
+.PHONY: all
 all: $(OUTPUT)
 
 .SECONDARY: $(MANUAL)
+.PHONY: manual
 manual: $(MANUAL)
 
 $(BUILD)/support:
@@ -195,12 +197,15 @@ $(BUILD)/%.pdf: $(BUILD)/%.ly
 
 
 # Cleanup
+.PHONY: clean
 clean:
 	$(RM) $(OUTPUT) $(INTERMEDIATE)
 
+.PHONY: distclean
 distclean: clean
 	$(RM) $(FETCH) Makefile config.status config.log
 
+.PHONY: realclean
 realclean: disclean
 	$(RM) $(SECONDARY)
 

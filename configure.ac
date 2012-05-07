@@ -38,7 +38,7 @@ AC_DEFUN([RP_NEEDPROG],
 AC_PATH_PROG($1,$1,[])
 AS_IF(
 	[test -z [$]$1],
-		[AC_MSG_FAILURE([--with-$1 was given, but $1 was not found])])
+		[AC_MSG_FAILURE([required program $1 was not found])])
 RP_CONDITIONAL($1,[test x != x$1])
 AC_SUBST($1,[[$]$1])
 AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])

@@ -27,9 +27,9 @@ done
 
 echo "Starting jackd..."
 if [ -n "$outfile" ]; then
-	jackd -r -d dummy & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -d dummy & jackpid=$!
 else
-	jackd -r -d alsa & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -d alsa & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
 while ! jack_lsp >/dev/null 2>/dev/null; do
@@ -37,9 +37,9 @@ while ! jack_lsp >/dev/null 2>/dev/null; do
 done
 
 echo "Starting LinuxSampler..."
-linuxsampler --lscp-port $LSCP_PORT & samppid=$!
+${LINUXSAMPLER:-linuxsampler} ${LINUXSAMPLERFLAGS:-} --lscp-port $LSCP_PORT & samppid=$!
 killpids=$killpids" $samppid"
-while ! echo QUIT | ncat -i10 localhost $LSCP_PORT | grep .; do
+while ! echo QUIT | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT | grep .; do
 	sleep 0.1
 done
 
@@ -83,22 +83,22 @@ EOF
 		done;
 	fi
 	echo QUIT
-} | ncat -i10 localhost $LSCP_PORT || true
+} | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT || true
 
 if [ -n "$outfile" ]; then
 	(
 		: > "$outfile"
-		jack_capture --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
+		${JACK_CAPTURE:-jack_capture} ${JACK_CAPTUREFLAGS:-} --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
 		# wait till there is more than just the WAV header in the outfile
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
 			sleep 0.1
 		done
-		jack-smf-player -t -n -a LinuxSampler:midi_in_0 "$midifile"
+		${JACK_SMF_PLAYER:-jack-smf-player} ${JACK_SMF_PLAYERFLAGS:-} -t -n -a LinuxSampler:midi_in_0 "$midifile"
 		kill $cappid
 		wait
 	)
 else
-	jack_connect LinuxSampler:0 system:playback_1
-	jack_connect LinuxSampler:1 system:playback_2
-	jack-smf-player -t -n -a LinuxSampler:midi_in_0 "$midifile"
+	${JACK_CONNECT:-jack_connect} ${JACK_CONNECTFLAGS:-} LinuxSampler:0 system:playback_1
+	${JACK_CONNECT:-jack_connect} ${JACK_CONNECTFLAGS:-} LinuxSampler:1 system:playback_2
+	${JACK_SMF_PLAYER:-jack-smf-player} ${JACK_SMF_PLAYERFLAGS:-} -t -n -a LinuxSampler:midi_in_0 "$midifile"
 fi

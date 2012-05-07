@@ -32,7 +32,7 @@ else
 	${JACKD:-jackd} ${JACKDFLAGS:--r} -d alsa & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
-while ! jack_lsp >/dev/null 2>/dev/null; do
+while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} >/dev/null 2>/dev/null; do
 	sleep 0.1
 done
 

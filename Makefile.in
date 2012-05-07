@@ -64,6 +64,8 @@ JACK_CONNECT = @jack_connect@
 JACK_CONNECTFLAGS = @jack_connect_flags@
 JACK_SMF_PLAYER = @jack_smf_player@
 JACK_SMF_PLAYERFLAGS = @jack_smf_player_flags@
+JACK_LSP = @jack_lsp@
+JACK_LSPFLAGS = @jack_lsp_flags@
 NCAT = @ncat@
 NCATFLAGS = @ncat_flags@
 

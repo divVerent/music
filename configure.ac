@@ -91,6 +91,12 @@ RP_CONDITIONAL(linuxsampler_steinwayc,[test xno != x$with_linuxsampler_steinwayc
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
 
+RP_NEEDPROG(perl)
+
+AS_IF(
+	[$perl -MMIDI::Opus -e ''],[],
+	[AC_MSG_FAILURE([required perl module MIDI::Opus is not installed])])
+
 AS_IF(
 	[test x != x$lilypond],[],
 	[test x != x$lame],[],

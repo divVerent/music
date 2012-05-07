@@ -54,6 +54,8 @@ MP3GAIN = @mp3gain@
 MP3GAINFLAGS = @mp3gain_flags@
 VORBISGAIN = @vorbisgain@
 VORBISGAINFLAGS = @vorbisgain_flags@
+PERL = @perl@
+PERLFLAGS = @perl_flags@
 
 # Source files
 RG = $(wildcard $(SRC)/*/*.rg)
@@ -166,7 +168,7 @@ fetch: $(FETCH)
 # Format 0 MIDI (friendly for the synths)
 $(BUILD)/%-format0.mid: $(SRC)/%.mid
 	d=$@ && mkdir -p $${d%/*}
-	$(SRC)/bin/to_format0.pl $< $@ 0 5 1
+	$(PERL) $(PERLFLAGS) $(SRC)/bin/to_format0.pl $< $@ 0 5 1
 
 # Audio renderers
 
@@ -196,7 +198,7 @@ $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.w
 
 $(BUILD)/%-ramp.rg: $(SRC)/%.rg
 	d=$@ && mkdir -p $${d%/*}
-	< $< $(GUNZIP) $(GUNZIPFLAGS) | $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) > $@
+	< $< $(GUNZIP) $(GUNZIPFLAGS) | $(PERL) $(PERLFLAGS) $(SRC)/bin/autoramp.pl | $(GZIP) $(GZIPFLAGS) > $@
 	
 $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo

@@ -58,28 +58,28 @@ AS_IF([test -z $LAMEFLAGS],[LAMEFLAGS="--preset standard"])
 AS_IF([test -z $OGGENCFLAGS],[OGGENCFLAGS="-q3"])
 AS_IF([test -z $FLACFLAGS],[FLACFLAGS="-8"])
 
-AC_ARG_WITH(lame, AS_HELP_STRING([--without-lame], [Do not use LAME to make .mp3 output files]), [with_lame=$withval], [with_lame=yes])
+AC_ARG_WITH(lame, AS_HELP_STRING([--without-lame], [Do not use LAME to make .mp3 output files]), [with_lame=$withval], [with_lame=check])
 RP_PROGOPTION(lame)
 
-AC_ARG_WITH(mp3gain, AS_HELP_STRING([--without-mp3gain], [Do not use mp3gain to fix .mp3 output file level]), [with_mp3gain=$withval], [with_mp3gain=yes])
+AC_ARG_WITH(mp3gain, AS_HELP_STRING([--without-mp3gain], [Do not use mp3gain to fix .mp3 output file level]), [with_mp3gain=$withval], [with_mp3gain=check])
 RP_PROGOPTION(mp3gain)
 
-AC_ARG_WITH(oggenc, AS_HELP_STRING([--without-oggenc], [Do not use vorbis-tools to make .ogg output files]), [with_oggenc=$withval], [with_oggenc=yes])
+AC_ARG_WITH(oggenc, AS_HELP_STRING([--without-oggenc], [Do not use vorbis-tools to make .ogg output files]), [with_oggenc=$withval], [with_oggenc=check])
 RP_PROGOPTION(oggenc)
 
-AC_ARG_WITH(vorbisgain, AS_HELP_STRING([--without-vorbisgain], [Do not use vorbisgain to fix .ogg output file level]), [with_vorbisgain=$withval], [with_vorbisgain=yes])
+AC_ARG_WITH(vorbisgain, AS_HELP_STRING([--without-vorbisgain], [Do not use vorbisgain to fix .ogg output file level]), [with_vorbisgain=$withval], [with_vorbisgain=check])
 RP_PROGOPTION(vorbisgain)
 
-AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=yes])
+AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=check])
 RP_PROGOPTION(flac)
 
-AC_ARG_WITH(timidity, AS_HELP_STRING([--without-timidity], [Use timidity outputs]), [with_timidity=$withval], [with_timidity=yes])
+AC_ARG_WITH(timidity, AS_HELP_STRING([--without-timidity], [Use timidity outputs]), [with_timidity=$withval], [with_timidity=check])
 RP_PROGOPTION(timidity)
 
-AC_ARG_WITH(fluidsynth, AS_HELP_STRING([--without-fluidsynth], [Do not use fluidsynth outputs]), [with_fluidsynth=$withval], [with_fluidsynth=yes])
+AC_ARG_WITH(fluidsynth, AS_HELP_STRING([--without-fluidsynth], [Do not use fluidsynth outputs]), [with_fluidsynth=$withval], [with_fluidsynth=check])
 RP_PROGOPTION(fluidsynth)
 
-AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=yes])
+AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=check])
 RP_PROGOPTION(linuxsampler)
 
 AC_ARG_WITH(linuxsampler-pleyelp190, AS_HELP_STRING([--with-linuxsampler-pleyelp190], [Use Pleyel P190.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_pleyelp190=$withval], [with_linuxsampler_pleyelp190=no])
@@ -90,6 +90,20 @@ RP_CONDITIONAL(linuxsampler_steinwayc,[test -n $with_linuxsampler_steinwayc])
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
+
+AS_IF(
+	[test -n $lilypond],[],
+	[test -n $lame],[],
+	[test -n $oggenc],[],
+	[test -n $flac],[],
+	[AC_MSG_FAILURE([no output would be generated (missing audio encoders)])])
+
+AS_IF(
+	[test -n $lilypond],[],
+	[test -n $timidity],[],
+	[test -n $fluidsynth],[],
+	[test -n $linuxsampler],[],
+	[AC_MSG_FAILURE([no output would be generated (missing synthesizers)])])
 
 dnl These are ALWAYS required:
 RP_NEEDPROG(cp)

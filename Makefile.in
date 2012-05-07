@@ -1,3 +1,24 @@
+if WITH_LAME
+endif
+
+if WITH_OGGENC
+endif
+
+if WITH_FLAC
+endif
+
+if WITH_TIMIDITY
+endif
+
+if WITH_LINUXSAMPLER
+endif
+
+if WITH_LINUXSAMPLER_PLEYELP190
+endif
+
+if WITH_LINUXSAMPLER_STEINWAYC
+endif
+
 OUTFORMATS ?= flac mp3 ogg
 
 # These generally output fine

@@ -22,7 +22,9 @@ AS_IF(
 	[test x$with_[]$1 = xno],
 		[$1=],
 	[
-		AC_PATH_PROG($1,$1,[])
+		AS_IF([test -z $2],
+			[AC_PATH_PROG($1,$1,[])],
+			[AC_PATH_PROG($1,$2,[])])
 		AS_IF(
 			[test x$with_[]$1 = xcheck],
 				[],
@@ -35,7 +37,9 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 
 AC_DEFUN([RP_NEEDPROG],
 [
-AC_PATH_PROG($1,$1,[])
+AS_IF([test -z $2],
+	[AC_PATH_PROG($1,$1,[])],
+	[AC_PATH_PROG($1,$2,[])])
 AS_IF(
 	[test -z [$]$1],
 		[AC_MSG_FAILURE([required program $1 was not found])])
@@ -46,7 +50,9 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 
 AC_DEFUN([RP_NEEDPROG_FORCEIFNOTEXIST],
 [
-AC_PATH_PROG($1,$1,[])
+AS_IF([test -z $2],
+	[AC_PATH_PROG($1,$1,[])],
+	[AC_PATH_PROG($1,$2,[])])
 AS_IF(
 	[test -z [$]$1],[$1=$1])
 RP_CONDITIONAL($1,[test x != x$1])
@@ -90,6 +96,15 @@ RP_CONDITIONAL(linuxsampler_steinwayc,[test xno != x$with_linuxsampler_steinwayc
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
+
+AS_IF([test x != x$linuxsampler],
+	[
+		RP_NEEDPROG(jackd)
+		RP_NEEDPROG(jack_connect)
+		RP_NEEDPROG(jack_lsp)
+		RP_NEEDPROG(ncat)
+		RP_NEEDPROG(jack_smf_player,jack-smf-player)
+	])
 
 RP_NEEDPROG(perl)
 

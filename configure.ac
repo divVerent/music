@@ -88,7 +88,7 @@ RP_CONDITIONAL(linuxsampler_pleyelp190,[test -n $with_linuxsampler_pleyelp190])
 AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
 RP_CONDITIONAL(linuxsampler_steinwayc,[test -n $with_linuxsampler_steinwayc])
 
-AC_ARG_WITH(lilypond, AS_HELP_STRING([--with-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
+AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
 
 dnl These are ALWAYS required:

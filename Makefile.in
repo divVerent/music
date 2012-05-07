@@ -77,7 +77,8 @@ SECONDARY = $(AUDIO_UNCUT_AND_RAW)
 .SECONDARY: $(SECONDARY)
 
 # Output files
-PDF = $(patsubst $(SRC)/%.rg,$(BUILD)/%.pdf,$(RG))
+PDF =
+@lilypond_TRUE@ PDF += $(patsubst $(SRC)/%.rg,$(BUILD)/%.pdf,$(RG))
 AUDIO = $(foreach OUTFORMAT,$(OUTFORMATS),$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE).$(OUTFORMAT),$(RG))))
 OUTPUT = $(PDF) $(AUDIO)
 

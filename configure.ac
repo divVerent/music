@@ -44,27 +44,31 @@ AC_SUBST($1,[[$]$1])
 AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 ])
 
+AC_DEFUN([RP_NEEDPROG_FORCEIFNOTEXIST],
+[
+AC_PATH_PROG($1,$1,[])
+AS_IF(
+	[test -z [$]$1],[$1=$1])
+RP_CONDITIONAL($1,[test -n $1])
+AC_SUBST($1,[[$]$1])
+AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
+])
+
 AS_IF([test -z $LAMEFLAGS],[LAMEFLAGS="--preset standard"])
 AS_IF([test -z $OGGENCFLAGS],[OGGENCFLAGS="-q3"])
 AS_IF([test -z $FLACFLAGS],[FLACFLAGS="-8"])
 
-RP_NEEDPROG(cp)
-RP_NEEDPROG(patch)
-RP_NEEDPROG(lilypond)
-RP_NEEDPROG(wget)
-RP_NEEDPROG(unrar)
-RP_NEEDPROG(sox)
-RP_NEEDPROG(gzip)
-RP_NEEDPROG(gunzip)
-RP_NEEDPROG(rosegarden)
-RP_NEEDPROG(mp3gain)
-RP_NEEDPROG(vorbisgain)
-
 AC_ARG_WITH(lame, AS_HELP_STRING([--without-lame], [Do not use LAME to make .mp3 output files]), [with_lame=$withval], [with_lame=yes])
 RP_PROGOPTION(lame)
 
+AC_ARG_WITH(mp3gain, AS_HELP_STRING([--without-mp3gain], [Do not use mp3gain to fix .mp3 output file level]), [with_mp3gain=$withval], [with_mp3gain=yes])
+RP_PROGOPTION(mp3gain)
+
 AC_ARG_WITH(oggenc, AS_HELP_STRING([--without-oggenc], [Do not use vorbis-tools to make .ogg output files]), [with_oggenc=$withval], [with_oggenc=yes])
 RP_PROGOPTION(oggenc)
+
+AC_ARG_WITH(vorbisgain, AS_HELP_STRING([--without-vorbisgain], [Do not use vorbisgain to fix .ogg output file level]), [with_vorbisgain=$withval], [with_vorbisgain=yes])
+RP_PROGOPTION(vorbisgain)
 
 AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=yes])
 RP_PROGOPTION(flac)
@@ -83,6 +87,21 @@ RP_CONDITIONAL(linuxsampler_pleyelp190,[test -n $with_linuxsampler_pleyelp190])
 
 AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
 RP_CONDITIONAL(linuxsampler_steinwayc,[test -n $with_linuxsampler_steinwayc])
+
+AC_ARG_WITH(lilypond, AS_HELP_STRING([--with-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
+RP_PROGOPTION(lilypond)
+
+dnl These are ALWAYS required:
+RP_NEEDPROG(cp)
+RP_NEEDPROG(patch)
+RP_NEEDPROG(wget)
+RP_NEEDPROG(unrar)
+RP_NEEDPROG(sox)
+
+dnl These are only needed for "make manual"
+RP_NEEDPROG_FORCEIFNOTEXIST(gzip)
+RP_NEEDPROG_FORCEIFNOTEXIST(gunzip)
+RP_NEEDPROG_FORCEIFNOTEXIST(rosegarden)
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

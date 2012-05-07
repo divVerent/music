@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 use MIDI::Opus;
+use MIDI::Track;
+use MIDI::Event;
 use POSIX;
 
 my ($filename, $outfilename, $extratime_pre, $extratime_post, $collapse_channels) = @ARGV;

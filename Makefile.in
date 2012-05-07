@@ -15,6 +15,9 @@ OUTTYPES =
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 @timidity_TRUE@                OUTTYPES += timidity-disklavier
 @timidity_TRUE@                OUTTYPES += timidity-imis
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-campbell
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-disklavier
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
@@ -30,6 +33,8 @@ TIMIDITY_SETSOUNDFONT_PRE = -x "dir /\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
 TIMIDITY_SETGUSPATCH_PRE = -x "dir /\nfont exclude 0 0\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
+FLUIDSYNTH ?= fluidsynth
+FLUIDSYNTHFLAGS ?=
 LAME ?= lame
 LAMEFLAGS ?= --preset standard
 OGGENC ?= oggenc
@@ -78,6 +83,7 @@ FETCH =
 $(BUILD)/support/CampbellsPianoBeta2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'CampbellsPianoBeta2.rar' 'http://www.hammersound.com/cgi-bin/soundlink_download2.pl/Download%20USA;CampbellsPianoBeta2.rar;505'
 @timidity_TRUE@ FETCH += $(BUILD)/support/CampbellsPianoBeta2.sf2
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/CampbellsPianoBeta2.sf2
 $(BUILD)/support/CampbellsPianoBeta2.sf2: | $(BUILD)/support/CampbellsPianoBeta2.rar
 	cd $(BUILD)/support && unrar x 'CampbellsPianoBeta2.rar' 'CampbellsPianoBeta2.sf2'
 
@@ -86,10 +92,12 @@ $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
 $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'acoustic_grand_piano_ydp_20080910.sf2' 'http://zenvoid.org/audio/acoustic_grand_piano_ydp_20080910.sf2'
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && wget -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
 
@@ -159,6 +167,15 @@ $(BUILD)/%-timidity-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/supp
 
 $(BUILD)/%-timidity-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETSOUNDFONT_PRE) $| $(TIMIDITY_SETSOUNDFONT_POST) -EI0 -EFreverb=G,70 -EFchorus=n,40 -Ow -o $@ $<
+
+$(BUILD)/%-fluidsynth-campbell-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/CampbellsPianoBeta2.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@

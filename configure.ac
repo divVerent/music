@@ -26,6 +26,9 @@ RP_CONDITIONAL(flac,[test x$with_flac = xyes])
 AC_ARG_WITH(timidity, AS_HELP_STRING([--with-timidity], [Use timidity outputs]), [with_timidity=$withval], [with_timidity=no])
 RP_CONDITIONAL(timidity,[test x$with_timidity = xyes])
 
+AC_ARG_WITH(fluidsynth, AS_HELP_STRING([--without-fluidsynth], [Do not use fluidsynth outputs]), [with_fluidsynth=$withval], [with_fluidsynth=yes])
+RP_CONDITIONAL(fluidsynth,[test x$with_fluidsynth = xyes])
+
 AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=yes])
 RP_CONDITIONAL(linuxsampler,[test x$with_linuxsampler = xyes])
 

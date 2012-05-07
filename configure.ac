@@ -92,7 +92,7 @@ RP_PROGOPTION(vorbisgain)
 AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=check])
 RP_PROGOPTION(flac)
 
-AC_ARG_WITH(timidity, AS_HELP_STRING([--without-timidity], [Use timidity outputs]), [with_timidity=$withval], [with_timidity=check])
+AC_ARG_WITH(timidity, AS_HELP_STRING([--without-timidity], [Do not use timidity outputs]), [with_timidity=$withval], [with_timidity=check])
 RP_PROGOPTION(timidity)
 
 AC_ARG_WITH(fluidsynth, AS_HELP_STRING([--without-fluidsynth], [Do not use fluidsynth outputs]), [with_fluidsynth=$withval], [with_fluidsynth=check])

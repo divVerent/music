@@ -6,6 +6,7 @@ config.status
 support/
 */*.wav
 */*.mp3
+*/*.ogg
 */*.flac
 */*-format0.mid
 */*.pdf

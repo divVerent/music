@@ -47,7 +47,7 @@ echo "Configuring LinuxSampler..."
 {
 	cat <<EOF
 RESET
-SET VOLUME 0.10
+SET VOLUME 0.125
 CREATE MIDI_INPUT_DEVICE JACK NAME='LinuxSampler'
 SET MIDI_INPUT_PORT_PARAMETER 0 0 NAME='midi_in_0'
 CREATE AUDIO_OUTPUT_DEVICE JACK ACTIVE=true CHANNELS=2 SAMPLERATE=48000 NAME='LinuxSampler'
@@ -88,7 +88,7 @@ EOF
 if [ -n "$outfile" ]; then
 	(
 		: > "$outfile"
-		${JACK_CAPTURE:-jack_capture} ${JACK_CAPTUREFLAGS:-} --daemon -b 16 -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
+		${JACK_CAPTURE:-jack_capture} ${JACK_CAPTUREFLAGS:-} --daemon -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
 		# wait till there is more than just the WAV header in the outfile
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
 			sleep 0.1

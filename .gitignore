@@ -1,2 +1,11 @@
 autom4te.cache/
 configure
+Makefile
+config.log
+config.status
+support/
+*/*.wav
+*/*.mp3
+*/*.flac
+*/*-format0.mid
+*/*.pdf

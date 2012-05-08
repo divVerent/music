@@ -188,13 +188,13 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
 
 $(BUILD)/%-fluidsynth-campbell-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/CampbellsPianoBeta2.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
@@ -237,7 +237,7 @@ $(SRC)/%.ly.orig: | $(SRC)/%.rg
 
 # we normalize to -1 dB FSD to have some safety margin for lossy audio codecs while retaining lots of accuracy from the input
 $(BUILD)/%.wav: $(BUILD)/%-uncut.wav
-	$(SOX) $(SOXFLAGS) $< -b 16 $@ silence 1 0 0% reverse silence 1 0 0% reverse gain -n -1
+	$(SOX) $(SOXFLAGS) $< -b 16 $@ trim 1 silence 1 0 0.0007% reverse silence 1 0 0% reverse gain -n -1
 
 $(BUILD)/%.flac: $(BUILD)/%.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@

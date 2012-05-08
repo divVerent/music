@@ -57,6 +57,7 @@ if($extratime_pre)
 	my $dtime = int($extratime_pre / $time_per_tick);
 
 	# add a redundant note-off at the end 5 seconds later to let notes cool down
+	print STDERR "Using $dtime ticks pre-delay\n";
 	unshift @outevents, ['note_off', $dtime, 0, 0, 0];
 	#unshift @outevents, ['text_event', $dtime, ''];
 }
@@ -92,6 +93,7 @@ if($extratime_post)
 	my $dtime = int($extratime_post / $time_per_tick);
 
 	# add a redundant note-off at the end 5 seconds later to let notes cool down
+	print STDERR "Using $dtime ticks post-delay\n";
 	push @outevents, ['note_off', $dtime, 0, 0, 0];
 	#push @outevents, ['text_event', $dtime, ''];
 }

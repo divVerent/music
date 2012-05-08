@@ -180,7 +180,7 @@ fetch: $(FETCH)
 # Format 0 MIDI (friendly for the synths)
 $(BUILD)/%-format0.mid: $(SRC)/%.mid
 	d=$@ && mkdir -p $${d%/*}
-	$(PERL) $(PERLFLAGS) $(SRC)/bin/to_format0.pl $< $@ 0 5 1
+	$(PERL) $(PERLFLAGS) $(SRC)/bin/to_format0.pl $< $@ 5 5 1
 
 # Audio renderers
 

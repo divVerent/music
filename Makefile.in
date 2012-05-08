@@ -237,7 +237,7 @@ $(SRC)/%.ly.orig: | $(SRC)/%.rg
 
 # we normalize to -1 dB FSD to have some safety margin for lossy audio codecs while retaining lots of accuracy from the input
 $(BUILD)/%.wav: $(BUILD)/%-uncut.wav
-	$(SOX) $(SOXFLAGS) $< -b 16 $@ trim 1 silence 1 0 0.005% reverse silence 1 0 0.005% reverse gain -n -1
+	$(SOX) $(SOXFLAGS) $< -b 16 $@ silence 1 0 0.005% reverse silence 1 0 0.005% reverse gain -n -1
 
 $(BUILD)/%.flac: $(BUILD)/%.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@

@@ -188,13 +188,13 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
 
 $(BUILD)/%-fluidsynth-campbell-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/CampbellsPianoBeta2.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -F $@ $| $<
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@

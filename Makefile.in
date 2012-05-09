@@ -45,7 +45,11 @@ OUTTYPES =
 
 # Programs we use
 CP = @cp@
+CPFLAGS = @cp_flags@
+MV = @mv@
+MVFLAGS = @mv_flags@
 PATCH = @patch@
+PATCHFLAGS = @patch_flags@
 LILYPOND = @lilypond@
 LILYPONDFLAGS = @lilypond_flags@
 TIMIDITY = @timidity@
@@ -94,6 +98,8 @@ NCAT = @ncat@
 NCATFLAGS = @ncat_flags@
 # UNPKZIP = @unpkzip@
 # UNPKZIPFLAGS = @unpkzip_flags@
+TAR = @tar@
+TARFLAGS = @tar_flags@
 
 # Source files
 RG = $(wildcard $(SRC)/*/*.rg)
@@ -155,17 +161,26 @@ $(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concer
 .INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
 $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
+$(BUILD)/support/sgpOgg_V2toV3.tar.bz2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgpOgg_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgpOgg_V2toV3.tar.bz2'
 @linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
-$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
+$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_OggVorbis/
+	cd $(BUILD)/support && $(MV) $(MVFLAGS) SalamanderGrandPianoV2_OggVorbis/ salamanderOgg_V2toV3/
+	cd $(BUILD)/support && $(TAR) xvjf 'sgpOgg_V2toV3.tar.bz2' $(TARFLAGS) salamanderOgg_V2toV3/
+	cd $(BUILD)/support && $(MV) $(MVFLAGS) salamanderOgg_V2toV3/ SalamanderGrandPianoV2_OggVorbis/
 
 .INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2
 $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_48khz24bit.tar.bz2'
+$(BUILD)/support/sgp48khz_V2toV3.tar.bz2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgp48khz_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgp48khz_V2toV3.tar.bz2'
 @linuxsampler_sfz_wav_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz
-http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_48khz24bit.tar.bz2
-$(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2
+$(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_48khz24bit/
+	cd $(BUILD)/support && $(MV) $(MVFLAGS) SalamanderGrandPianoV2_48khz24bit/ salamander48khz\ V2toV3/
+	cd $(BUILD)/support && $(TAR) xvjf 'sgp48khz_V2toV3.tar.bz2' $(TARFLAGS) salamander48khz\ V2toV3/
+	cd $(BUILD)/support && $(MV) $(MVFLAGS) salamander48khz\ V2toV3/ SalamanderGrandPianoV2_48khz24bit/ 
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
@@ -288,8 +303,8 @@ $(BUILD)/%.ogg: $(BUILD)/%.wav
 # PDF making
 $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig
 	d=$@ && mkdir -p $${d%/*}
-	set -- $^ && $(CP) $$2 $@
-	set -- $^ && $(PATCH) $@ $$1
+	set -- $^ && $(CP) $(CPFLAGS) $$2 $@
+	set -- $^ && $(PATCH) $(PATCHFLAGS) $@ $$1
 
 $(BUILD)/%.pdf: $(BUILD)/%.ly
 	$(LILYPOND) $(LILYPONDFLAGS) -o $* $<

@@ -161,6 +161,8 @@ RP_NEEDPROG(wget)
 RP_NEEDPROG(unrar)
 dnl RP_NEEDPROG(unpkzip,unzip)
 RP_NEEDPROG(sox)
+RP_NEEDPROG(tar)
+RP_NEEDPROG(mv)
 
 dnl These are only needed for "make manual"
 dnl (we must avoid the GZIP env variable here)

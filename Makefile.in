@@ -17,15 +17,19 @@ OUTTYPES =
 
 #	2	3	2	3	4
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
+# sometimes the sample switching is easy to notice, especially in the highs
 
 #	3	5	4	4	5
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
+# nice and consistent, but nothing special
 
 #	1	2	1	1	1
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
+# good, needs reverb (done here)
 
 #	5	1	3	2	2
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
+# good, but sometimes "over the top"
 
 #	6	6	6	6	6
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc

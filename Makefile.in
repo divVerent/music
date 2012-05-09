@@ -27,6 +27,9 @@ OUTTYPES =
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 # good, needs reverb (done here)
 
+#	?	?	?	?	?
+@linuxsampler_TRUE@            OUTTYPES += linuxsampler-salamander
+
 #	5	1	3	2	2
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 # good, but sometimes "over the top"
@@ -148,6 +151,13 @@ $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 $(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concert_grand_v2.rar
 	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) 'maestro_concert_grand_v2.rar' 'maestro_concert_grand_v2.gig'
 
+.INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
+$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
+@linuxsampler_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
+$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
+	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_OggVorbis/
+
 .INTERMEDIATE: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
 	@echo
@@ -209,6 +219,9 @@ $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SteinwayC.gig
+	$(SRC)/bin/linuxsampler.sh $< $| $@
+
+$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb

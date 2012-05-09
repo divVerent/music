@@ -15,13 +15,10 @@ OUTTYPES =
 # Here I also include my ratings:
 #	sonata1	sonata2	sonata3	sonata4	sonata5
 
-#	6	4	4	7	7
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-disklavier
-
 #	2	3	2	3	4
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 
-#	3	6	5	4	5
+#	3	5	4	4	5
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
 
 #	1	2	1	1	1
@@ -30,11 +27,13 @@ OUTTYPES =
 #	5	1	3	2	2
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 
-#	7	7	7	6	6
+#	6	6	6	6	6
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
+# keeping it for now, just don't know what kind of piece it's good for
 
-#	4	5	6	5	3
+#	4	4	5	5	3
 @timidity_TRUE@                OUTTYPES += timidity-freepats
+# kept as example for GUS patch
 
 # Programs we use
 CP = @cp@
@@ -130,10 +129,6 @@ FETCH =
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
-@fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
-$(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_grand_piano_ydp_20080910.sf2' 'http://zenvoid.org/audio/acoustic_grand_piano_ydp_20080910.sf2'
-
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
@@ -199,9 +194,6 @@ $(BUILD)/%-format0.mid: $(SRC)/%.mid
 
 $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
-
-$(BUILD)/%-fluidsynth-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<

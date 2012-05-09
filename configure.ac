@@ -144,6 +144,7 @@ RP_NEEDPROG(cp)
 RP_NEEDPROG(patch)
 RP_NEEDPROG(wget)
 RP_NEEDPROG(unrar)
+dnl RP_NEEDPROG(unpkzip,unzip)
 RP_NEEDPROG(sox)
 
 dnl These are only needed for "make manual"

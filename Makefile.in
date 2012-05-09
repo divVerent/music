@@ -82,6 +82,8 @@ JACK_LSP = @jack_lsp@
 JACK_LSPFLAGS = @jack_lsp_flags@
 NCAT = @ncat@
 NCATFLAGS = @ncat_flags@
+# UNPKZIP = @unpkzip@
+# UNPKZIPFLAGS = @unpkzip_flags@
 
 # Source files
 RG = $(wildcard $(SRC)/*/*.rg)

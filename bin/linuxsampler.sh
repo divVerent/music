@@ -29,7 +29,7 @@ echo "Starting jackd..."
 if [ -n "$outfile" ]; then
 	${JACKD:-jackd} ${JACKDFLAGS:--r} -d dummy & jackpid=$!
 else
-	${JACKD:-jackd} ${JACKDFLAGS:--r} -d alsa & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -d ${JACKDDEVICE:-alsa} & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
 while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} >/dev/null 2>/dev/null; do
@@ -58,12 +58,23 @@ ADD CHANNEL
 SET CHANNEL MIDI_INPUT_DEVICE 0 0
 SET CHANNEL MIDI_INPUT_PORT 0 0
 SET CHANNEL MIDI_INPUT_CHANNEL 0 ALL
-LOAD ENGINE GIG 0
+EOF
+	case "$gigfile" in
+		*.gig)
+			echo "LOAD ENGINE GIG 0"
+			;;
+		*.sfz)
+			echo "LOAD ENGINE SFZ 0"
+			;;
+		*.sf2)
+			echo "LOAD ENGINE SF2 0"
+			;;
+	esac
+	cat <<EOF
 SET CHANNEL VOLUME 0 1.0
 SET CHANNEL MIDI_INSTRUMENT_MAP 0 NONE
 SET CHANNEL AUDIO_OUTPUT_DEVICE 0 0
 LOAD INSTRUMENT '$gigfile' 0 0
-QUIT
 EOF
 	if [ -n "$extracommands" ]; then
 		while :; do
@@ -83,7 +94,7 @@ EOF
 		done;
 	fi
 	echo QUIT
-} | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT || true
+} | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT || true
 
 if [ -n "$outfile" ]; then
 	(

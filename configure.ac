@@ -120,7 +120,7 @@ AS_IF(
 AS_IF(
 	[test xno != x$with_linuxsampler_sfz_wav],
 	[with_linuxsampler_sfz=yes])
-RP_CONDITIONAL(with_linuxsampler_sfz,[test xno != x$with_linuxsampler_sfz])
+RP_CONDITIONAL(linuxsampler_sfz,[test xno != x$with_linuxsampler_sfz])
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)

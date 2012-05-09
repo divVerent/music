@@ -15,30 +15,30 @@ OUTTYPES =
 # Here I also include my ratings:
 #	sonata1	sonata2	sonata3	sonata4	sonata5
 
-#	2	3	2	3	4
+#	3	4	3	4	5
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 # sometimes the sample switching is easy to notice, especially in the highs
 
-#	3	5	4	4	5
+#	4	6	5	5	6
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
 # nice and consistent, but nothing special
 
-#	1	2	1	1	1
+#	2	2	2	1	2
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 # good, needs reverb (done here)
 
-#	?	?	?	?	?
+#	1	3	1	3	1
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 
-#	5	1	3	2	2
+#	6	1	4	2	3
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 # good, but sometimes "over the top"
 
-#	6	6	6	6	6
+#	7	7	7	7	7
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
 # keeping it for now, just don't know what kind of piece it's good for
 
-#	4	4	5	5	3
+#	5	5	6	6	4
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 # kept as example for GUS patch
 

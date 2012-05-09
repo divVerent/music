@@ -107,8 +107,20 @@ RP_CONDITIONAL(linuxsampler_pleyelp190,[test xno != x$with_linuxsampler_pleyelp1
 AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
 RP_CONDITIONAL(linuxsampler_steinwayc,[test xno != x$with_linuxsampler_steinwayc])
 
-AC_ARG_WITH(linuxsampler-sfz, AS_HELP_STRING([--with-linuxsampler-sfz], [Allow using .sfz samples with LinuxSampler (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz=$withval], [with_linuxsampler_sfz=no])
-RP_CONDITIONAL(linuxsampler_sfz,[test xno != x$with_linuxsampler_sfz])
+AC_ARG_WITH(linuxsampler-sfz-wav, AS_HELP_STRING([--with-linuxsampler-sfz-wav], [Allow using lossless .sfz samples with LinuxSampler (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz_wav=$withval], [with_linuxsampler_sfz_wav=no])
+RP_CONDITIONAL(linuxsampler_sfz_wav,[test xno != x$with_linuxsampler_sfz_wav])
+
+AC_ARG_WITH(linuxsampler-sfz-ogg, AS_HELP_STRING([--with-linuxsampler-sfz-ogg], [Allow using lossy .sfz samples with LinuxSampler compression (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz_ogg=$withval], [with_linuxsampler_sfz_ogg=no])
+RP_CONDITIONAL(linuxsampler_sfz_ogg,[test xno != x$with_linuxsampler_sfz_ogg])
+
+with_linuxsampler_sfz=no
+AS_IF(
+	[test xno != x$with_linuxsampler_sfz_ogg],
+	[with_linuxsampler_sfz=yes])
+AS_IF(
+	[test xno != x$with_linuxsampler_sfz_wav],
+	[with_linuxsampler_sfz=yes])
+RP_CONDITIONAL(with_linuxsampler_sfz,[test xno != x$with_linuxsampler_sfz])
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)

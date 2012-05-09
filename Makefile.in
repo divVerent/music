@@ -163,8 +163,8 @@ $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgpOgg_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgpOgg_V2toV3.tar.bz2'
-@linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
-$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2
+@linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
+$(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(RM) -r salamanderOgg_V2toV3/
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_OggVorbis/
 	cd $(BUILD)/support && $(MV) $(MVFLAGS) SalamanderGrandPianoV2_OggVorbis/ salamanderOgg_V2toV3/
@@ -176,8 +176,8 @@ $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_48khz24bit.tar.bz2'
 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgp48khz_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgp48khz_V2toV3.tar.bz2'
-@linuxsampler_sfz_wav_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz
-$(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2
+@linuxsampler_sfz_wav_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
+$(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(RM) -r salamander48khz\ V2toV3/
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_48khz24bit/
 	cd $(BUILD)/support && $(MV) $(MVFLAGS) SalamanderGrandPianoV2_48khz24bit/ salamander48khz\ V2toV3/
@@ -247,10 +247,10 @@ $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SteinwayC.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
+$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV2.sfz
+$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb

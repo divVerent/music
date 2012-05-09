@@ -21,6 +21,9 @@ OUTTYPES =
 #	2	3	2	3	4
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 
+#	?	?	?	?	?
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
+
 #	1	2	1	1	1
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 
@@ -135,6 +138,10 @@ $(BUILD)/support/acoustic_grand_piano_ydp_20080910.sf2: | $(BUILD)/support
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
 
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/piano-mgg.sf2
+$(BUILD)/support/piano-mgg.sf2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'piano-mgg.sf2' 'http://freepats.zenvoid.org/musix/piano-mgg.sf2'
+
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
@@ -197,6 +204,9 @@ $(BUILD)/%-fluidsynth-disklavier-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/su
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-mgg-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/piano-mgg.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig

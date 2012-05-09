@@ -28,7 +28,7 @@ OUTTYPES =
 # good, needs reverb (done here)
 
 #	?	?	?	?	?
-@linuxsampler_TRUE@            OUTTYPES += linuxsampler-salamander
+@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 
 #	5	1	3	2	2
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
@@ -154,7 +154,7 @@ $(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concer
 .INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
 $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
-@linuxsampler_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
+@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz
 $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV2.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_OggVorbis/
 

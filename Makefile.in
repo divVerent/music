@@ -11,12 +11,27 @@ OUTTYPES =
 @lame_TRUE@                    OUTFORMATS += mp3
 @oggenc_TRUE@                  OUTFORMATS += ogg
 @flac_TRUE@                    OUTFORMATS += flac
-@timidity_TRUE@                OUTTYPES += timidity-freepats
+
+# Here I also include my ratings:
+#	sonata1	sonata2	sonata3	sonata4	sonata5
+
+#	5	4	4	6	6
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-disklavier
+
+#	2	3	2	3	4
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
+
+#	1	2	1	1	1
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
+
+#	4	1	3	2	2
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
+
+#	6	6	6	5	5
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
+
+#	3	5	5	4	3
+@timidity_TRUE@                OUTTYPES += timidity-freepats
 
 # Programs we use
 CP = @cp@

@@ -61,19 +61,20 @@ compare_and_swap()
 {
 	p=$1
 	set -- $order
+	n=$#
 
 	# won't swap if too high/low
 	if [ $p -lt 0 ]; then
 		return 1
 	fi
-	if [ $p -ge $(($# - 1)) ]; then
+	if [ $p -ge $(($n - 1)) ]; then
 		return 1
 	fi
 
 	pre=
 	post=
 	i=0
-	while [ $i -lt $# ]; do
+	while [ $i -lt $n ]; do
 		if [ $i -eq $p ]; then
 			a=$1
 		elif [ $i -eq $(($p+1)) ]; then
@@ -84,7 +85,10 @@ compare_and_swap()
 			post="$post $1"
 		fi
 		i=$(($i+1))
+		shift
 	done
+
+	#echo "DECIDE $pre  ($a <=> $b)  $post"
 
 	if decide "$a" "$b"; then
 		order="$pre$a $b$post"
@@ -145,7 +149,7 @@ fi
 
 while read -r S ORDER; do
 	if [ x"$S" = x"$s" ]; then
-		echo "$S $neworder"
+		echo "$s $order"
 	else
 		echo "$S $ORDER"
 	fi

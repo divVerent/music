@@ -1,0 +1,54 @@
+This work is conveyed to you under the
+
+
+Pick Your Poison License (PYPL)
+ ===============================
+
+This work is free software and/or artwork; you can redistribute it and/or
+modify it under the terms of either of the following licenses at your choice:
+
+a) the GNU General Public License version 2 as published by the Free
+   Software Foundation and included in the file LICENSE.GPL2 or available
+   on http://www.gnu.org/licenses/gpl-2.0.html
+
+b) the GNU General Public License version 3 as published by the Free
+   Software Foundation and included in the file LICENSE.GPL3 or available
+   on http://www.gnu.org/licenses/gpl-3.0.html
+
+c) the Creative Commons Attribution-NonCommercial 3.0 license as published by
+   Creative Commons and included in the file LICENSE.CC-BY-NC30 or available
+   on http://creativecommons.org/licenses/by-nc/3.0/legalcode
+
+d) the Creative Commons Attribution-ShareAlike 3.0 license as published by
+   Creative Commons and included in the file LICENSE.CC-BY-SA30 or available
+   on http://creativecommons.org/licenses/by-sa/3.0/legalcode
+
+
+NOTE: when creating combined works of this work and works by others, your
+license choices may become limited by the licenses of the other works.
+
+Especially, the included Makefile may create works restricted further by
+the licenses of the sample sets that were used:
+
+- fluidsynth-imis: no restrictions at all; you should still give Roberto Gordo
+  Saez and the University of Iowa credit :)
+
+- fluidsynth-mgg: only GPLv2 (choice "a") may be used; credit the author
+  Marcos Guglielmetti appropriately, of course
+  
+- linuxsampler-maestro: only CC-BY-NC (choice "c") may be used; credit the
+  author Mats Helgesson appropriately, of course
+
+- linuxsampler-salamander: only the CC licenses (choice "c" or "d") may be
+  used; credit the author Alexander Holm appropriately, of course
+
+- linuxsampler-pleyelp190: only the CC licenses (choice "c" or "d") may be
+  used; credit the author Nikko as described on
+  http://tickets.nikkoid.com/knowledgebase.php?article=23
+
+- linuxsampler-steinwayc: only the CC licenses (choice "c" or "d") may be
+  used; credit the author Nikko as described on
+  http://tickets.nikkoid.com/knowledgebase.php?article=23
+
+- timidity-freepats: no restrictions at all; you should still give the Freepats
+  Project credit :)

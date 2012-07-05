@@ -7,7 +7,7 @@ use MIDI::Track;
 use MIDI::Event;
 use POSIX;
 
-my ($filename, $outfilename, $extratime_pre, $extratime_post, $collapse_channels) = @ARGV;
+my ($filename, $outfilename, $extratime_pre, $extratime_post, $collapse_channels, $cnt, $drop_silence) = @ARGV;
 my $opus = MIDI::Opus->new({from_file => $filename});
 
 # where is channel stored in which events?
@@ -48,6 +48,25 @@ my @outevents = reltime sort { ($a->[1] <=> $b->[1]) or (($a->[0] eq 'note_on') 
 my %notehash = ();
 my $t = 0;
 my $tempo = 500000;
+
+if($drop_silence)
+{
+	for my $e(@outevents)
+	{
+		$e->[1] = 0;
+		last
+			if $e->[0] =~ /^note_/;
+	}
+	for my $e(reverse @outevents)
+	{
+		last
+			if $e->[0] =~ /^note_/;
+		$e->[1] = 0;
+	}
+}
+
+@outevents = map { @outevents } 1..$cnt
+	if $cnt;
 
 if($extratime_pre)
 {

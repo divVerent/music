@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="13.10" format-version-major="1" format-version-minor="6" format-version-point="1">
-<composition recordtracks="0" pointer="371866" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="2" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
+<composition recordtracks="0" pointer="377789" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="2" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
 
 
   <track id="0" label="Right" shortLabel="" position="0" muted="false" instrument="2048" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0"/>
@@ -33,7 +33,7 @@
 
 
 <configuration>
-    <zoomlevel type="Int">15360</zoomlevel>
+    <zoomlevel type="Int">768000</zoomlevel>
     <transportmode type="String">RealMode</transportmode>
 </configuration>
 

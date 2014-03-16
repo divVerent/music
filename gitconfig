@@ -1,0 +1,15 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+
+[filter "rosegarden-gunzip"]
+	clean = gunzip --force --stdout
+	smudge = gzip --stdout
+[remote "origin"]
+	url = git@github.com:divVerent/music.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master

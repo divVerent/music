@@ -79,7 +79,7 @@ TAR = @tar@
 TARFLAGS = @tar_flags@
 
 # Source files
-RG = $(SRC)/sonata1/sonata1.rg $(SRC)/sonata2/sonata2.rg $(SRC)/sonata3/sonata3.rg $(SRC)/sonata4/sonata4.rg $(SRC)/sonata5/sonata5.rg
+RG = $(SRC)/sonata1/sonata1.rg $(SRC)/sonata2/sonata2.rg $(SRC)/sonata3/sonata3.rg $(SRC)/sonata4/sonata4.rg $(SRC)/sonata5/sonata5.rg $(SRC)/sonatina6/sonatina6.rg
 LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 
 # Saved intermediate files (part of the source distribution)

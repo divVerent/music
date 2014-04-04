@@ -1,0 +1,11 @@
+--- sonatina6.ly.orig	2014-04-04 15:52:07.457747205 +0200
++++ sonatina6.ly	2014-04-04 16:08:54.365261792 +0200
+@@ -350,7 +351,7 @@
+                 < d b, g > 1 \< 
+                 % warning: overlong bar truncated here |
+                 < a f d > 1  |
+-                < cis ais, fis > 1 -\f \! e 2 -\accent  |
++                << { \voiceOne fis 2 -\f \! e 2 -\accent } \new Voice { \voiceTwo < cis ais, > 1 } >> \oneVoice |
+                 \key h \minor
+                 < fis, d h, > 1 ^\markup { \bold "Moderato" } \> 
+                 % warning: overlong bar truncated here |

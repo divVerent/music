@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="11.11.42" format-version-major="1" format-version-minor="6" format-version-point="0">
-<composition recordtracks="0" pointer="38400" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0">
+<composition recordtracks="0" pointer="697920" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0">
 
 
   <track id="0" label="Right" position="0" muted="false" instrument="2048" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0"/>
@@ -45,6 +45,7 @@
   <tempo time="687360" bph="5400" tempo="9000000" target="6000000"/>
   <tempo time="691200" bph="5400" tempo="9000000"/>
   <tempo time="695040" bph="5400" tempo="9000000" target="3000000"/>
+  <tempo time="697920" bph="5400" tempo="9000000"/>
   <tempo time="698880" bph="5400" tempo="9000000"/>
 
 <metadata>
@@ -1288,6 +1289,7 @@
 	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="text" subordering="-70"><property name="text" string="fff"/><property name="type" string="dynamic"/></event>
+	<event type="text" subordering="-70"><property name="text" string="a tempo"/><property name="type" string="local_direction"/></event>
 	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="66"/><property name="velocity" int="119"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="rest" duration="120" subordering="10"></event>

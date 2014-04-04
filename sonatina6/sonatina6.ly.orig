@@ -22,7 +22,7 @@ globalTempo = {
     \tempo 4 = 105  \skip 1 \skip 1 \skip 1 \skip 1 \skip 1*3 
     \tempo 4 = 90  \skip 1 \skip 1*25 \skip 1 \skip 1*15 
     \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
-    \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 1 
+    \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 4 \skip 2 \skip 4 
 }
 \score {
 << % common
@@ -263,7 +263,7 @@ globalTempo = {
             \clef "treble"
             \key h \minor
             R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
-            r4 r r r8-\fff  fis'  |
+            r4 r r r8-\fff _\markup { \bold \italic "a tempo" }  fis'  |
             \bar "|."
         } % Voice
     >> % Staff ends

@@ -33,7 +33,7 @@ TIMIDITY = @timidity@
 TIMIDITYFLAGS = @timidity_flags@
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir /\nsoundfont
 TIMIDITY_SETSOUNDFONT_POST = "
-TIMIDITY_SETGUSPATCH_PRE = -x "dir /\nfont exclude 0 0\nbank 0\n0
+TIMIDITY_SETGUSPATCH_PRE = -x "dir /\nsoundfont /dev/null\nfont exclude 0 0\nbank 0\n0
 TIMIDITY_SETGUSPATCH_POST = "
 FLUIDSYNTH = @fluidsynth@
 FLUIDSYNTHFLAGS = @fluidsynth_flags@
@@ -272,11 +272,11 @@ $(BUILD)/%.flac: $(BUILD)/%.wav
 
 $(BUILD)/%.mp3: $(BUILD)/%.wav
 	$(LAME) $(LAMEFLAGS) $< $@
-	$(MP3GAIN) $(MP3GAINFLAGS) -r -k $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -r -k $@
 
 $(BUILD)/%.ogg: $(BUILD)/%.wav
 	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
-	$(VORBISGAIN) $(VORBISGAINFLAGS) $@
+@vorbisgain_TRUE@	$(VORBISGAIN) $(VORBISGAINFLAGS) $@
 
 
 # PDF making

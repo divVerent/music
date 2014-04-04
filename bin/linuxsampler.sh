@@ -27,9 +27,9 @@ done
 
 echo "Starting jackd..."
 if [ -n "$outfile" ]; then
-	${JACKD:-jackd} ${JACKDFLAGS:--r} -d dummy & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d dummy & jackpid=$!
 else
-	${JACKD:-jackd} ${JACKDFLAGS:--r} -d ${JACKDDEVICE:-alsa} & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d ${JACKDDEVICE:-alsa} & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
 while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} >/dev/null 2>/dev/null; do

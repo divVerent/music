@@ -22,7 +22,7 @@ globalTempo = {
     \tempo 4 = 105  \skip 1 \skip 1 \skip 1 \skip 1 \skip 1*3 
     \tempo 4 = 90  \skip 1 \skip 1*25 \skip 1 \skip 1*15 
     \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
-    \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 4 \skip 2 \skip 4 
+    \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 1 
 }
 \score {
 << % common
@@ -43,7 +43,7 @@ globalTempo = {
             \clef "treble"
             \key h \minor
             h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
-            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < h d' h' > 4 -\ff  |
+            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
         } % Voice
 
         \context Voice = "voice 2" {
@@ -181,7 +181,7 @@ globalTempo = {
             \clef "treble"
             \key h \minor
             h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
-            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < h d' h' > 4 -\ff  |
+            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
         } % Voice
 
         \context Voice = "voice 5" {
@@ -263,7 +263,7 @@ globalTempo = {
             \clef "treble"
             \key h \minor
             R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
-            r4 r r r8-\fff _\markup { \bold \italic "a tempo" }  fis'  |
+            r4 r r h  |
             \bar "|."
         } % Voice
     >> % Staff ends
@@ -284,7 +284,7 @@ globalTempo = {
             \clef "bass"
             \key h \minor
             R1^\markup { \bold \large "Moderato" }   |
-            r4 r r fis -\ff  |
+            r4 r r h, -\ff  |
         } % Voice
 
         \context Voice = "voice 8" {
@@ -424,7 +424,7 @@ globalTempo = {
             \clef "bass"
             \key h \minor
             R1^\markup { \bold "Moderato" }   |
-            r4 r r fis -\ff  |
+            r4 r r h, -\ff  |
         } % Voice
 
         \context Voice = "voice 11" {
@@ -509,7 +509,7 @@ globalTempo = {
             \key h \minor
             h 16 -\fff fis \> h fis d fis d h, h g h g e g e h, 
             % warning: overlong bar truncated here |
-            cis' 16 ais cis' ais e ais e cis d h d h, -\ppp \! \times 2/3 { h, -\fff d h } r8  |
+            cis' 16 ais cis' ais e ais e cis d h d h, -\ppp \! < h, d fis > 4 -\fff  |
             \bar "|."
         } % Voice
     >> % Staff (final) ends

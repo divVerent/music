@@ -1287,7 +1287,8 @@
 	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="960" subordering="10"><property name="tiedforward" bool="true"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
-	<event type="note" duration="960"><property name="pitch" int="59"/><property name="velocity" int="104"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-3"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="text" subordering="-70"><property name="text" string="fff"/><property name="type" string="dynamic"/></event>
+	<event type="note" duration="960"><property name="pitch" int="59"/><property name="velocity" int="119"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-3"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="rest" duration="120" subordering="10"></event>
 	<event type="rest" duration="120" subordering="10"></event>
 	<event type="rest" duration="240" subordering="10"></event>

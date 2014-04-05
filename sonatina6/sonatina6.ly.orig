@@ -263,7 +263,7 @@ globalTempo = {
             \clef "treble"
             \key h \minor
             R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
-            r4 r r h  |
+            r4 r r h -\fff  |
             \bar "|."
         } % Voice
     >> % Staff ends

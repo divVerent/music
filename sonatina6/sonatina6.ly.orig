@@ -481,7 +481,7 @@ globalTempo = {
 %% 170
             < h, g, e > 1  |
             < fis d h, > 1  |
-            < ais, cis fis > 2 -\tenuto e -\accent  |
+            < cis ais, fis > 1 e 2 -\accent  |
             < fis, d h, > 1  |
             < h, g e > 1  |
 %% 175

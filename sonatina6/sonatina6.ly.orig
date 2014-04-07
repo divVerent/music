@@ -3,6 +3,7 @@
 \version "2.12.0"
 \header {
     copyright = "Copyright (c) 2014 Rudolf Polzer"
+    subtitle = "in B minor"
     title = "Sonatina 6"
     tagline = "Created using Rosegarden 11.11.42 and LilyPond"
 }

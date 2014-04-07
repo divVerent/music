@@ -241,7 +241,6 @@ globalTempo = {
             g' 8 h' e'' g' e'' h' e'' e'  |
             d' 8 h' fis'' d'' fis'' h' fis'' f'  |
             fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
-            \key h \minor
             h' 8 fis'' h'' d'' h'' fis'' h'' dis''  |
             e'' 8 g'' h'' e'' h'' g'' h'' g'  |
 %% 175
@@ -327,7 +326,6 @@ globalTempo = {
 %% 25
                 d, 8 d d, d e, h, e, h,  |
                 a, 8 ^\markup { \bold "Allegro" } cis a, cis d, 2  |
-                \key d \minor
                 < f a d > 4 -\pp ^\markup { \bold "Allegro" } < b d g > \< < cis e a > < cis e a > 
                 % warning: overlong bar truncated here |
                 < a c f > 4 < f a c d > < cis e a > < cis e a >  |
@@ -340,7 +338,6 @@ globalTempo = {
                 < f a d > 4 < b d g > < cis e a > < cis e a >  |
                 < cis e a > 4 < cis e g a > < f a d > < f a d >  |
 %% 35
-                \key d \minor
                 < a f d > 1 -\mp \!  |
                 < d b, g > 1  |
                 < a f d > 1  |
@@ -463,7 +460,6 @@ globalTempo = {
 %% 155
             h, 8 d h, d e, e e, e  |
             fis, 8 ^\markup { \bold "Allegro" } cis fis, cis h, 2  |
-            \key h \minor
             < h, d fis > 4 ^\markup { \bold "Allegro" } -\pp < e g h, > \< < fis ais, cis > < fis ais, cis > 
             % warning: overlong bar truncated here |
             < d fis a, > 4 < h, d fis a, > < fis ais, cis > < fis ais, cis >  |
@@ -476,7 +472,6 @@ globalTempo = {
             < h, d fis > 4 < e g h, > < fis ais, cis > < fis ais, cis >  |
             < fis ais, cis > 4 < fis ais, cis e > < h, d fis > < h, d fis >  |
 %% 165
-            \key h \minor
             < fis d h, > 1 -\mp \!  |
             < h, g, e > 1  |
             < fis d h, > 1  |
@@ -486,7 +481,6 @@ globalTempo = {
             < h, g, e > 1  |
             < fis d h, > 1  |
             < ais, cis fis > 2 -\tenuto e -\accent  |
-            \key h \minor
             < fis, d h, > 1  |
             < h, g e > 1  |
 %% 175

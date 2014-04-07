@@ -1,6 +1,31 @@
---- sonatina6.ly.orig	2014-04-04 15:52:07.457747205 +0200
-+++ sonatina6.ly	2014-04-04 16:08:54.365261792 +0200
-@@ -350,7 +351,7 @@
+--- sonatina6.ly.orig	2014-04-07 20:10:03.686591614 +0200
++++ sonatina6.ly	2014-04-07 20:24:11.351027488 +0200
+@@ -8,12 +8,15 @@
+ }
+ #(set-global-staff-size 20)
+ #(set-default-paper-size "a4")
++\paper {
++    system-system-spacing #'padding = #3
++}
+ global = { 
+     \time 4/4
+     
+ }
+ globalTempo = {
+-    \tempo 4 = 90  \skip 1*9 \skip 1 \skip 1*15 
++    \tempo 4 = 90  \skip 1*9 \skip 1 \skip 1*15 %{
+     \override Score.MetronomeMark #'transparent = ##t
+     \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
+     \tempo 4 = 90  \skip 1*15 \skip 1 \skip 1*15 
+@@ -23,6 +26,7 @@
+     \tempo 4 = 90  \skip 1 \skip 1*25 \skip 1 \skip 1*15 
+     \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
+     \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 1 
++    %}
+ }
+ \score {
+ << % common
+@@ -347,7 +351,7 @@
                  < d b, g > 1 \< 
                  % warning: overlong bar truncated here |
                  < a f d > 1  |

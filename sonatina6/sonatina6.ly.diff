@@ -1,6 +1,6 @@
---- sonatina6.ly.orig	2014-04-07 20:10:03.686591614 +0200
-+++ sonatina6.ly	2014-04-07 20:24:11.351027488 +0200
-@@ -8,12 +8,15 @@
+--- sonatina6.ly.orig	2014-04-09 19:54:19.906477693 +0200
++++ sonatina6.ly	2014-04-09 19:57:23.430659977 +0200
+@@ -9,12 +9,15 @@
  }
  #(set-global-staff-size 20)
  #(set-default-paper-size "a4")
@@ -17,7 +17,7 @@
      \override Score.MetronomeMark #'transparent = ##t
      \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
      \tempo 4 = 90  \skip 1*15 \skip 1 \skip 1*15 
-@@ -23,6 +26,7 @@
+@@ -24,6 +27,7 @@
      \tempo 4 = 90  \skip 1 \skip 1*25 \skip 1 \skip 1*15 
      \tempo 4 = 105  \skip 1 \skip 1*8 \skip 1*8 
      \tempo 4 = 90  \skip 1*7 \skip 1 \skip 1 \skip 1 
@@ -25,12 +25,101 @@
  }
  \score {
  << % common
-@@ -347,7 +351,7 @@
-                 < d b, g > 1 \< 
+@@ -56,7 +60,6 @@
+                 \skip 1*2 
+                 \repeat volta 2 {
+                     \clef "treble"
+-                    \key h \minor
+                     h' 8 _\markup { \bold \italic "" } _\markup { \bold \italic "" } -\p cis'' h' a' h' e'' h' a'  |
+                     h' 8 fis'' cis'' a' h' 4 h'  |
+ %% 5
+@@ -133,7 +136,6 @@
+ 
+                 \skip 1*50 
+                 \clef "treble"
+-                \key h \minor
+                 h' 16 -\mf _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais h' fis' h' fis' d' fis' d' a  |
+ %% 100
+                 h' 16 _\markup { \bold \italic "ritard." } g' h' g' e' g' e' h d' h' d' h < h' h d' > 4  |
+@@ -182,7 +184,6 @@
+ 
+                 \skip 1*82 
+                 \clef "treble"
+-                \key h \minor
+                 h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
+                 cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
+             } % Voice
+@@ -193,7 +194,6 @@
+ 
+                 \skip 1*84 
+                 \clef "treble"
+-                \key h \minor
+                 h' 8 -\p cis'' h' a' h' e'' h' a'  |
+                 h' 8 fis'' cis'' a' h' 4 h'  |
+ %% 135
+@@ -265,7 +265,6 @@
+ 
+                 \skip 1*132 
+                 \clef "treble"
+-                \key h \minor
+                 R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
+                 r4 r r h -\fff  |
+                 \bar "|."
+@@ -298,7 +297,6 @@
+                 \skip 1*2 
+                 \repeat volta 2 {
+                     \clef "bass"
+-                    \key h \minor
+                     h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
+                     h 16 fis ais fis e fis e fis < fis d h > 2  |
+ %% 5
+@@ -352,7 +350,7 @@
+                     < d b, g > 1 \< 
+                     % warning: overlong bar truncated here |
+                     < a f d > 1  |
+-                    < cis ais, fis > 1 -\f \! e 2 -\accent  |
++                    << { \voiceOne fis 2 -\f \! e 2 -\accent } \new Voice { \voiceTwo < cis ais, > 1 } >> \oneVoice |
+                     \key h \minor
+                     < fis, d h, > 1 ^\markup { \bold "Moderato" } \> 
+                     % warning: overlong bar truncated here |
+@@ -375,7 +373,6 @@
+ 
+                 \skip 1*50 
+                 \clef "bass"
+-                \key h \minor
+                 h, 4 -\ff cis h, a,  |
+ %% 100
+                 h, 4 e h, a,  |
+@@ -424,7 +421,6 @@
+ 
+                 \skip 1*82 
+                 \clef "bass"
+-                \key h \minor
+                 R1^\markup { \bold "Moderato" }   |
+                 r4 r r h, -\ff  |
+             } % Voice
+@@ -435,7 +431,6 @@
+ 
+                 \skip 1*84 
+                 \clef "bass"
+-                \key h \minor
+                 h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
+                 h 16 fis ais fis e fis e fis < fis d h > 2  |
+ %% 135
+@@ -486,7 +481,7 @@
+                 < h, g, e > 1 \< 
                  % warning: overlong bar truncated here |
-                 < a f d > 1  |
+                 < fis d h, > 1  |
 -                < cis ais, fis > 1 -\f \! e 2 -\accent  |
 +                << { \voiceOne fis 2 -\f \! e 2 -\accent } \new Voice { \voiceTwo < cis ais, > 1 } >> \oneVoice |
-                 \key h \minor
                  < fis, d h, > 1 ^\markup { \bold "Moderato" } \> 
                  % warning: overlong bar truncated here |
+                 < h, g e > 1  |
+@@ -507,7 +502,6 @@
+ 
+                 \skip 1*132 
+                 \clef "bass"
+-                \key h \minor
+                 h 16 -\fff fis \> h fis d fis d h, h g h g e g e h, 
+                 % warning: overlong bar truncated here |
+                 cis' 16 ais cis' ais e ais e cis d h d h, -\ppp \! < h, d fis > 4 -\fff  |

@@ -27,493 +27,500 @@ globalTempo = {
 }
 \score {
 << % common
+        % force offset of colliding notes in chords:
+        \override Score.NoteColumn #'force-hshift = #1.0
 
-    \context Staff = "track 1, Right" << 
-        \set Staff.instrumentName = \markup { \column { "Right " } }
-        \set Staff.midiInstrument = ""
-        \set Score.skipBars = ##t
-        \set Staff.printKeyCancellation = ##t
-        \new Voice \global
-        \new Voice \globalTempo
+        \context Staff = "track 1, Right" << 
+            \set Staff.instrumentName = \markup { \column { "Right " } }
+            \set Staff.midiInstrument = ""
+            \set Score.skipBars = ##t
+            \set Staff.printKeyCancellation = ##f
+            \new Voice \global
+            \new Voice \globalTempo
 
-        \context Voice = "voice 1" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
+            \context Voice = "voice 1" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
 \once \override Staff.TimeSignature #'style = #'() \time 4/4
-            
-            \clef "treble"
-            \key h \minor
-            h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
-            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
-        } % Voice
-
-        \context Voice = "voice 2" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*2 
-            \repeat volta 2 {
+                
                 \clef "treble"
                 \key h \minor
-                h' 8 _\markup { \bold \italic "" } _\markup { \bold \italic "" } -\p cis'' h' a' h' e'' h' a'  |
-                h' 8 fis'' cis'' a' h' 4 h'  |
+                h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
+                cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
+            } % Voice
+
+            \context Voice = "voice 2" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*2 
+                \repeat volta 2 {
+                    \clef "treble"
+                    \key h \minor
+                    h' 8 _\markup { \bold \italic "" } _\markup { \bold \italic "" } -\p cis'' h' a' h' e'' h' a'  |
+                    h' 8 fis'' cis'' a' h' 4 h'  |
 %% 5
+                    h' 8 cis'' h' a' h' e'' h' a'  |
+                    h' 8 gis'' eis'' cis'' fis'' 4 fis''  |
+                    h' 8 -\pp cis'' h' a' h' e'' h' a'  |
+                    h' 8 fis'' cis'' a' h' 4 h'  |
+                    h' 8 cis'' h' a' h' e'' h' a'  |
+%% 10
+                    fis'' 8 _\markup { \bold \italic "ritard." } cis'' ais' fis' h' 2  |
+                    h' 8 -\ppp _\markup { \bold \italic "a tempo" } _\markup { \bold \italic "accel." } fis' fis' fis' h' g' g' g'  |
+                    ais' 8 fis' fis' fis' h' 4 fis'  |
+                    h' 8 fis' fis' fis' gis' eis' eis' eis'  |
+                    ais' 8 fis' fis' fis' h' 4 fis'  |
+%% 15
+                    h' 8 fis' fis' fis' h' g' g' g'  |
+                    ais' 8 fis' fis' fis' h' 4 fis'  |
+                    h' 8 fis' \< fis' fis' gis' eis' eis' eis' 
+                    % warning: overlong bar truncated here |
+                    ais' 8 fis' fis' fis' h' 4 fis'  |
+                    h' 8 fis' fis' fis' h' g' g' g'  |
+%% 20
+                    a' 8 e' e' e' a' 4 -\mp \! fis'  |
+                    \key d \minor
+                    a' 8 f' \> f' f' gis' e' e' e' 
+                    % warning: overlong bar truncated here |
+                    a' 8 e' e' e' a' 4 f'  |
+                    a' 8 f' f' f' b' g' g' g'  |
+                    a' 8 e' e' e' a' 4 -\p \! f'  |
+%% 25
+                    a' 8 f' f' f' gis' e' e' e'  |
+                    a' 8 _\markup { \bold \italic "ritard." } e' e' e' < a' d' f' > 2  |
+                    c'' 8 -\pp d'' \< f'' g'' a'' 4 a'' 
+                    % warning: overlong bar truncated here |
+                    a'' 8 f'' g'' d'' a' 4 a'  |
+                    c'' 8 d'' f'' g'' a'' 4 a''  |
+%% 30
+                    a'' 8 f'' g'' c'' d'' 4 d''  |
+                    c'' 8 -\p \! d'' \< f'' g'' a'' 4 a'' 
+                    % warning: overlong bar truncated here |
+                    a'' 8 f'' g'' d'' a' 4 a'  |
+                    c'' 8 d'' f'' g'' a'' 4 a''  |
+                    a'' 8 f'' a'' g'' d'' 4 d''  |
+%% 35
+                    a'' 8 -\mp _\markup { \bold \italic "ritard." } \! f'' a'' d'' a'' f'' a'' c'' -\accent  |
+                    b' 8 d'' g'' b' g'' d'' g'' g' -\accent  |
+                    f' 8 d'' a'' f'' a'' d'' a'' as' -\accent  |
+                    a' 8 e'' a'' cis'' a'' e'' a'' cis'' -\accent  |
+                    d'' 8 f'' a'' d'' a'' f'' a'' c'' -\accent  |
+%% 40
+                    b' 8 d'' \< g'' b' g'' d'' g'' g' -\accent 
+                    % warning: overlong bar truncated here |
+                    f' 8 d'' a'' f'' a'' d'' a'' f' -\accent  |
+                    fis' 8 -\f \! fis'' ais'' cis'' ais'' fis'' ais'' e'' -\accent  |
+                    \key h \minor
+                    d'' 8 fis'' \> h'' d'' h'' fis'' h'' dis'' -\accent 
+                    % warning: overlong bar truncated here |
+                    e'' 8 g'' h'' e'' h'' g'' h'' g' -\accent  |
+%% 45
+                    fis' 8 -\mp \! d'' h'' fis'' h'' d'' h'' h' -\accent  |
+                    ais' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais'' -\accent  |
+                    h'' 8 fis'' \< h'' d'' h'' fis'' h'' dis'' -\accent 
+                    % warning: overlong bar truncated here |
+                    e'' 8 g'' h'' e'' h'' g'' h'' eis'' -\accent  |
+                    fis'' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais'' -\accent  |
+%% 50
+                    h'' 8 -\ff _\markup { \bold \italic "(2.) ritard." } \! fis'' h'' ais' h' 2  |
+                 } % close repeat
+            } % Voice
+
+            \context Voice = "voice 3" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*50 
+                \clef "treble"
+                \key h \minor
+                h' 16 -\mf _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais h' fis' h' fis' d' fis' d' a  |
+%% 100
+                h' 16 _\markup { \bold \italic "ritard." } g' h' g' e' g' e' h d' h' d' h < h' h d' > 4  |
+                h' 16 _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais cis'' ais' cis'' ais' e' fis' e' cis'  |
+                cis'' 16 _\markup { \bold \italic "ritard." } ais' cis'' ais' e' ais' e' cis' d' h' d' h < d' h h' > 4  |
+                fis'' 8 _\markup { \bold \italic "accel." } _\markup { \bold \italic "a tempo" } d'' fis'' h' fis'' d'' fis'' a'  |
+                g' 8 h' e'' g' e'' h' e'' e'  |
+%% 105
+                fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
+                fis'' 8 cis'' fis'' eis' fis' 2  |
+                h' 16 fis' h' fis' cis' fis' cis' ais h' fis' h' fis' d' fis' d' a  |
+                h' 16 _\markup { \bold \italic "ritard." } g' h' g' e' g' e' h d' h' d' h < h' h d' > 4  |
+                h' 16 _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais cis'' ais' cis'' ais' e' fis' e' cis'  |
+%% 110
+                cis'' 16 _\markup { \bold \italic "ritard." } ais' _\markup { \bold \italic "ritard." } cis'' ais' e' ais' e' cis' d' h' d' h < h' h d' > 4  |
+                fis'' 8 _\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." } d'' fis'' h' fis'' d'' fis'' a'  |
+                g' 8 h' e'' g' e'' h' e'' e'  |
+                fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
+                h'' 8 _\markup { \bold \italic "ritard." } fis'' h'' ais' h' 2  |
+%% 115
+                h' 8 -\pp fis' \< fis' fis' h' g' g' g' 
+                % warning: overlong bar truncated here |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                a' 8 fis' fis' fis' h' fis' fis' fis'  |
+                ais' 8 fis' fis' fis' d'' 4 ais'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+%% 120
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' ais' fis' fis' fis'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+%% 125
+                a' 8 fis' fis' fis' h' fis' fis' fis'  |
+                ais' 8 fis' fis' fis' d'' 4 ais'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                ais' 8 -\mf \! fis' fis' fis' ais' fis' fis' fis'  |
+%% 130
+                d'' 8 -\ff h' fis' d' r2  |
+            } % Voice
+
+            \context Voice = "voice 4" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*82 
+                \clef "treble"
+                \key h \minor
+                h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
+                cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
+            } % Voice
+
+            \context Voice = "voice 5" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*84 
+                \clef "treble"
+                \key h \minor
+                h' 8 -\p cis'' h' a' h' e'' h' a'  |
+                h' 8 fis'' cis'' a' h' 4 h'  |
+%% 135
                 h' 8 cis'' h' a' h' e'' h' a'  |
                 h' 8 gis'' eis'' cis'' fis'' 4 fis''  |
                 h' 8 -\pp cis'' h' a' h' e'' h' a'  |
                 h' 8 fis'' cis'' a' h' 4 h'  |
                 h' 8 cis'' h' a' h' e'' h' a'  |
-%% 10
+%% 140
                 fis'' 8 _\markup { \bold \italic "ritard." } cis'' ais' fis' h' 2  |
                 h' 8 -\ppp _\markup { \bold \italic "a tempo" } _\markup { \bold \italic "accel." } fis' fis' fis' h' g' g' g'  |
                 ais' 8 fis' fis' fis' h' 4 fis'  |
                 h' 8 fis' fis' fis' gis' eis' eis' eis'  |
                 ais' 8 fis' fis' fis' h' 4 fis'  |
-%% 15
-                h' 8 fis' fis' fis' h' g' g' g'  |
-                ais' 8 fis' fis' fis' h' 4 fis'  |
-                h' 8 fis' \< fis' fis' gis' eis' eis' eis' 
-                % warning: overlong bar truncated here |
-                ais' 8 fis' fis' fis' h' 4 fis'  |
-                h' 8 fis' fis' fis' h' g' g' g'  |
-%% 20
-                a' 8 e' e' e' a' 4 -\mp \! fis'  |
-                \key d \minor
-                a' 8 f' \> f' f' gis' e' e' e' 
-                % warning: overlong bar truncated here |
-                a' 8 e' e' e' a' 4 f'  |
-                a' 8 f' f' f' b' g' g' g'  |
-                a' 8 e' e' e' a' 4 -\p \! f'  |
-%% 25
-                a' 8 f' f' f' gis' e' e' e'  |
-                a' 8 _\markup { \bold \italic "ritard." } e' e' e' < a' d' f' > 2  |
-                c'' 8 -\pp d'' \< f'' g'' a'' 4 a'' 
-                % warning: overlong bar truncated here |
-                a'' 8 f'' g'' d'' a' 4 a'  |
-                c'' 8 d'' f'' g'' a'' 4 a''  |
-%% 30
-                a'' 8 f'' g'' c'' d'' 4 d''  |
-                c'' 8 -\p \! d'' \< f'' g'' a'' 4 a'' 
-                % warning: overlong bar truncated here |
-                a'' 8 f'' g'' d'' a' 4 a'  |
-                c'' 8 d'' f'' g'' a'' 4 a''  |
-                a'' 8 f'' a'' g'' d'' 4 d''  |
-%% 35
-                a'' 8 -\mp _\markup { \bold \italic "ritard." } \! f'' a'' d'' a'' f'' a'' c'' -\accent  |
-                b' 8 d'' g'' b' g'' d'' g'' g' -\accent  |
-                f' 8 d'' a'' f'' a'' d'' a'' as' -\accent  |
-                a' 8 e'' a'' cis'' a'' e'' a'' cis'' -\accent  |
-                d'' 8 f'' a'' d'' a'' f'' a'' c'' -\accent  |
-%% 40
-                b' 8 d'' \< g'' b' g'' d'' g'' g' -\accent 
-                % warning: overlong bar truncated here |
-                f' 8 d'' a'' f'' a'' d'' a'' f' -\accent  |
-                fis' 8 -\f \! fis'' ais'' cis'' ais'' fis'' ais'' e'' -\accent  |
-                \key h \minor
-                d'' 8 fis'' \> h'' d'' h'' fis'' h'' dis'' -\accent 
-                % warning: overlong bar truncated here |
-                e'' 8 g'' h'' e'' h'' g'' h'' g' -\accent  |
-%% 45
-                fis' 8 -\mp \! d'' h'' fis'' h'' d'' h'' h' -\accent  |
-                ais' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais'' -\accent  |
-                h'' 8 fis'' \< h'' d'' h'' fis'' h'' dis'' -\accent 
-                % warning: overlong bar truncated here |
-                e'' 8 g'' h'' e'' h'' g'' h'' eis'' -\accent  |
-                fis'' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais'' -\accent  |
-%% 50
-                h'' 8 -\ff _\markup { \bold \italic "(2.) ritard." } \! fis'' h'' ais' h' 2  |
-             } % close repeat
-        } % Voice
-
-        \context Voice = "voice 3" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*50 
-            \clef "treble"
-            \key h \minor
-            h' 16 -\mf _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais h' fis' h' fis' d' fis' d' a  |
-%% 100
-            h' 16 _\markup { \bold \italic "ritard." } g' h' g' e' g' e' h d' h' d' h < h' h d' > 4  |
-            h' 16 _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais cis'' ais' cis'' ais' e' fis' e' cis'  |
-            cis'' 16 _\markup { \bold \italic "ritard." } ais' cis'' ais' e' ais' e' cis' d' h' d' h < d' h h' > 4  |
-            fis'' 8 _\markup { \bold \italic "accel." } _\markup { \bold \italic "a tempo" } d'' fis'' h' fis'' d'' fis'' a'  |
-            g' 8 h' e'' g' e'' h' e'' e'  |
-%% 105
-            fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
-            fis'' 8 cis'' fis'' eis' fis' 2  |
-            h' 16 fis' h' fis' cis' fis' cis' ais h' fis' h' fis' d' fis' d' a  |
-            h' 16 _\markup { \bold \italic "ritard." } g' h' g' e' g' e' h d' h' d' h < h' h d' > 4  |
-            h' 16 _\markup { \bold \italic "a tempo" } fis' h' fis' cis' fis' cis' ais cis'' ais' cis'' ais' e' fis' e' cis'  |
-%% 110
-            cis'' 16 _\markup { \bold \italic "ritard." } ais' _\markup { \bold \italic "ritard." } cis'' ais' e' ais' e' cis' d' h' d' h < h' h d' > 4  |
-            fis'' 8 _\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." } d'' fis'' h' fis'' d'' fis'' a'  |
-            g' 8 h' e'' g' e'' h' e'' e'  |
-            fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
-            h'' 8 _\markup { \bold \italic "ritard." } fis'' h'' ais' h' 2  |
-%% 115
-            h' 8 -\pp fis' \< fis' fis' h' g' g' g' 
-            % warning: overlong bar truncated here |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            a' 8 fis' fis' fis' h' fis' fis' fis'  |
-            ais' 8 fis' fis' fis' d'' 4 ais'  |
-            h' 8 fis' fis' fis' h' g' g' g'  |
-%% 120
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' ais' fis' fis' fis'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' h' g' g' g'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-%% 125
-            a' 8 fis' fis' fis' h' fis' fis' fis'  |
-            ais' 8 fis' fis' fis' d'' 4 ais'  |
-            h' 8 fis' fis' fis' h' g' g' g'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            ais' 8 -\mf \! fis' fis' fis' ais' fis' fis' fis'  |
-%% 130
-            d'' 8 -\ff h' fis' d' r2  |
-        } % Voice
-
-        \context Voice = "voice 4" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*82 
-            \clef "treble"
-            \key h \minor
-            h' 16 -\f fis' \> h' fis' d' fis' d' h -\p \! h' -\f g' \> h' g' e' g' e' h -\p \!  |
-            cis'' 16 -\ff ais' \> cis'' ais' e' ais' e' cis' d' h' d' h -\pp \! < fis' d' h' > 4 -\ff  |
-        } % Voice
-
-        \context Voice = "voice 5" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*84 
-            \clef "treble"
-            \key h \minor
-            h' 8 -\p cis'' h' a' h' e'' h' a'  |
-            h' 8 fis'' cis'' a' h' 4 h'  |
-%% 135
-            h' 8 cis'' h' a' h' e'' h' a'  |
-            h' 8 gis'' eis'' cis'' fis'' 4 fis''  |
-            h' 8 -\pp cis'' h' a' h' e'' h' a'  |
-            h' 8 fis'' cis'' a' h' 4 h'  |
-            h' 8 cis'' h' a' h' e'' h' a'  |
-%% 140
-            fis'' 8 _\markup { \bold \italic "ritard." } cis'' ais' fis' h' 2  |
-            h' 8 -\ppp _\markup { \bold \italic "a tempo" } _\markup { \bold \italic "accel." } fis' fis' fis' h' g' g' g'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' gis' eis' eis' eis'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
 %% 145
-            h' 8 fis' fis' fis' h' g' g' g'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' gis' eis' eis' eis'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' h' g' g' g'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' gis' eis' eis' eis'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
 %% 150
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' h' g' g' g'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
-            h' 8 fis' fis' fis' gis' eis' eis' eis'  |
-            ais' 8 fis' fis' fis' h' 4 fis'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
+                h' 8 fis' fis' fis' gis' eis' eis' eis'  |
+                ais' 8 fis' fis' fis' h' 4 fis'  |
 %% 155
-            h' 8 fis' fis' fis' h' g' g' g'  |
-            ais' 8 _\markup { \bold \italic "ritard." } fis' fis' fis' < h' d' fis' > 2  |
-            a' 8 -\pp h' \< d'' e'' fis'' 4 fis'' 
-            % warning: overlong bar truncated here |
-            fis'' 8 d'' e'' h' fis' 4 fis'  |
-            a' 8 h' d'' e'' fis'' 4 fis''  |
+                h' 8 fis' fis' fis' h' g' g' g'  |
+                ais' 8 _\markup { \bold \italic "ritard." } fis' fis' fis' < h' d' fis' > 2  |
+                a' 8 -\pp h' \< d'' e'' fis'' 4 fis'' 
+                % warning: overlong bar truncated here |
+                fis'' 8 d'' e'' h' fis' 4 fis'  |
+                a' 8 h' d'' e'' fis'' 4 fis''  |
 %% 160
-            fis'' 8 d'' e'' a' h' 4 h'  |
-            a' 8 -\p \! h' \< d'' e'' fis'' 4 fis'' 
-            % warning: overlong bar truncated here |
-            fis'' 8 d'' e'' h' fis' 4 fis'  |
-            a' 8 h' d'' e'' fis'' 4 fis''  |
-            fis'' 8 d'' fis'' e'' h' 4 h'  |
+                fis'' 8 d'' e'' a' h' 4 h'  |
+                a' 8 -\p \! h' \< d'' e'' fis'' 4 fis'' 
+                % warning: overlong bar truncated here |
+                fis'' 8 d'' e'' h' fis' 4 fis'  |
+                a' 8 h' d'' e'' fis'' 4 fis''  |
+                fis'' 8 d'' fis'' e'' h' 4 h'  |
 %% 165
-            fis'' 8 -\mp _\markup { \bold \italic "ritard." } \! d'' fis'' h' fis'' d'' fis'' a'  |
-            g' 8 h' e'' g' e'' h' e'' e'  |
-            d' 8 h' fis'' d'' fis'' h' fis'' f'  |
-            fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
-            h' 8 d'' fis'' h' fis'' d'' fis'' a'  |
+                fis'' 8 -\mp _\markup { \bold \italic "ritard." } \! d'' fis'' h' fis'' d'' fis'' a'  |
+                g' 8 h' e'' g' e'' h' e'' e'  |
+                d' 8 h' fis'' d'' fis'' h' fis'' f'  |
+                fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
+                h' 8 d'' fis'' h' fis'' d'' fis'' a'  |
 %% 170
-            g' 8 h' e'' g' e'' h' e'' e'  |
-            d' 8 h' fis'' d'' fis'' h' fis'' f'  |
-            fis' 8 cis'' fis'' ais' fis'' cis'' fis'' ais'  |
-            h' 8 fis'' h'' d'' h'' fis'' h'' dis''  |
-            e'' 8 g'' h'' e'' h'' g'' h'' g'  |
+                g' 8 h' \< e'' g' e'' h' e'' e' 
+                % warning: overlong bar truncated here |
+                d' 8 h' fis'' d'' fis'' h' fis'' f'  |
+                fis' 8 -\f \! cis'' fis'' ais' fis'' cis'' fis'' ais'  |
+                h' 8 fis'' \> h'' d'' h'' fis'' h'' dis'' 
+                % warning: overlong bar truncated here |
+                e'' 8 g'' h'' e'' h'' g'' h'' g'  |
 %% 175
-            fis' 8 d'' h'' fis'' h'' d'' h'' h'  |
-            ais' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais''  |
-            h'' 8 fis'' \< h'' d'' h'' fis'' h'' dis'' 
-            % warning: overlong bar truncated here |
-            e'' 8 g'' h'' e'' h'' g'' h'' eis''  |
-            fis'' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais''  |
+                fis' 8 -\mp \! d'' h'' fis'' h'' d'' h'' h'  |
+                ais' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais''  |
+                h'' 8 fis'' \< h'' d'' h'' fis'' h'' dis'' 
+                % warning: overlong bar truncated here |
+                e'' 8 g'' h'' e'' h'' g'' h'' eis''  |
+                fis'' 8 ais'' cis''' fis'' cis''' ais'' cis''' ais''  |
 %% 180
-            h'' 8 -\ff _\markup { \bold \italic "ritard." } \! fis'' h'' ais' h' 2  |
-        } % Voice
+                h'' 8 -\ff _\markup { \bold \italic "ritard." } \! fis'' h'' ais' h' 2  |
+            } % Voice
 
-        \context Voice = "voice 6" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
+            \context Voice = "voice 6" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
 
-            \skip 1*132 
-            \clef "treble"
-            \key h \minor
-            R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
-            r4 r r h -\fff  |
-            \bar "|."
-        } % Voice
-    >> % Staff ends
+                \skip 1*132 
+                \clef "treble"
+                \key h \minor
+                R1_\markup { \bold \italic "a tempo" } _\markup { \bold \italic "ritard." }   |
+                r4 r r h -\fff  |
+                \bar "|."
+            } % Voice
+        >> % Staff ends
 
-    \context Staff = "track 3, Left" << 
-        \set Staff.instrumentName = \markup { \column { "Left " } }
-        \set Staff.midiInstrument = ""
-        \set Score.skipBars = ##t
-        \set Staff.printKeyCancellation = ##t
-        \new Voice \global
-        \new Voice \globalTempo
+        \context Staff = "track 3, Left" << 
+            \set Staff.instrumentName = \markup { \column { "Left " } }
+            \set Staff.midiInstrument = ""
+            \set Score.skipBars = ##t
+            \set Staff.printKeyCancellation = ##f
+            \new Voice \global
+            \new Voice \globalTempo
 
-        \context Voice = "voice 7" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
+            \context Voice = "voice 7" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
 \once \override Staff.TimeSignature #'style = #'() \time 4/4
-            
-            \clef "bass"
-            \key h \minor
-            R1^\markup { \bold \large "Moderato" }   |
-            r4 r r h, -\ff  |
-        } % Voice
+                
+                \clef "bass"
+                \key h \minor
+                R1^\markup { \bold \large "Moderato" }   |
+                r4 r r h, -\ff  |
+            } % Voice
 
-        \context Voice = "voice 8" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
+            \context Voice = "voice 8" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
 
-            \skip 1*2 
-            \repeat volta 2 {
+                \skip 1*2 
+                \repeat volta 2 {
+                    \clef "bass"
+                    \key h \minor
+                    h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
+                    h 16 fis ais fis e fis e fis < fis d h > 2  |
+%% 5
+                    h 16 fis h fis d fis d h, h g h g e g e h,  |
+                    h 16 gis h gis f gis f d < cis fis ais > 2  |
+                    h 16 -\pp fis h fis d fis d h, h g h g e g e h,  |
+                    h 16 fis ais fis e fis e fis < fis d h > 2  |
+                    h 16 fis h fis d fis d h, h g h g e g e h,  |
+%% 10
+                    ais 16 fis ais fis e fis e cis < d fis h > 2  |
+                    h, 8 -\ppp d h, d e, e e, e  |
+                    fis, 8 cis fis, cis h, d h, d  |
+                    h, 8 d h, d cis, cis cis, cis  |
+                    fis, 8 cis fis, cis h, d h, d  |
+%% 15
+                    h, 8 d h, d e, e e, e  |
+                    fis, 8 cis fis, cis h, d h, d  |
+                    h, 8 d \< h, d cis, cis cis, cis 
+                    % warning: overlong bar truncated here |
+                    fis, 8 cis fis, cis h, d h, d  |
+                    h, 8 d h, d e, d e, d  |
+%% 20
+                    a, 8 cis a, cis d, -\mp \! d d, d  |
+                    \key d \minor
+                    d, 8 d \> d, d e, h, e, h, 
+                    % warning: overlong bar truncated here |
+                    a, 8 cis a, cis d, d d, d  |
+                    d, 8 d d, d g, d g, d  |
+                    a, 8 cis a, cis d, -\p \! d d, d  |
+%% 25
+                    d, 8 d d, d e, h, e, h,  |
+                    a, 8 ^\markup { \bold "Allegro" } cis a, cis d, 2  |
+                    < f a d > 4 -\pp ^\markup { \bold "Allegro" } < b d g > \< < cis e a > < cis e a > 
+                    % warning: overlong bar truncated here |
+                    < a c f > 4 < f a c d > < cis e a > < cis e a >  |
+                    < f a d > 4 < b d g > < cis e a > < cis e a >  |
+%% 30
+                    < f a d > 4 < c e g a > < f a d > < f a d >  |
+                    < f a d > 4 -\p \! < b d g > \< < cis e a > < cis e a > 
+                    % warning: overlong bar truncated here |
+                    < a c f > 4 < f a c d > < cis e a > < cis e a >  |
+                    < f a d > 4 < b d g > < cis e a > < cis e a >  |
+                    < cis e a > 4 < cis e g a > < f a d > < f a d >  |
+%% 35
+                    < a f d > 1 -\mp \!  |
+                    < d b, g > 1  |
+                    < a f d > 1  |
+                    < e cis a > 1  |
+                    < a f d > 1  |
+%% 40
+                    < d b, g > 1 \< 
+                    % warning: overlong bar truncated here |
+                    < a f d > 1  |
+                    < cis ais, fis > 1 -\f \! e 2 -\accent  |
+                    \key h \minor
+                    < fis, d h, > 1 ^\markup { \bold "Moderato" } \> 
+                    % warning: overlong bar truncated here |
+                    < h, g e > 1  |
+%% 45
+                    < fis, d h, > 1 -\mp \!  |
+                    < cis e fis, > 1  |
+                    < fis, d h, > 1 \< 
+                    % warning: overlong bar truncated here |
+                    < h, g e > 1  |
+                    < e cis fis, > 1  |
+%% 50
+                    < fis, d h, > 1 -\ff \!  |
+                 } % close repeat
+            } % Voice
+
+            \context Voice = "voice 9" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*50 
+                \clef "bass"
+                \key h \minor
+                h, 4 -\ff cis h, a,  |
+%% 100
+                h, 4 e h, a,  |
+                h, 4 fis cis a,  |
+                h, 2 h,, -\accent  |
+                h, 4 cis h, a,  |
+                h, 4 e h, a,  |
+%% 105
+                h, 4 gis eis cis  |
+                fis 2 fis  |
+                h, 4 ^\markup { \bold "Allegro" } cis h, a,  |
+                h, 4 e h, a,  |
+                h, 4 fis cis a,  |
+%% 110
+                h, 2 h,, -\accent  |
+                h, 4 cis h, a,  |
+                h, 4 e h, a,  |
+                fis 4 cis ais, fis,  |
+                h, 1  |
+%% 115
+                a, 4 -\mp ^\markup { \bold "Moderato" } h, \< d e 
+                % warning: overlong bar truncated here |
+                fis 2 fis  |
+                fis 4 d e h,  |
+                fis, 2 fis,  |
+                a, 4 h, d e  |
+%% 120
+                fis 2 fis  |
+                fis 4 d e a,  |
+                ais, 2 h,  |
+                a, 4 h, d e  |
+                fis 2 fis  |
+%% 125
+                fis 4 d e h,  |
+                fis, 2 fis,  |
+                a, 4 h, d e  |
+                fis 2 fis  |
+                fis 4 -\ff \! d fis e  |
+%% 130
+                h, 2 h 8 fis d h,  |
+            } % Voice
+
+            \context Voice = "voice 10" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*82 
+                \clef "bass"
+                \key h \minor
+                R1^\markup { \bold "Moderato" }   |
+                r4 r r h, -\ff  |
+            } % Voice
+
+            \context Voice = "voice 11" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
+
+                \skip 1*84 
                 \clef "bass"
                 \key h \minor
                 h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
                 h 16 fis ais fis e fis e fis < fis d h > 2  |
-%% 5
+%% 135
                 h 16 fis h fis d fis d h, h g h g e g e h,  |
                 h 16 gis h gis f gis f d < cis fis ais > 2  |
-                h 16 -\pp fis h fis d fis d h, h g h g e g e h,  |
+                h 16 fis -\pp h fis d fis d h, h g h g e g e h,  |
                 h 16 fis ais fis e fis e fis < fis d h > 2  |
                 h 16 fis h fis d fis d h, h g h g e g e h,  |
-%% 10
+%% 140
                 ais 16 fis ais fis e fis e cis < d fis h > 2  |
                 h, 8 -\ppp d h, d e, e e, e  |
                 fis, 8 cis fis, cis h, d h, d  |
                 h, 8 d h, d cis, cis cis, cis  |
                 fis, 8 cis fis, cis h, d h, d  |
-%% 15
+%% 145
                 h, 8 d h, d e, e e, e  |
                 fis, 8 cis fis, cis h, d h, d  |
-                h, 8 d \< h, d cis, cis cis, cis 
-                % warning: overlong bar truncated here |
+                h, 8 d h, d cis, cis cis, cis  |
                 fis, 8 cis fis, cis h, d h, d  |
-                h, 8 d h, d e, d e, d  |
-%% 20
-                a, 8 cis a, cis d, -\mp \! d d, d  |
-                \key d \minor
-                d, 8 d \> d, d e, h, e, h, 
+                h, 8 d h, d e, e e, e  |
+%% 150
+                fis, 8 cis fis, cis h, d h, d  |
+                h, 8 d h, d e, e e, e  |
+                fis, 8 cis fis, cis h, d h, d  |
+                h, 8 d h, d cis, cis cis, cis  |
+                fis, 8 cis fis, cis h, d h, d  |
+%% 155
+                h, 8 d h, d e, e e, e  |
+                fis, 8 ^\markup { \bold "Allegro" } cis fis, cis h, 2  |
+                < h, d fis > 4 ^\markup { \bold "Allegro" } -\pp < e g h, > \< < fis ais, cis > < fis ais, cis > 
                 % warning: overlong bar truncated here |
-                a, 8 cis a, cis d, d d, d  |
-                d, 8 d d, d g, d g, d  |
-                a, 8 cis a, cis d, -\p \! d d, d  |
-%% 25
-                d, 8 d d, d e, h, e, h,  |
-                a, 8 ^\markup { \bold "Allegro" } cis a, cis d, 2  |
-                < f a d > 4 -\pp ^\markup { \bold "Allegro" } < b d g > \< < cis e a > < cis e a > 
+                < d fis a, > 4 < h, d fis a, > < fis ais, cis > < fis ais, cis >  |
+                < h, d fis > 4 < e g h, > < fis ais, cis > < fis ais, cis >  |
+%% 160
+                < h, d fis > 4 < fis a, cis e > < h, d fis > < h, d fis >  |
+                < h, d fis > 4 -\p \! < e g h, > \< < fis ais, cis > < fis ais, cis > 
                 % warning: overlong bar truncated here |
-                < a c f > 4 < f a c d > < cis e a > < cis e a >  |
-                < f a d > 4 < b d g > < cis e a > < cis e a >  |
-%% 30
-                < f a d > 4 < c e g a > < f a d > < f a d >  |
-                < f a d > 4 -\p \! < b d g > \< < cis e a > < cis e a > 
+                < d fis a, > 4 < h, d fis a, > < fis ais, cis > < fis ais, cis >  |
+                < h, d fis > 4 < e g h, > < fis ais, cis > < fis ais, cis >  |
+                < fis ais, cis > 4 < fis ais, cis e > < h, d fis > < h, d fis >  |
+%% 165
+                < fis d h, > 1 -\mp \!  |
+                < h, g, e > 1  |
+                < fis d h, > 1  |
+                < cis ais, fis > 1  |
+                < fis d h, > 1  |
+%% 170
+                < h, g, e > 1 \< 
                 % warning: overlong bar truncated here |
-                < a c f > 4 < f a c d > < cis e a > < cis e a >  |
-                < f a d > 4 < b d g > < cis e a > < cis e a >  |
-                < cis e a > 4 < cis e g a > < f a d > < f a d >  |
-%% 35
-                < a f d > 1 -\mp \!  |
-                < d b, g > 1  |
-                < a f d > 1  |
-                < e cis a > 1  |
-                < a f d > 1  |
-%% 40
-                < d b, g > 1 \< 
-                % warning: overlong bar truncated here |
-                < a f d > 1  |
+                < fis d h, > 1  |
                 < cis ais, fis > 1 -\f \! e 2 -\accent  |
-                \key h \minor
                 < fis, d h, > 1 ^\markup { \bold "Moderato" } \> 
                 % warning: overlong bar truncated here |
                 < h, g e > 1  |
-%% 45
+%% 175
                 < fis, d h, > 1 -\mp \!  |
                 < cis e fis, > 1  |
                 < fis, d h, > 1 \< 
                 % warning: overlong bar truncated here |
                 < h, g e > 1  |
                 < e cis fis, > 1  |
-%% 50
-                < fis, d h, > 1 -\ff \!  |
-             } % close repeat
-        } % Voice
-
-        \context Voice = "voice 9" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*50 
-            \clef "bass"
-            \key h \minor
-            h, 4 -\ff cis h, a,  |
-%% 100
-            h, 4 e h, a,  |
-            h, 4 fis cis a,  |
-            h, 2 h,, -\accent  |
-            h, 4 cis h, a,  |
-            h, 4 e h, a,  |
-%% 105
-            h, 4 gis eis cis  |
-            fis 2 fis  |
-            h, 4 ^\markup { \bold "Allegro" } cis h, a,  |
-            h, 4 e h, a,  |
-            h, 4 fis cis a,  |
-%% 110
-            h, 2 h,, -\accent  |
-            h, 4 cis h, a,  |
-            h, 4 e h, a,  |
-            fis 4 cis ais, fis,  |
-            h, 1  |
-%% 115
-            a, 4 -\mp ^\markup { \bold "Moderato" } h, \< d e 
-            % warning: overlong bar truncated here |
-            fis 2 fis  |
-            fis 4 d e h,  |
-            fis, 2 fis,  |
-            a, 4 h, d e  |
-%% 120
-            fis 2 fis  |
-            fis 4 d e a,  |
-            ais, 2 h,  |
-            a, 4 h, d e  |
-            fis 2 fis  |
-%% 125
-            fis 4 d e h,  |
-            fis, 2 fis,  |
-            a, 4 h, d e  |
-            fis 2 fis  |
-            fis 4 -\ff \! d fis e  |
-%% 130
-            h, 2 h 8 fis d h,  |
-        } % Voice
-
-        \context Voice = "voice 10" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*82 
-            \clef "bass"
-            \key h \minor
-            R1^\markup { \bold "Moderato" }   |
-            r4 r r h, -\ff  |
-        } % Voice
-
-        \context Voice = "voice 11" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
-
-            \skip 1*84 
-            \clef "bass"
-            \key h \minor
-            h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
-            h 16 fis ais fis e fis e fis < fis d h > 2  |
-%% 135
-            h 16 fis h fis d fis d h, h g h g e g e h,  |
-            h 16 gis h gis f gis f d < cis fis ais > 2  |
-            h 16 fis -\pp h fis d fis d h, h g h g e g e h,  |
-            h 16 fis ais fis e fis e fis < fis d h > 2  |
-            h 16 fis h fis d fis d h, h g h g e g e h,  |
-%% 140
-            ais 16 fis ais fis e fis e cis < d fis h > 2  |
-            h, 8 -\ppp d h, d e, e e, e  |
-            fis, 8 cis fis, cis h, d h, d  |
-            h, 8 d h, d cis, cis cis, cis  |
-            fis, 8 cis fis, cis h, d h, d  |
-%% 145
-            h, 8 d h, d e, e e, e  |
-            fis, 8 cis fis, cis h, d h, d  |
-            h, 8 d h, d cis, cis cis, cis  |
-            fis, 8 cis fis, cis h, d h, d  |
-            h, 8 d h, d e, e e, e  |
-%% 150
-            fis, 8 cis fis, cis h, d h, d  |
-            h, 8 d h, d e, e e, e  |
-            fis, 8 cis fis, cis h, d h, d  |
-            h, 8 d h, d cis, cis cis, cis  |
-            fis, 8 cis fis, cis h, d h, d  |
-%% 155
-            h, 8 d h, d e, e e, e  |
-            fis, 8 ^\markup { \bold "Allegro" } cis fis, cis h, 2  |
-            < h, d fis > 4 ^\markup { \bold "Allegro" } -\pp < e g h, > \< < fis ais, cis > < fis ais, cis > 
-            % warning: overlong bar truncated here |
-            < d fis a, > 4 < h, d fis a, > < fis ais, cis > < fis ais, cis >  |
-            < h, d fis > 4 < e g h, > < fis ais, cis > < fis ais, cis >  |
-%% 160
-            < h, d fis > 4 < fis a, cis e > < h, d fis > < h, d fis >  |
-            < h, d fis > 4 -\p \! < e g h, > \< < fis ais, cis > < fis ais, cis > 
-            % warning: overlong bar truncated here |
-            < d fis a, > 4 < h, d fis a, > < fis ais, cis > < fis ais, cis >  |
-            < h, d fis > 4 < e g h, > < fis ais, cis > < fis ais, cis >  |
-            < fis ais, cis > 4 < fis ais, cis e > < h, d fis > < h, d fis >  |
-%% 165
-            < fis d h, > 1 -\mp \!  |
-            < h, g, e > 1  |
-            < fis d h, > 1  |
-            < cis ais, fis > 1  |
-            < fis d h, > 1  |
-%% 170
-            < h, g, e > 1  |
-            < fis d h, > 1  |
-            < cis ais, fis > 1 e 2 -\accent  |
-            < fis, d h, > 1  |
-            < h, g e > 1  |
-%% 175
-            < fis, d h, > 1  |
-            < cis e fis, > 1  |
-            < fis, d h, > 1 \< 
-            % warning: overlong bar truncated here |
-            < h, g e > 1  |
-            < e cis fis, > 1  |
 %% 180
-            < fis, d h, > 1 -\ff \!  |
-        } % Voice
+                < fis, d h, > 1 -\ff \!  |
+            } % Voice
 
-        \context Voice = "voice 12" {
-            \override Voice.TextScript #'padding = #2.0
-            \override MultiMeasureRest #'expand-limit = 1
+            \context Voice = "voice 12" {
+                \override Voice.TextScript #'padding = #2.0
+                \override MultiMeasureRest #'expand-limit = 1
 
-            \skip 1*132 
-            \clef "bass"
-            \key h \minor
-            h 16 -\fff fis \> h fis d fis d h, h g h g e g e h, 
-            % warning: overlong bar truncated here |
-            cis' 16 ais cis' ais e ais e cis d h d h, -\ppp \! < h, d fis > 4 -\fff  |
-            \bar "|."
-        } % Voice
-    >> % Staff (final) ends
+                \skip 1*132 
+                \clef "bass"
+                \key h \minor
+                h 16 -\fff fis \> h fis d fis d h, h g h g e g e h, 
+                % warning: overlong bar truncated here |
+                cis' 16 ais cis' ais e ais e cis d h d h, -\ppp \! < h, d fis > 4 -\fff  |
+                \bar "|."
+            } % Voice
+        >> % Staff (final) ends
 
->> % notes
+    >> % notes
 
-\layout {
-}
-% uncomment to enable generating midi file from the lilypond source
-%     \midi {
-%     } 
+    \layout {
+        \context { \GrandStaff \accepts "Lyrics" }
+    }
+%     uncomment to enable generating midi file from the lilypond source
+%         \midi {
+%         } 
 } % score

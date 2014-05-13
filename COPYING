@@ -35,7 +35,10 @@ the licenses of the sample sets that were used:
 
 - fluidsynth-mgg: only GPLv2 (choice "a") may be used; credit the author
   Marcos Guglielmetti appropriately, of course
-  
+
+- fluidsynth-upright: only the CC licenses (choice "c" or "d") may be used;
+  credit soundbrewer.com appropriately, of course
+
 - linuxsampler-maestro: only CC-BY-NC (choice "c") may be used; credit the
   author Mats Helgesson appropriately, of course
 
@@ -49,6 +52,9 @@ the licenses of the sample sets that were used:
 - linuxsampler-steinwayc: only the CC licenses (choice "c" or "d") may be
   used; credit the author Nikko as described on
   http://tickets.nikkoid.com/knowledgebase.php?article=23
+
+- linuxsampler-citypiano: no restrictions at all; you should still give bigcat
+  Instruments credit :)
 
 - timidity-freepats: no restrictions at all; you should still give the Freepats
   Project credit :)

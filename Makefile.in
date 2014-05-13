@@ -1,7 +1,7 @@
-# @configure_input@
+# @configure_inpu t@
 
-SRC = @abs_srcdir@
-BUILD = @abs_builddir@
+SRC = @srcdir@
+BUILD = @builddir@
 
 .DEFAULT_GOAL: all
 
@@ -14,10 +14,12 @@ OUTTYPES =
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-upright
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
+@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-citypiano
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 
 # Programs we use
@@ -73,13 +75,13 @@ JACK_LSP = @jack_lsp@
 JACK_LSPFLAGS = @jack_lsp_flags@
 NCAT = @ncat@
 NCATFLAGS = @ncat_flags@
-# UNPKZIP = @unpkzip@
-# UNPKZIPFLAGS = @unpkzip_flags@
+UNPKZIP = @unpkzip@
+UNPKZIPFLAGS = @unpkzip_flags@
 TAR = @tar@
 TARFLAGS = @tar_flags@
 
 # Source files
-RG = $(SRC)/sonata1/sonata1.rg $(SRC)/sonata2/sonata2.rg $(SRC)/sonata3/sonata3.rg $(SRC)/sonata4/sonata4.rg $(SRC)/sonata5/sonata5.rg $(SRC)/sonatina6/sonatina6.rg
+RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg
 LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 
 # Saved intermediate files (part of the source distribution)
@@ -95,7 +97,7 @@ INTERMEDIATE = $(MID_FORMAT0) $(LY)
 .INTERMEDIATE: $(INTERMEDIATE)
 
 # Secondary files
-AUDIO_UNCUT_AND_RAW = $(foreach TEMPTYPE,uncut raw,$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE)-$(TEMPTYPE).wav,$(RG))))
+AUDIO_UNCUT_AND_RAW = $(foreach TEMPTYPE,cut uncut raw,$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE)-$(TEMPTYPE).wav,$(RG))))
 SECONDARY = $(AUDIO_UNCUT_AND_RAW)
 .SECONDARY: $(SECONDARY)
 
@@ -128,6 +130,25 @@ $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 $(BUILD)/support/piano-mgg.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'piano-mgg.sf2' 'http://freepats.zenvoid.org/musix/piano-mgg.sf2'
 
+.INTERMEDIATE: $(BUILD)/support/soundbrewer_upright_piano_sf.zip
+$(BUILD)/support/soundbrewer_upright_piano_sf.zip: | $(BUILD)/support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Register at http://www.soundbrewer.com/downloads.php
+	@echo and download the FREE Piano set
+	@echo Upright Piano
+	@echo
+	@echo Place the downloaded file in
+	@echo $@
+	@echo to proceed.
+	@echo
+	@echo
+	@false
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/soundbrewer_upright_piano.sf2
+$(BUILD)/support/soundbrewer_upright_piano.sf2: | $(BUILD)/support/soundbrewer_upright_piano_sf.zip
+	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) soundbrewer_upright_piano_sf.zip 'Old Upright Piano.sf2' && mv 'Old Upright Piano.sf2' 'soundbrewer_upright_piano.sf2'
+
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
@@ -140,7 +161,7 @@ $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgpOgg_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgpOgg_V2toV3.tar.bz2'
-@linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
+@linuxsampler_sfz_TRUE@@linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
 $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(RM) -r salamanderOgg_V2toV3/
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_OggVorbis/
@@ -153,7 +174,7 @@ $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_48khz24bit.tar.bz2'
 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgp48khz_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgp48khz_V2toV3.tar.bz2'
-@linuxsampler_sfz_wav_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
+@linuxsampler_sfz_TRUE@@linuxsampler_sfz_ogg_FALSE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
 $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz: | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2
 	cd $(BUILD)/support && $(RM) -r salamander48khz\ V2toV3/
 	cd $(BUILD)/support && $(TAR) xvjf 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' $(TARFLAGS) SalamanderGrandPianoV2_48khz24bit/
@@ -176,9 +197,9 @@ $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/suppor
 	@echo
 	@echo
 	@false
-@linuxsampler_pleyelp190_TRUE@ FETCH += $(BUILD)/support/PleyelP190.gig
-$(BUILD)/support/PleyelP190.gig: | $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
-	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'PleyelP190.gig'
+@linuxsampler_pleyelp190_TRUE@ FETCH += $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig
+$(BUILD)/support/classicpianos-pleyel_ambient_p190.gig: | $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'classicpianos-pleyel_ambient_p190.gig'
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
@@ -195,9 +216,16 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 	@echo
 	@echo
 	@false
-@linuxsampler_steinwayc_TRUE@ FETCH += $(BUILD)/support/SteinwayC.gig
-$(BUILD)/support/SteinwayC.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
-	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'SteinwayC.gig'
+@linuxsampler_steinwayc_TRUE@ FETCH += $(BUILD)/support/classicpianos-steinway_c.gig
+$(BUILD)/support/classicpianos-steinway_c.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'classicpianos-steinway_c.gig'
+
+.INTERMEDIATE: $(BUILD)/support/City\ Piano-SFZ.zip
+$(BUILD)/support/City_Piano-SFZ.zip: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'City_Piano-SFZ.zip' 'http://www.mediafire.com/download/f8nv7f3oqo7zpim/City_Piano-SFZ.zip'
+@linuxsampler_citypiano_TRUE@ FETCH += $(BUILD)/support/City_Piano.sfz
+$(BUILD)/support/City_Piano.sfz: | $(BUILD)/support/City_Piano-SFZ.zip
+	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) City_Piano-SFZ.zip && mv 'City Piano.sfz' 'City_Piano.sfz'
 
 fetch: $(FETCH)
 
@@ -218,17 +246,23 @@ $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/
 $(BUILD)/%-fluidsynth-mgg-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/piano-mgg.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
-$(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/PleyelP190.gig
+$(BUILD)/%-fluidsynth-upright-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/soundbrewer_upright_piano.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+
+$(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-$(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SteinwayC.gig
+$(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-steinway_c.gig
+	$(SRC)/bin/linuxsampler.sh $< $| $@
+
+$(BUILD)/%-linuxsampler-citypiano-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/City_Piano.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 @linuxsampler_sfz_ogg_TRUE@$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
 @linuxsampler_sfz_ogg_TRUE@	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-@linuxsampler_sfz_wav_TRUE@$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
-@linuxsampler_sfz_wav_TRUE@	$(SRC)/bin/linuxsampler.sh $< $| $@
+@linuxsampler_sfz_ogg_FALSE@$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
+@linuxsampler_sfz_ogg_FALSE@	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
@@ -264,17 +298,17 @@ $(SRC)/%.ly.orig: | $(SRC)/%.rg
 # Audio transforms
 
 # we normalize to -1 dB FSD to have some safety margin for lossy audio codecs while retaining lots of accuracy from the input
-$(BUILD)/%.wav: $(BUILD)/%-uncut.wav
+$(BUILD)/%-cut.wav: $(BUILD)/%-uncut.wav
 	$(SOX) $(SOXFLAGS) $< -b 16 $@ silence 1 0 0.005% reverse silence 1 0 0.005% reverse gain -n -1
 
-$(BUILD)/%.flac: $(BUILD)/%.wav
+$(BUILD)/%.flac: $(BUILD)/%-cut.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
 
-$(BUILD)/%.mp3: $(BUILD)/%.wav
+$(BUILD)/%.mp3: $(BUILD)/%-cut.wav
 	$(LAME) $(LAMEFLAGS) $< $@
 @mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -r -k $@
 
-$(BUILD)/%.ogg: $(BUILD)/%.wav
+$(BUILD)/%.ogg: $(BUILD)/%-cut.wav
 	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
 @vorbisgain_TRUE@	$(VORBISGAIN) $(VORBISGAINFLAGS) $@
 

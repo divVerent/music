@@ -1,5 +1,5 @@
-sonata1/sonata1 linuxsampler-salamander linuxsampler-maestro fluidsynth-imis fluidsynth-mgg timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc
-sonata2/sonata2 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander fluidsynth-imis timidity-freepats fluidsynth-mgg linuxsampler-steinwayc
-sonata3/sonata3 linuxsampler-salamander linuxsampler-maestro fluidsynth-imis linuxsampler-pleyelp190 fluidsynth-mgg timidity-freepats linuxsampler-steinwayc
-sonata4/sonata4 linuxsampler-maestro linuxsampler-salamander linuxsampler-pleyelp190 fluidsynth-imis fluidsynth-mgg timidity-freepats linuxsampler-steinwayc
-sonata5/sonata5 linuxsampler-salamander linuxsampler-maestro linuxsampler-pleyelp190 timidity-freepats fluidsynth-imis fluidsynth-mgg linuxsampler-steinwayc
+sonatina1/sonatina1 linuxsampler-salamander linuxsampler-maestro linuxsampler-citypiano fluidsynth-upright fluidsynth-imis fluidsynth-mgg timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc
+sonatina2/sonatina2 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander fluidsynth-imis timidity-freepats linuxsampler-citypiano fluidsynth-mgg fluidsynth-upright
+sonatina3/sonatina3 linuxsampler-salamander linuxsampler-maestro fluidsynth-imis linuxsampler-pleyelp190 fluidsynth-mgg timidity-freepats
+sonatina4/sonatina4 linuxsampler-maestro linuxsampler-salamander linuxsampler-pleyelp190 fluidsynth-imis fluidsynth-mgg timidity-freepats
+sonatina5/sonatina5 linuxsampler-salamander linuxsampler-maestro linuxsampler-pleyelp190 timidity-freepats fluidsynth-imis fluidsynth-mgg

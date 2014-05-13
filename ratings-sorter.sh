@@ -22,7 +22,7 @@ decide_real()
 
 	drs=-1
 	while :; do
-		mplayer a.mp3 b.mp3
+		mpv a.mp3 b.mp3
 		echo "Which was better? (a/b)"
 		read -r ab
 		case "$ab" in
@@ -109,8 +109,8 @@ if [ -n "$t" ]; then
 		tpos=$(($tpos+1))
 	done
 	if [ $tpos -ge $# ]; then
-		echo "Not found"
-		exit 1
+		order="$order $t"
+		set -- $order
 	fi
 
 	if [ $(($RANDOM % 2)) -eq 0 ]; then

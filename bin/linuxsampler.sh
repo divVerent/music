@@ -12,9 +12,20 @@ atexit()
 trap atexit EXIT
 trap 'exit 1' INT
 
-midifile=$1
-gigfile=$2
-outfile=$3
+fullpath() {
+	case "$1" in
+		/*)
+			printf "%s\n" "$1"
+			;;
+		*)
+			printf "%s/%s\n" "$PWD" "$1"
+			;;
+	esac
+}
+
+midifile=`fullpath "$1"`
+gigfile=`fullpath "$2"`
+outfile=`fullpath "$3"`
 extracommands=$4
 
 export JACK_DEFAULT_SERVER=midiconvert.$$
@@ -96,10 +107,15 @@ EOF
 	echo QUIT
 } | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT || true
 
+while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} 2>/dev/null | grep LinuxSampler:1 >/dev/null; do
+	sleep 0.1
+done
+
 if [ -n "$outfile" ]; then
 	(
 		: > "$outfile"
 		${JACK_CAPTURE:-jack_capture} ${JACK_CAPTUREFLAGS:-} --daemon -c 2 -p LinuxSampler:0 -p LinuxSampler:1 "$outfile" & cappid=$!
+		#${JACK_REC:-jack_rec} ${JACK_RECFLAGS:-} -f "$outfile" LinuxSampler:0 LinuxSampler:1 & cappid=$!
 		# wait till there is more than just the WAV header in the outfile
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
 			sleep 0.1

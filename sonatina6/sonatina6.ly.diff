@@ -1,5 +1,5 @@
---- sonatina6.ly.orig	2014-04-09 19:54:19.906477693 +0200
-+++ sonatina6.ly	2014-04-09 19:57:23.430659977 +0200
+--- sonatina6.ly.orig	2014-05-13 20:44:48.597985869 +0200
++++ sonatina6.ly	2014-05-13 20:45:43.298199028 +0200
 @@ -9,12 +9,15 @@
  }
  #(set-global-staff-size 20)
@@ -30,7 +30,7 @@
                  \repeat volta 2 {
                      \clef "treble"
 -                    \key h \minor
-                     h' 8 _\markup { \bold \italic "" } _\markup { \bold \italic "" } -\p cis'' h' a' h' e'' h' a'  |
+                     h' 8 _\markup { \bold \italic "" } _\markup { \bold \italic "" } -\mp cis'' h' a' h' e'' h' a'  |
                      h' 8 fis'' cis'' a' h' 4 h'  |
  %% 5
 @@ -133,7 +136,6 @@
@@ -54,7 +54,7 @@
                  \skip 1*84 
                  \clef "treble"
 -                \key h \minor
-                 h' 8 -\p cis'' h' a' h' e'' h' a'  |
+                 h' 8 -\mp cis'' h' a' h' e'' h' a'  |
                  h' 8 fis'' cis'' a' h' 4 h'  |
  %% 135
 @@ -265,7 +265,6 @@
@@ -70,7 +70,7 @@
                  \repeat volta 2 {
                      \clef "bass"
 -                    \key h \minor
-                     h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
+                     h 16 -\mp fis h fis d fis d h, h g h g e g e h,  |
                      h 16 fis ais fis e fis e fis < fis d h > 2  |
  %% 5
 @@ -352,7 +350,7 @@
@@ -103,7 +103,7 @@
                  \skip 1*84 
                  \clef "bass"
 -                \key h \minor
-                 h 16 -\p fis h fis d fis d h, h g h g e g e h,  |
+                 h 16 -\mp fis h fis d fis d h, h g h g e g e h,  |
                  h 16 fis ais fis e fis e fis < fis d h > 2  |
  %% 135
 @@ -486,7 +481,7 @@

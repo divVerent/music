@@ -3,11 +3,22 @@
 s=$1
 t=$2
 
-order=
-while read -r S ORDER; do
-	[ x"$S" = x"$s" ] || continue
-	order=$ORDER
-done < ratings.txt
+if [ -n "$s" ]; then
+	order=
+	while read -r S ORDER; do
+		[ x"$S" = x"$s" ] || continue
+		order=$ORDER
+	done < ratings.txt
+else
+	order=
+	n=0
+	while read -r S ORDER; do
+		n=$((n + 1))
+		[ $((RANDOM % n)) -eq 0 ] || continue
+		s=$S
+		order=$ORDER
+	done < ratings.txt
+fi
 
 if [ -z "$order" ]; then
 	echo "$1 not found"

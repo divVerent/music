@@ -14,7 +14,7 @@ OUTTYPES =
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-upright
+@fluidsynth_upright_TRUE@      OUTTYPES += fluidsynth-upright
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
@@ -81,7 +81,7 @@ TAR = @tar@
 TARFLAGS = @tar_flags@
 
 # Source files
-RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg
+RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg $(SRC)/sonatina7/sonatina7.rg
 LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 
 # Saved intermediate files (part of the source distribution)
@@ -223,7 +223,7 @@ $(BUILD)/support/classicpianos-steinway_c.gig: | $(BUILD)/support/classicpianos-
 .INTERMEDIATE: $(BUILD)/support/City\ Piano-SFZ.zip
 $(BUILD)/support/City_Piano-SFZ.zip: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'City_Piano-SFZ.zip' 'http://www.mediafire.com/download/f8nv7f3oqo7zpim/City_Piano-SFZ.zip'
-@linuxsampler_citypiano_TRUE@ FETCH += $(BUILD)/support/City_Piano.sfz
+@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/City_Piano.sfz
 $(BUILD)/support/City_Piano.sfz: | $(BUILD)/support/City_Piano-SFZ.zip
 	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) City_Piano-SFZ.zip && mv 'City Piano.sfz' 'City_Piano.sfz'
 

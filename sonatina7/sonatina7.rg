@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="14.02" format-version-major="1" format-version-minor="6" format-version-point="2">
-<composition recordtracks="0" pointer="0" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
+<composition recordtracks="0" pointer="457920" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="698880" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
 
 
   <track id="0" label="Right" shortLabel="" position="0" muted="false" instrument="2000" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0"/>
@@ -43,8 +43,18 @@
 
 <metadata>
 <property name="copyright" value="Copyright (c) xxxx Copyright Holder"/>
+<property name="composer" value=""/>
 <property name="title" value="Not Yet Titled"/>
 <property name="subtitle" value="not yet subtitled"/>
+<property name="arranger" value=""/>
+<property name="dedication" value=""/>
+<property name="subsubtitle" value=""/>
+<property name="poet" value=""/>
+<property name="meter" value=""/>
+<property name="opus" value=""/>
+<property name="instrument" value=""/>
+<property name="piece" value=""/>
+<property name="tagline" value=""/>
 
 
 </metadata>
@@ -762,14 +772,14 @@
 	<event type="note" duration="960"><property name="pitch" int="69"/><property name="velocity" int="109"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="64"/><property name="velocity" int="105"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="0"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
-	<event type="note" duration="960"><property name="pitch" int="66"/><property name="velocity" int="112"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="960"><property name="pitch" int="67"/><property name="velocity" int="112"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="74"/><property name="velocity" int="102"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="73"/><property name="velocity" int="106"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="5"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="69"/><property name="velocity" int="101"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="69"/><property name="velocity" int="108"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="73"/><property name="velocity" int="100"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="5"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="74"/><property name="velocity" int="103"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/></event>
-	<event type="note" duration="960"><property name="pitch" int="66"/><property name="velocity" int="98"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="960"><property name="pitch" int="67"/><property name="velocity" int="98"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="68"/><property name="velocity" int="106"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="76"/><property name="velocity" int="97"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="7"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="75"/><property name="velocity" int="100"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/></event>

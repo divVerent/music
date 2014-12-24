@@ -191,8 +191,8 @@ globalTempo = {
                 % warning: overlong bar truncated here |
                 b' 4 gis' a' e' 8 r  |
 %% 150
-                fis' 4 d'' cis'' a'  |
-                a' 4 cis'' d'' fis'  |
+                g' 4 d'' cis'' a'  |
+                a' 4 cis'' d'' g'  |
                 gis' 4 e'' dis'' b'  |
                 b' 4 dis'' e'' gis'  |
                 a' 4 -\mf \! cis'' e' gis'  |

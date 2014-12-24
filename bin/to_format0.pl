@@ -89,8 +89,10 @@ for my $e(@outevents)
 		if defined $p and $collapse_channels;
 	if($e->[0] eq 'note_on')
 	{
-		warn "Note @{[note $e->[3]]} is played twice at @{[ $t * 2 ]}\n" # times 2 for rosegarden units
-			if $notehash{$e->[3]}++;
+		if (exists $notehash{$e->[3]}) {
+			warn "Note @{[note $e->[3]]} is played twice at @{[ $t * 2 ]} and @{[ $notehash{$e->[3]} * 2 ]}\n" # times 2 for rosegarden units
+		}
+		$notehash{$e->[3]} = $t;
 	}
 	if($e->[0] eq 'note_off')
 	{

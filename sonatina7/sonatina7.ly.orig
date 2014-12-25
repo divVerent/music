@@ -381,9 +381,9 @@ globalTempo = {
                 d 8 b g d' d b e cis'  |
                 cis 8 a e cis' cis a g cis'  |
 %% 130
-                < d a fis d' > 8 \sustainOn a -\p fis \< d' d a fis d' \sustainOff 
+                < d a fis d' > 8 \sustainOn a -\p fis \< d' d a fis d' 
                 % warning: overlong bar truncated here |
-                d 8 a fis d' d a fis d' -\mp \!  |
+                d 8 a fis d' d a fis d' -\mp \! \sustainOff  |
             } % Voice
 
             \context Voice = "voice 7" {

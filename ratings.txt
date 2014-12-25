@@ -4,3 +4,4 @@ sonatina3/sonatina3 linuxsampler-steinwayc linuxsampler-salamander linuxsampler-
 sonatina4/sonatina4 linuxsampler-salamander linuxsampler-maestro linuxsampler-pleyelp190 fluidsynth-imis fluidsynth-upright fluidsynth-mgg timidity-freepats linuxsampler-steinwayc linuxsampler-citypiano
 sonatina5/sonatina5 linuxsampler-salamander linuxsampler-steinwayc linuxsampler-maestro linuxsampler-pleyelp190 timidity-freepats fluidsynth-imis linuxsampler-citypiano fluidsynth-upright fluidsynth-mgg
 sonatina6/sonatina6 linuxsampler-steinwayc fluidsynth-imis linuxsampler-salamander linuxsampler-maestro timidity-freepats linuxsampler-pleyelp190 linuxsampler-citypiano fluidsynth-upright fluidsynth-mgg
+sonatina7/sonatina7 fluidsynth-imis fluidsynth-upright fluidsynth-mgg

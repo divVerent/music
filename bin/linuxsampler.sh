@@ -32,6 +32,7 @@ export JACK_DEFAULT_SERVER=midiconvert.$$
 export LSCP_PORT=$((($RANDOM + $$ + 8888 - 1024) % 64512 + 1024))
 
 echo "Finding free port..."
+# TODO(rpolzer): Switch to ncat here too.
 while nc -z localhost $LSCP_PORT; do
 	LSCP_PORT=$(($LSCP_PORT+1))
 done
@@ -50,7 +51,7 @@ done
 echo "Starting LinuxSampler..."
 ${LINUXSAMPLER:-linuxsampler} ${LINUXSAMPLERFLAGS:-} --lscp-port $LSCP_PORT & samppid=$!
 killpids=$killpids" $samppid"
-while ! echo QUIT | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT | grep .; do
+while ! echo QUIT | ${NCAT:-ncat} ${NCATFLAGS:--i10} -4 localhost $LSCP_PORT | grep .; do
 	sleep 0.1
 done
 
@@ -105,7 +106,7 @@ EOF
 		done;
 	fi
 	echo QUIT
-} | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i10} localhost $LSCP_PORT || true
+} | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i10} -4 localhost $LSCP_PORT || true
 
 while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} 2>/dev/null | grep LinuxSampler:1 >/dev/null; do
 	sleep 0.1

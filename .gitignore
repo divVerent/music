@@ -10,3 +10,6 @@ support/
 */*.flac
 */*-format0.mid
 */*.pdf
+*/*.png
+*/*.ly
+*/*.txt

@@ -1,0 +1,27 @@
+--- sonatina7.ly.orig	2014-12-25 14:45:42.024299740 +0100
++++ sonatina7.ly	2014-12-29 17:29:11.768696820 +0100
+@@ -31,11 +31,13 @@
+             \context Voice = "voice 1" {
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
++                \once \override Staff.TimeSignature #'style = #'() 
++                \clef "treble"
++                \key d \major
++                \time 4/4
+ 
+                 \skip 1*2 
+                 \repeat volta 2 {
+-                    \clef "treble"
+-                    \key d \major
+                     d'' 4 -\mf a' cis'' a'  |
+                     b' 4 a' a' 2  |
+ %% 5
+@@ -263,7 +265,7 @@
+                 \repeat volta 2 {
+                     \clef "bass"
+                     \key d \major
+-                    d 8 -\mf a fis d' cis a e cis'  |
++                    d 8 a fis d' cis a e cis'  |
+                     d 8 b fis d' d a fis d'  |
+ %% 5
+                     d 8 a \< fis d' cis a e cis'  |

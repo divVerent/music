@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="14.02" format-version-major="1" format-version-minor="6" format-version-point="2">
-<composition recordtracks="0" pointer="40262" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="384000" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
+<composition recordtracks="0" pointer="62632" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="384000" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
 
 
   <track id="0" label="" shortLabel="" position="0" muted="false" instrument="2000" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0"/>
@@ -70,7 +70,7 @@
 
 
 
-<segment track="0" start="0" label="Acoustic Grand Piano">
+<segment track="0" start="0" label="T1" endmarker="61440">
 	<event type="clefchange" subordering="-250" absoluteTime="0"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200" absoluteTime="0"><property name="key" string="C major"/></event>
 	<event type="note" duration="1440" absoluteTime="0"><property name="pitch" int="60"/><property name="velocity" int="112"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="1"/><nproperty name="HeightOnStaff" int="-2"/><nproperty name="OttavaShift" int="0"/></event>
@@ -121,7 +121,7 @@
 	<event type="rest" duration="3840" subordering="10"><nproperty name="notetype" int="6"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="3840" subordering="10"><nproperty name="notetype" int="6"/><nproperty name="notedots" int="0"/></event>
 </segment>
-<segment track="1" start="0" label="Acoustic Grand Piano" endmarker="72960">
+<segment track="1" start="0" label="T1" endmarker="61440">
 	<event type="clefchange" subordering="-250" absoluteTime="0"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200" absoluteTime="0"><property name="key" string="C major"/></event>
 <chord>

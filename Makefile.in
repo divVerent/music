@@ -121,7 +121,7 @@ FETCH =
 
 @timidity_TRUE@ FETCH += $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'http://freepats.zenvoid.org/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'https://github.com/rism-ch/midi-player/raw/master/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support

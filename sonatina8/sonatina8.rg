@@ -57,9 +57,18 @@
 
 <metadata>
 <property name="copyright" value="Copyright (c) xxxx Copyright Holder"/>
+<property name="composer" value=""/>
 <property name="title" value="Not Yet Titled"/>
 <property name="subtitle" value="not yet subtitled"/>
-<property name="author" value="Unknown"/>
+<property name="arranger" value=""/>
+<property name="dedication" value=""/>
+<property name="subsubtitle" value=""/>
+<property name="poet" value=""/>
+<property name="meter" value=""/>
+<property name="opus" value=""/>
+<property name="instrument" value=""/>
+<property name="piece" value=""/>
+<property name="tagline" value=""/>
 
 
 </metadata>

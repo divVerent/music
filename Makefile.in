@@ -14,6 +14,7 @@ OUTTYPES =
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
 @fluidsynth_upright_TRUE@      OUTTYPES += fluidsynth-upright
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
@@ -81,7 +82,7 @@ TAR = @tar@
 TARFLAGS = @tar_flags@
 
 # Source files
-RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg $(SRC)/sonatina7/sonatina7.rg
+RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg $(SRC)/sonatina7/sonatina7.rg $(SRC)/sonatina8/sonatina8.rg
 LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 
 # Saved intermediate files (part of the source distribution)
@@ -128,7 +129,14 @@ $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/piano-mgg.sf2
 $(BUILD)/support/piano-mgg.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'piano-mgg.sf2' 'http://freepats.zenvoid.org/musix/piano-mgg.sf2'
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'piano-mgg.sf2' 'http://awm.jp/~yoya/js/sf2.js/sample/piano-mgg.sf2'
+
+.INTERMEDIATE: $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
+$(BUILD)/support/grand-piano-YDP-20160804.tar.bz2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'grand-piano-YDP-20160804.tar.bz2' 'http://freepats.zenvoid.org/Piano/YDP-GrandPiano/grand-piano-YDP-20160804.tar.bz2'
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/grand-piano-YDP-20160804.sf2
+$(BUILD)/support/grand-piano-YDP-20160804.sf2: | $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
+	cd $(BUILD)/support && $(TAR) xvjf 'grand-piano-YDP-20160804.tar.bz2' $(TARFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 && $(MV) $(MVFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 grand-piano-YDP-20160804.sf2
 
 .INTERMEDIATE: $(BUILD)/support/soundbrewer_upright_piano_sf.zip
 $(BUILD)/support/soundbrewer_upright_piano_sf.zip: | $(BUILD)/support
@@ -199,7 +207,7 @@ $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/suppor
 	@false
 @linuxsampler_pleyelp190_TRUE@ FETCH += $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig: | $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
-	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && mv 'Pleyel P190.gig' 'classicpianos-pleyel_ambient_p190.gig'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-pleyel_ambient_p190.giga-*.rar 'Pleyel P190.gig' && $(MV) $(MVFLAGS) 'Pleyel P190.gig' 'classicpianos-pleyel_ambient_p190.gig'
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
@@ -218,14 +226,14 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 	@false
 @linuxsampler_steinwayc_TRUE@ FETCH += $(BUILD)/support/classicpianos-steinway_c.gig
 $(BUILD)/support/classicpianos-steinway_c.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
-	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && mv 'Steinway C.gig' 'classicpianos-steinway_c.gig'
+	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && $(MV) $(MVFLAGS) 'Steinway C.gig' 'classicpianos-steinway_c.gig'
 
 .INTERMEDIATE: $(BUILD)/support/City\ Piano-SFZ.zip
 $(BUILD)/support/City_Piano-SFZ.zip: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'City_Piano-SFZ.zip' 'http://www.mediafire.com/download/f8nv7f3oqo7zpim/City_Piano-SFZ.zip'
 @linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/City_Piano.sfz
 $(BUILD)/support/City_Piano.sfz: | $(BUILD)/support/City_Piano-SFZ.zip
-	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) City_Piano-SFZ.zip && mv 'City Piano.sfz' 'City_Piano.sfz'
+	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) City_Piano-SFZ.zip && $(MV) $(MVFLAGS) 'City Piano.sfz' 'City_Piano.sfz'
 
 fetch: $(FETCH)
 
@@ -244,6 +252,9 @@ $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-mgg-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/piano-mgg.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-upright-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/soundbrewer_upright_piano.sf2

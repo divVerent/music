@@ -1,0 +1,164 @@
+--- sonatina8.ly.orig	2016-12-08 16:50:20.376641809 -0500
++++ sonatina8.ly	2016-12-08 17:02:01.737196978 -0500
+@@ -6,17 +6,15 @@
+     title = "Sonatina 8 in C"
+     tagline = "Created using Rosegarden 13.06 and LilyPond"
+ }
+-#(set-global-staff-size 20)
++#(set-global-staff-size 18)
+ #(set-default-paper-size "a4")
+ global = { 
+     \time 4/4
+-    \skip 1*290  %% 1-290
++    \skip 1*210  %% 1-290
+ }
+ globalTempo = {
+     \tempo 4 = 150  \skip 1*40 \skip 1*8 
+     \tempo 4 = 210  \skip 1*7 \skip 1 
+-    \tempo 4 = 150  \skip 1*64 \skip 1*8 
+-    \tempo 4 = 210  \skip 1*7 \skip 1 
+     \tempo 4 = 150  \skip 1*112 \skip 1*8 
+     \tempo 4 = 180  \skip 1*7 \skip 1 
+     \tempo 4 = 150  \skip 1*21 \skip 1*5 
+@@ -175,9 +173,11 @@
+ %% 80
+                 \key c \major
+                 < g' c'' e' > 1 -\f  |
++\bar ":|"
+                  |
+             } % Voice
+ 
++%{
+             \context Voice = "voice 5" {
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+@@ -319,12 +319,13 @@
+                 < g' c'' e' > 1 -\f  |
+                  |
+             } % Voice
++%}
+ 
+             \context Voice = "voice 9" {
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*160 
++                \skip 1*80 
+                 \clef "treble"
+                 c' 4. -\mf e' g' 4  |
+                 f' 4. e' d' 4  |
+@@ -391,6 +392,7 @@
+                 % warning: overlong bar truncated here |
+                 b' 8 f' g' r b r r4-\p  \!  |
+                 < e' c'' > 4 -\f < g' e' > < e' c' > c'  |
++\bar "||"
+                  |
+             } % Voice
+ 
+@@ -398,7 +400,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*208 
++                \skip 1*128 
+                 \clef "treble"
+                 \key c \major
+                 c' 4. -\mf ^\markup { \bold \large "Allegro" } e' g' 4  |
+@@ -426,7 +428,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*224 
++                \skip 1*144 
+ %% 225
+                 \clef "treble"
+                 c' 4. -\mp e' g' 4  |
+@@ -457,7 +459,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*240 
++                \skip 1*160 
+                 \clef "treble"
+                 \key c \major
+                 c' 4. -\mf d' 8 e' 4 f'  |
+@@ -505,7 +507,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*272 
++                \skip 1*192 
+                 \clef "treble"
+                 \key c \major
+                 c' 8 -\mf e' g' e' c' e' g' e'  |
+@@ -686,9 +688,11 @@
+ %% 80
+                 \key c \major
+                 < c g > 1 -\f  |
++\bar ":|"
+                  |
+             } % Voice
+ 
++%{
+             \context Voice = "voice 18" {
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+@@ -830,12 +834,13 @@
+                 < c g > 1 -\f  |
+                  |
+             } % Voice
++%}
+ 
+             \context Voice = "voice 22" {
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*160 
++                \skip 1*80 
+                 \clef "bass"
+                 c, 8 -\mf g, c c, g, c e g  |
+                 c, 8 f, c c, f, c f a  |
+@@ -902,6 +907,7 @@
+                 % warning: overlong bar truncated here |
+                 r4 r8 g r b, d -\p \! g,  |
+                 < c g > 4 -\f < g c > < g c > < e c g >  |
++\bar "||"
+                  |
+             } % Voice
+ 
+@@ -909,7 +915,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*208 
++                \skip 1*128 
+                 \clef "bass"
+                 \key c \major
+                 < c, c e > 1 -\mf  |
+@@ -937,7 +943,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*224 
++                \skip 1*144 
+ %% 225
+                 \clef "bass"
+                 c, 8 -\mp g, c c, g, c e g  |
+@@ -968,7 +974,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*240 
++                \skip 1*160 
+                 \clef "bass"
+                 < c, c g, > 1 -\mf  |
+                 < c, e g > 4 < f, c a, > < g, b, g > 2  |
+@@ -1015,7 +1021,7 @@
+                 \override Voice.TextScript #'padding = #2.0
+                 \override MultiMeasureRest #'expand-limit = 1
+ 
+-                \skip 1*272 
++                \skip 1*192 
+                 \clef "bass"
+                 \key c \major
+                 c 2. -\mf e 4  |

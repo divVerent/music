@@ -44,7 +44,7 @@ globalTempo = {
                 \time 4/4
                 
                 \clef "treble"
-                \key g \minor
+                \key c \major
                 c' 4. -\mf ^\markup { \bold \large "Allegro" } e' g' 4  |
                 f' 4. e' d' 4  |
                 c' 4. e' g' 4  |
@@ -95,9 +95,7 @@ globalTempo = {
 %% 30
                 d' 4. g' bes' 4  |
                 < d' fis' a' > 2 -\f \! g' 4 \> fis'  |
-                \key g \minor
                 < g' d' bes > 1 -\mf \!  |
-                 |
             } % Voice
 
             \context Voice = "voice 3" {
@@ -187,7 +185,6 @@ globalTempo = {
 
                 \skip 1*80 
                 \clef "treble"
-                \key g \minor
                 c' 4. -\mf ^\markup { \bold \large "Allegro" } e' g' 4  |
                 f' 4. e' d' 4  |
                 c' 4. e' g' 4  |
@@ -238,9 +235,7 @@ globalTempo = {
 %% 110
                 d' 4. g' bes' 4  |
                 < d' fis' a' > 2 -\f \! g' 4 \> fis'  |
-                \key g \minor
                 < g' d' bes > 1 -\mf \!  |
-                 |
             } % Voice
 
             \context Voice = "voice 7" {
@@ -330,7 +325,6 @@ globalTempo = {
 
                 \skip 1*160 
                 \clef "treble"
-                \key g \minor
                 c' 4. -\mf e' g' 4  |
                 f' 4. e' d' 4  |
                 c' 4. e' g' 4  |
@@ -405,7 +399,7 @@ globalTempo = {
 
                 \skip 1*208 
                 \clef "treble"
-                \key g \minor
+                \key c \major
                 c' 4. -\mf ^\markup { \bold \large "Allegro" } e' g' 4  |
 %% 210
                 f' 4. e' d' 4  |
@@ -434,7 +428,6 @@ globalTempo = {
                 \skip 1*224 
 %% 225
                 \clef "treble"
-                \key g \minor
                 c' 4. -\mp e' g' 4  |
                 c' 4. e' g' 4  |
                 c' 4. f' a' 4  |
@@ -465,7 +458,6 @@ globalTempo = {
 
                 \skip 1*240 
                 \clef "treble"
-                \key g \minor
                 c' 4. -\mf d' 8 e' 4 f'  |
                 g' 4 a' g' 2  |
                 g' 4. a' 8 b' 4 a'  |
@@ -513,7 +505,6 @@ globalTempo = {
 
                 \skip 1*272 
                 \clef "treble"
-                \key g \minor
                 c' 8 -\mf e' g' e' c' e' g' e'  |
                 c' 8 f' a' f' c' f' a' f'  |
 %% 275
@@ -559,7 +550,6 @@ globalTempo = {
                 \time 4/4
                 
                 \clef "bass"
-                \key g \minor
                 < c, c e > 1 -\mf  |
                 < f, c f > 1  |
                 < c, c e > 1  |
@@ -610,9 +600,7 @@ globalTempo = {
 %% 30
                 g,, 8 g, bes, g,, g, bes, d g  |
                 < a, d, > 2 -\f \! d 4 \> d,  |
-                \key g \minor
                 g, 1 -\mf \!  |
-                 |
             } % Voice
 
             \context Voice = "voice 16" {
@@ -702,7 +690,6 @@ globalTempo = {
 
                 \skip 1*80 
                 \clef "bass"
-                \key g \minor
                 < c, c e > 1 -\mf  |
                 < f, c f > 1  |
                 < c, c e > 1  |
@@ -752,9 +739,7 @@ globalTempo = {
 %% 110
                 g,, 8 g, bes, g,, g, bes, d g  |
                 < a, d, > 2 -\f \! d 4 \> d,  |
-                \key g \minor
                 g, 1 -\mf \!  |
-                 |
             } % Voice
 
             \context Voice = "voice 20" {
@@ -844,7 +829,6 @@ globalTempo = {
 
                 \skip 1*160 
                 \clef "bass"
-                \key g \minor
                 c, 8 -\mf g, c c, g, c e g  |
                 c, 8 f, c c, f, c f a  |
                 c, 8 g, c c, g, c e g  |
@@ -919,7 +903,7 @@ globalTempo = {
 
                 \skip 1*208 
                 \clef "bass"
-                \key g \minor
+                \key c \major
                 < c, c e > 1 -\mf  |
 %% 210
                 < f, c f > 1  |
@@ -948,7 +932,6 @@ globalTempo = {
                 \skip 1*224 
 %% 225
                 \clef "bass"
-                \key g \minor
                 c, 8 -\mp g, c c, g, c e g  |
                 c, 8 g, c c, g, c e g  |
                 f,, 8 c, a, f,, c, a, c f  |
@@ -979,7 +962,6 @@ globalTempo = {
 
                 \skip 1*240 
                 \clef "bass"
-                \key g \minor
                 < c, c g, > 1 -\mf  |
                 < c, e g > 4 < f, c a, > < g, b, g > 2  |
                 < g, b, d > 1  |
@@ -1027,7 +1009,6 @@ globalTempo = {
 
                 \skip 1*272 
                 \clef "bass"
-                \key g \minor
                 c 2. -\mf e 4  |
                 f 1  |
 %% 275

@@ -33,11 +33,9 @@ the licenses of the sample sets that were used:
 - fluidsynth-imis: no restrictions at all; you should still give Roberto Gordo
   Saez and the University of Iowa credit :)
 
-- fluidsynth-mgg: only GPLv2 (choice "a") may be used; credit the author
-  Marcos Guglielmetti appropriately, of course
-
-- fluidsynth-upright: only the CC licenses (choice "c" or "d") may be used;
-  credit soundbrewer.com appropriately, of course
+- fluidsynth-ydp: only the CC licenses (choice "c" or "d") may be
+  used; credit the author according to
+  http://freepats.zenvoid.org/Piano/acoustic-grand-piano.html, of course
 
 - linuxsampler-maestro: only CC-BY-NC (choice "c") may be used; credit the
   author Mats Helgesson appropriately, of course

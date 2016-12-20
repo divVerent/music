@@ -13,9 +13,7 @@ OUTTYPES =
 @flac_TRUE@                    OUTFORMATS += flac
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-mgg
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
-@fluidsynth_upright_TRUE@      OUTTYPES += fluidsynth-upright
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
@@ -127,35 +125,12 @@ $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 $(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
 
-@fluidsynth_TRUE@ FETCH += $(BUILD)/support/piano-mgg.sf2
-$(BUILD)/support/piano-mgg.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'piano-mgg.sf2' 'http://awm.jp/~yoya/js/sf2.js/sample/piano-mgg.sf2'
-
 .INTERMEDIATE: $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
 $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'grand-piano-YDP-20160804.tar.bz2' 'http://freepats.zenvoid.org/Piano/YDP-GrandPiano/grand-piano-YDP-20160804.tar.bz2'
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/grand-piano-YDP-20160804.sf2
 $(BUILD)/support/grand-piano-YDP-20160804.sf2: | $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
 	cd $(BUILD)/support && $(TAR) xvjf 'grand-piano-YDP-20160804.tar.bz2' $(TARFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 && $(MV) $(MVFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 grand-piano-YDP-20160804.sf2
-
-.INTERMEDIATE: $(BUILD)/support/soundbrewer_upright_piano_sf.zip
-$(BUILD)/support/soundbrewer_upright_piano_sf.zip: | $(BUILD)/support
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Register at http://www.soundbrewer.com/downloads.php
-	@echo and download the FREE Piano set
-	@echo Upright Piano
-	@echo
-	@echo Place the downloaded file in
-	@echo $@
-	@echo to proceed.
-	@echo
-	@echo
-	@false
-@fluidsynth_TRUE@ FETCH += $(BUILD)/support/soundbrewer_upright_piano.sf2
-$(BUILD)/support/soundbrewer_upright_piano.sf2: | $(BUILD)/support/soundbrewer_upright_piano_sf.zip
-	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) soundbrewer_upright_piano_sf.zip 'Old Upright Piano.sf2' && mv 'Old Upright Piano.sf2' 'soundbrewer_upright_piano.sf2'
 
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
@@ -251,13 +226,7 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 $(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
-$(BUILD)/%-fluidsynth-mgg-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/piano-mgg.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
-
 $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
-
-$(BUILD)/%-fluidsynth-upright-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/soundbrewer_upright_piano.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig

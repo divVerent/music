@@ -101,9 +101,6 @@ RP_PROGOPTION(fluidsynth)
 AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=check])
 RP_PROGOPTION(linuxsampler)
 
-AC_ARG_WITH(fluidsynth-upright, AS_HELP_STRING([--with-fluidsynth-upright], [Use Old Upright Piano.sfw (http://www.soundbrewer.com/downloads.php)]), [with_fluidsynth_upright=$withval], [with_fluidsynth_upright=no])
-RP_CONDITIONAL(fluidsynth_upright,[test xno != x$with_fluidsynth -a xno != x$with_fluidsynth_upright])
-
 AC_ARG_WITH(linuxsampler-pleyelp190, AS_HELP_STRING([--with-linuxsampler-pleyelp190], [Use Pleyel P190.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_pleyelp190=$withval], [with_linuxsampler_pleyelp190=no])
 RP_CONDITIONAL(linuxsampler_pleyelp190,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_pleyelp190])
 

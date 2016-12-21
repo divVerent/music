@@ -120,10 +120,25 @@ if [ -n "$t" ]; then
 		tpos=$(($tpos+1))
 	done
 	if [ $tpos -ge $# ]; then
-		order="$order $t"
+		# Missing? Insert at a random place.
+		tpos=$((RANDOM % ($# + 1)))
+		echo $tpos
+		n=$#
+		i=0
+		order=
+		if [ $i -eq $tpos ]; then
+			order="$order $t "
+		fi
+		while [ $i -lt $n ]; do
+			order="$order $1 "
+			i=$(($i+1))
+			if [ $i -eq $tpos ]; then
+				order="$order $t "
+			fi
+			shift
+		done
 		set -- $order
 	fi
-
 	if [ $(($RANDOM % 2)) -eq 0 ]; then
 		if compare_and_swap "$tpos"; then
 			# we swapped. Continue upwards

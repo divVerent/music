@@ -1,8 +1,8 @@
-sonatina1/sonatina1 linuxsampler-salamander linuxsampler-maestro fluidsynth-imis linuxsampler-citypiano timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc fluidsynth-ydp
-sonatina2/sonatina2 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander fluidsynth-imis linuxsampler-steinwayc fluidsynth-ydp timidity-freepats linuxsampler-citypiano
-sonatina3/sonatina3 linuxsampler-steinwayc linuxsampler-salamander linuxsampler-maestro fluidsynth-imis linuxsampler-citypiano linuxsampler-pleyelp190 timidity-freepats fluidsynth-ydp
-sonatina4/sonatina4 linuxsampler-salamander linuxsampler-pleyelp190 linuxsampler-maestro fluidsynth-ydp fluidsynth-imis timidity-freepats linuxsampler-steinwayc linuxsampler-citypiano
-sonatina5/sonatina5 linuxsampler-salamander linuxsampler-steinwayc linuxsampler-maestro linuxsampler-pleyelp190 timidity-freepats fluidsynth-ydp fluidsynth-imis linuxsampler-citypiano
-sonatina6/sonatina6 linuxsampler-steinwayc fluidsynth-imis linuxsampler-salamander timidity-freepats linuxsampler-maestro linuxsampler-pleyelp190 linuxsampler-citypiano fluidsynth-ydp
-sonatina7/sonatina7 linuxsampler-salamander linuxsampler-steinwayc linuxsampler-pleyelp190 fluidsynth-imis linuxsampler-maestro timidity-freepats linuxsampler-citypiano fluidsynth-ydp
-sonatina8/sonatina8 linuxsampler-pleyelp190 linuxsampler-salamander fluidsynth-imis fluidsynth-ydp timidity-freepats linuxsampler-maestro linuxsampler-steinwayc linuxsampler-citypiano
+sonatina1/sonatina1 linuxsampler-salamander linuxsampler-maestro linuxsampler-imis linuxsampler-tinypiano timidity-freepats linuxsampler-pleyelp190 linuxsampler-steinwayc fluidsynth-ydp
+sonatina2/sonatina2 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander linuxsampler-imis linuxsampler-steinwayc fluidsynth-ydp linuxsampler-tinypiano timidity-freepats
+sonatina3/sonatina3 linuxsampler-steinwayc linuxsampler-salamander linuxsampler-maestro linuxsampler-imis linuxsampler-pleyelp190 timidity-freepats linuxsampler-tinypiano fluidsynth-ydp
+sonatina4/sonatina4 linuxsampler-salamander linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-imis fluidsynth-ydp linuxsampler-tinypiano timidity-freepats linuxsampler-steinwayc
+sonatina5/sonatina5 linuxsampler-salamander linuxsampler-steinwayc linuxsampler-maestro linuxsampler-pleyelp190 linuxsampler-imis timidity-freepats fluidsynth-ydp linuxsampler-tinypiano
+sonatina6/sonatina6 linuxsampler-steinwayc linuxsampler-imis linuxsampler-salamander timidity-freepats linuxsampler-maestro linuxsampler-pleyelp190 fluidsynth-ydp linuxsampler-tinypiano
+sonatina7/sonatina7 linuxsampler-salamander linuxsampler-steinwayc linuxsampler-pleyelp190 linuxsampler-imis linuxsampler-maestro timidity-freepats fluidsynth-ydp linuxsampler-tinypiano
+sonatina8/sonatina8 linuxsampler-pleyelp190 linuxsampler-salamander linuxsampler-imis fluidsynth-ydp timidity-freepats linuxsampler-maestro linuxsampler-steinwayc linuxsampler-tinypiano

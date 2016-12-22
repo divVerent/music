@@ -2,6 +2,7 @@
 
 s=$1
 t=$2
+ext=${3:-mp3}
 
 if [ -n "$s" ]; then
 	order=
@@ -28,12 +29,12 @@ decide_real()
 {
 	dra=$1
 	drb=$2
-	ln -snf "$s-$dra.mp3" a.mp3
-	ln -snf "$s-$drb.mp3" b.mp3
+	ln -snf "$s-$dra.$ext" "a.$ext"
+	ln -snf "$s-$drb.$ext" "b.$ext"
 
 	drs=-1
 	while :; do
-		mpv a.mp3 b.mp3
+		mpv -af volume=replaygain-track=yes "a.$ext" "b.$ext"
 		echo "Which was better? (a/b)"
 		read -r ab
 		case "$ab" in
@@ -48,7 +49,7 @@ decide_real()
 		esac
 	done
 
-	rm -f a.mp3 b.mp3
+	rm -f "a.$ext" "b.$ext"
 
 	return $drs
 }
@@ -122,7 +123,6 @@ if [ -n "$t" ]; then
 	if [ $tpos -ge $# ]; then
 		# Missing? Insert at a random place.
 		tpos=$((RANDOM % ($# + 1)))
-		echo $tpos
 		n=$#
 		i=0
 		order=

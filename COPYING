@@ -30,29 +30,29 @@ license choices may become limited by the licenses of the other works.
 Especially, the included Makefile may create works restricted further by
 the licenses of the sample sets that were used:
 
-- fluidsynth-imis: no restrictions at all; you should still give Roberto Gordo
-  Saez and the University of Iowa credit :)
-
 - fluidsynth-ydp: only the CC licenses (choice "c" or "d") may be
   used; credit the author according to
   http://freepats.zenvoid.org/Piano/acoustic-grand-piano.html, of course
 
+- linuxsampler-imis: no restrictions at all; you should still give Music Mayor
+  and the University of Iowa credit :)
+
 - linuxsampler-maestro: only CC-BY-NC (choice "c") may be used; credit the
   author Mats Helgesson appropriately, of course
-
-- linuxsampler-salamander: only the CC licenses (choice "c" or "d") may be
-  used; credit the author Alexander Holm appropriately, of course
 
 - linuxsampler-pleyelp190: only the CC licenses (choice "c" or "d") may be
   used; credit the author Nikko as described on
   http://tickets.nikkoid.com/knowledgebase.php?article=23
 
+- linuxsampler-salamander: only the CC licenses (choice "c" or "d") may be
+  used; credit the author Alexander Holm appropriately, of course
+
 - linuxsampler-steinwayc: only the CC licenses (choice "c" or "d") may be
   used; credit the author Nikko as described on
   http://tickets.nikkoid.com/knowledgebase.php?article=23
 
-- linuxsampler-citypiano: no restrictions at all; you should still give bigcat
-  Instruments credit :)
+- linuxsampler-tinypiano: only the CC licenses (choice "c" or "d") may be used;
+  credit Signal Experiments (http://sig-ex.com/) appropriately, of course.
 
 - timidity-freepats: no restrictions at all; you should still give the Freepats
   Project credit :)

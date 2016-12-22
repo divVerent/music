@@ -74,7 +74,7 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 AS_IF([test -z $LAMEFLAGS],[LAMEFLAGS="--preset standard"])
 AS_IF([test -z $OGGENCFLAGS],[OGGENCFLAGS="-q3"])
 AS_IF([test -z $FLACFLAGS],[FLACFLAGS="--replay-gain -8"])
-AS_IF([test -z $NCATFLAGS],[NCATFLAGS="-i10"])
+AS_IF([test -z $NCATFLAGS],[NCATFLAGS="-i30"])
 AS_IF([test -z $JACKDFLAGS],[JACKDFLAGS="-r"])
 
 AC_ARG_WITH(lame, AS_HELP_STRING([--without-lame], [Do not use LAME to make .mp3 output files]), [with_lame=$withval], [with_lame=check])
@@ -101,17 +101,17 @@ RP_PROGOPTION(fluidsynth)
 AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=check])
 RP_PROGOPTION(linuxsampler)
 
-AC_ARG_WITH(linuxsampler-pleyelp190, AS_HELP_STRING([--with-linuxsampler-pleyelp190], [Use Pleyel P190.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_pleyelp190=$withval], [with_linuxsampler_pleyelp190=no])
+AC_ARG_WITH(linuxsampler-pleyelp190, AS_HELP_STRING([--with-linuxsampler-pleyelp190], [Use Pleyel P190.gig (no longer available online)]), [with_linuxsampler_pleyelp190=$withval], [with_linuxsampler_pleyelp190=no])
 RP_CONDITIONAL(linuxsampler_pleyelp190,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_pleyelp190])
 
-AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (http://www.gigfiles.com/freebees.php)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
+AC_ARG_WITH(linuxsampler-steinwayc, AS_HELP_STRING([--with-linuxsampler-steinwayc], [Use Steinway C.gig (no longer available online)]), [with_linuxsampler_steinwayc=$withval], [with_linuxsampler_steinwayc=no])
 RP_CONDITIONAL(linuxsampler_steinwayc,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_steinwayc])
 
 AC_ARG_WITH(linuxsampler-sfz, AS_HELP_STRING([--with-linuxsampler-sfz], [Allow using .sfz samples with LinuxSampler (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz=$withval], [with_linuxsampler_sfz=no])
 RP_CONDITIONAL(linuxsampler_sfz,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_sfz])
 
 AC_ARG_WITH(linuxsampler-sfz-ogg, AS_HELP_STRING([--with-linuxsampler-sfz-ogg], [Allow using lossy .sfz samples with LinuxSampler (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz_ogg=$withval], [with_linuxsampler_sfz_ogg=no])
-RP_CONDITIONAL(linuxsampler_sfz_ogg,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_sfz_ogg])
+RP_CONDITIONAL(linuxsampler_sfz_ogg,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_sfx -a xno != x$with_linuxsampler_sfz_ogg])
 
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
@@ -154,6 +154,7 @@ RP_NEEDPROG(unpkzip,unzip)
 RP_NEEDPROG(sox)
 RP_NEEDPROG(tar)
 RP_NEEDPROG(mv)
+RP_NEEDPROG(sevenzip,7za)
 
 dnl These are only needed for "make manual"
 dnl (we must avoid the GZIP env variable here)

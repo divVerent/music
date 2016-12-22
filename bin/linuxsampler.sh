@@ -24,12 +24,13 @@ fullpath() {
 }
 
 midifile=`fullpath "$1"`
-gigfile=`fullpath "$2"`
+gigfiles=$2
 outfile=`fullpath "$3"`
 extracommands=$4
 
 export JACK_DEFAULT_SERVER=midiconvert.$$
 export LSCP_PORT=$((($RANDOM + $$ + 8888 - 1024) % 64512 + 1024))
+logfile=`mktemp -t midiconvert.XXXXXX`
 
 echo "Finding free port..."
 # TODO(rpolzer): Switch to ncat here too.
@@ -39,9 +40,9 @@ done
 
 echo "Starting jackd..."
 if [ -n "$outfile" ]; then
-	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d dummy & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d dummy -p 32768 >"$logfile" 2>&1 & jackpid=$!
 else
-	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d ${JACKDDEVICE:-alsa} & jackpid=$!
+	${JACKD:-jackd} ${JACKDFLAGS:--r} -n "$JACK_DEFAULT_SERVER" -d ${JACKDDEVICE:-alsa} >"$logfile" 2>&1 & jackpid=$!
 fi
 killpids=$killpids" $jackpid"
 while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} >/dev/null 2>/dev/null; do
@@ -51,7 +52,7 @@ done
 echo "Starting LinuxSampler..."
 ${LINUXSAMPLER:-linuxsampler} ${LINUXSAMPLERFLAGS:-} --lscp-port $LSCP_PORT & samppid=$!
 killpids=$killpids" $samppid"
-while ! echo QUIT | ${NCAT:-ncat} ${NCATFLAGS:--i10} -4 localhost $LSCP_PORT | grep .; do
+while ! echo QUIT | ${NCAT:-ncat} ${NCATFLAGS:--i30} -4 localhost $LSCP_PORT | grep .; do
 	sleep 0.1
 done
 
@@ -66,28 +67,43 @@ CREATE AUDIO_OUTPUT_DEVICE JACK ACTIVE=true CHANNELS=2 SAMPLERATE=48000 NAME='Li
 SET AUDIO_OUTPUT_CHANNEL_PARAMETER 0 0 NAME='0'
 SET AUDIO_OUTPUT_CHANNEL_PARAMETER 0 1 NAME='1'
 REMOVE MIDI_INSTRUMENT_MAP ALL
+EOF
+	ch=0
+	for gigfile in $gigfiles; do
+		case "$gigfile" in
+			*=*)
+				vol=${gigfile##*=}
+				gigfile=${gigfile%=*}
+				;;
+			*)
+				vol=1.0
+				;;
+		esac
+		gigfile=`fullpath "$gigfile"`
+		cat <<EOF
 ADD CHANNEL
-SET CHANNEL MIDI_INPUT_DEVICE 0 0
-SET CHANNEL MIDI_INPUT_PORT 0 0
-SET CHANNEL MIDI_INPUT_CHANNEL 0 ALL
+ADD CHANNEL MIDI_INPUT $ch 0
+SET CHANNEL MIDI_INPUT_CHANNEL $ch ALL
 EOF
-	case "$gigfile" in
-		*.gig)
-			echo "LOAD ENGINE GIG 0"
-			;;
-		*.sfz)
-			echo "LOAD ENGINE SFZ 0"
-			;;
-		*.sf2)
-			echo "LOAD ENGINE SF2 0"
-			;;
-	esac
-	cat <<EOF
-SET CHANNEL VOLUME 0 1.0
-SET CHANNEL MIDI_INSTRUMENT_MAP 0 NONE
-SET CHANNEL AUDIO_OUTPUT_DEVICE 0 0
-LOAD INSTRUMENT '$gigfile' 0 0
+		case "$gigfile" in
+			*.gig)
+				echo "LOAD ENGINE GIG $ch"
+				;;
+			*.sfz)
+				echo "LOAD ENGINE SFZ $ch"
+				;;
+			*.sf2)
+				echo "LOAD ENGINE SF2 $ch"
+				;;
+		esac
+		cat <<EOF
+SET CHANNEL VOLUME $ch $vol
+SET CHANNEL MIDI_INSTRUMENT_MAP $ch NONE
+SET CHANNEL AUDIO_OUTPUT_DEVICE $ch 0
+LOAD INSTRUMENT '$gigfile' 0 $ch
 EOF
+		ch=$((ch + 1))
+	done
 	if [ -n "$extracommands" ]; then
 		while :; do
 			case "$extracommands" in
@@ -106,7 +122,7 @@ EOF
 		done;
 	fi
 	echo QUIT
-} | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i10} -4 localhost $LSCP_PORT || true
+} | tee /dev/stderr | ${NCAT:-ncat} ${NCATFLAGS:--i30} -4 localhost $LSCP_PORT || true
 
 while ! ${JACK_LSP:-jack_lsp} ${JACK_LSPFLAGS:-} 2>/dev/null | grep LinuxSampler:1 >/dev/null; do
 	sleep 0.1
@@ -121,6 +137,7 @@ if [ -n "$outfile" ]; then
 		while [ `stat -c %s "$outfile" 2>/dev/null || echo 0` -lt 2048 ]; do
 			sleep 0.1
 		done
+		echo "Playing..."
 		${JACK_SMF_PLAYER:-jack-smf-player} ${JACK_SMF_PLAYERFLAGS:-} -t -n -a LinuxSampler:midi_in_0 "$midifile"
 		kill $cappid
 		wait
@@ -130,3 +147,10 @@ else
 	${JACK_CONNECT:-jack_connect} ${JACK_CONNECTFLAGS:-} LinuxSampler:1 system:playback_2
 	${JACK_SMF_PLAYER:-jack-smf-player} ${JACK_SMF_PLAYERFLAGS:-} -t -n -a LinuxSampler:midi_in_0 "$midifile"
 fi
+
+atexit
+trap - EXIT
+if grep -i xrun "$logfile"; then
+	exit 1
+fi
+rm -f "$logfile"

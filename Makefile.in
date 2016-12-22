@@ -1,4 +1,4 @@
-# @configure_inpu t@
+# @configure_input@
 
 SRC = @srcdir@
 BUILD = @builddir@
@@ -12,13 +12,13 @@ OUTTYPES =
 @oggenc_TRUE@                  OUTFORMATS += ogg
 @flac_TRUE@                    OUTFORMATS += flac
 
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-imis
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
-@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-citypiano
+@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-tinypiano
+@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-imis
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 
 # Programs we use
@@ -54,6 +54,8 @@ GZ = @gz@
 GZFLAGS = @gz_flags@
 UNGZ = @ungz@
 UNGZFLAGS = @ungz_flags@
+SEVENZIP = @sevenzip@
+SEVENZIPFLAGS = @sevenzip_flags@
 ROSEGARDEN = @rosegarden@
 ROSEGARDENFLAGS = @rosegarden_flags@
 MP3GAIN = @mp3gain@
@@ -89,16 +91,15 @@ LY_ORIG = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.orig,$(RG))
 MANUAL = $(MID) $(LY_ORIG)
 .SECONDARY: $(MANUAL)
 
-# Intermediate files
+# Avoid regenerating this (would cascade to regenerate all outputs)
 MID_FORMAT0 = $(patsubst $(SRC)/%.rg,$(BUILD)/%-format0.mid,$(RG))
-LY = $(patsubst $(SRC)/%.rg,$(BUILD)/%.ly,$(RG))
-INTERMEDIATE = $(MID_FORMAT0) $(LY)
-.INTERMEDIATE: $(INTERMEDIATE)
+.SECONDARY: $(MID_FORMAT0)
 
-# Secondary files
+# Intermediate files
+LY = $(patsubst $(SRC)/%.rg,$(BUILD)/%.ly,$(RG))
 AUDIO_UNCUT_AND_RAW = $(foreach TEMPTYPE,cut uncut raw,$(foreach OUTTYPE,$(OUTTYPES),$(patsubst $(SRC)/%.rg,$(BUILD)/%-$(OUTTYPE)-$(TEMPTYPE).wav,$(RG))))
-SECONDARY = $(AUDIO_UNCUT_AND_RAW)
-.SECONDARY: $(SECONDARY)
+INTERMEDIATE = $(LY) $(AUDIO_UNCUT_AND_RAW)
+.INTERMEDIATE: $(INTERMEDIATE)
 
 # Output files
 PDF =
@@ -109,8 +110,20 @@ OUTPUT = $(PDF) $(AUDIO)
 .PHONY: all
 all: $(OUTPUT)
 
+.PHONY: all-lowdisk
+all-lowdisk: format0
+	set -x; \
+	for rg in $(RG); do \
+		$(MAKE) RG=$$rg tempclean; \
+		$(MAKE) RG=$$rg all; \
+		$(MAKE) RG=$$rg tempclean; \
+	done
+
 .PHONY: manual
 manual: $(MANUAL)
+
+.PHONY: format0
+format0: $(MID_FORMAT0)
 
 $(BUILD)/support:
 	mkdir -p $(BUILD)/support
@@ -120,10 +133,6 @@ FETCH =
 @timidity_TRUE@ FETCH += $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'https://github.com/rism-ch/midi-player/raw/master/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
-
-@fluidsynth_TRUE@ FETCH += $(BUILD)/support/acoustic_piano_imis_1.sf2
-$(BUILD)/support/acoustic_piano_imis_1.sf2: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'acoustic_piano_imis_1.sf2' 'http://freepats.zenvoid.org/sf2/acoustic_piano_imis_1.sf2'
 
 .INTERMEDIATE: $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
 $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2: | $(BUILD)/support
@@ -142,6 +151,7 @@ $(BUILD)/support/maestro_concert_grand_v2.gig: | $(BUILD)/support/maestro_concer
 .INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2
 $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_OggVorbis.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_OggVorbis.tar.bz2'
+.INTERMEDIATE: $(BUILD)/support/sgpOgg_V2toV3.tar.bz2
 $(BUILD)/support/sgpOgg_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgpOgg_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgpOgg_V2toV3.tar.bz2'
 @linuxsampler_sfz_TRUE@@linuxsampler_sfz_ogg_TRUE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
@@ -155,6 +165,7 @@ $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz: | 
 .INTERMEDIATE: $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2
 $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'SalamanderGrandPianoV2_48khz24bit.tar.bz2' 'http://download.linuxaudio.org/lau/SalamanderGrandPianoV2/SalamanderGrandPianoV2_48khz24bit.tar.bz2'
+.INTERMEDIATE: $(BUILD)/support/sgp48khz_V2toV3.tar.bz2
 $(BUILD)/support/sgp48khz_V2toV3.tar.bz2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sgp48khz_V2toV3.tar.bz2' 'http://dl.dropbox.com/u/16547648/sgp48khz_V2toV3.tar.bz2'
 @linuxsampler_sfz_TRUE@@linuxsampler_sfz_ogg_FALSE@ FETCH += $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz
@@ -164,6 +175,13 @@ $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz: |
 	cd $(BUILD)/support && $(MV) $(MVFLAGS) SalamanderGrandPianoV2_48khz24bit/ salamander48khz\ V2toV3/
 	cd $(BUILD)/support && $(TAR) xvjf 'sgp48khz_V2toV3.tar.bz2' $(TARFLAGS) salamander48khz\ V2toV3/
 	cd $(BUILD)/support && $(MV) $(MVFLAGS) salamander48khz\ V2toV3/ SalamanderGrandPianoV2_48khz24bit/ 
+
+.INTERMEDIATE: $(BUILD)/support/Iowa_Piano.zip
+$(BUILD)/support/Iowa_Piano.zip: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'Iowa_Piano.zip' 'http://www.mediafire.com/download/uv2ehmh8qdvfno1/Iowa_Piano.zip'
+@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/Iowa_MIS_Piano.sfz
+$(BUILD)/support/Iowa_Piano/Iowa_MIS_Piano.sfz: | $(BUILD)/support/Iowa_Piano.zip
+	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) 'Iowa_Piano.zip' && $(MV) 'Iowa Piano' 'Iowa_Piano' && $(MV) 'Iowa_Piano/Iowa MIS Piano.sfz' 'Iowa_Piano/Iowa_MIS_Piano.sfz'
 
 .INTERMEDIATE: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
@@ -203,12 +221,12 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 $(BUILD)/support/classicpianos-steinway_c.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && $(MV) $(MVFLAGS) 'Steinway C.gig' 'classicpianos-steinway_c.gig'
 
-.INTERMEDIATE: $(BUILD)/support/City\ Piano-SFZ.zip
-$(BUILD)/support/City_Piano-SFZ.zip: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'City_Piano-SFZ.zip' 'http://www.mediafire.com/download/f8nv7f3oqo7zpim/City_Piano-SFZ.zip'
-@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/City_Piano.sfz
-$(BUILD)/support/City_Piano.sfz: | $(BUILD)/support/City_Piano-SFZ.zip
-	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) City_Piano-SFZ.zip && $(MV) $(MVFLAGS) 'City Piano.sfz' 'City_Piano.sfz'
+.INTERMEDIATE: $(BUILD)/support/sig-ex-exp_tiny-piano00.zip
+$(BUILD)/support/sig-ex-exp_tiny-piano00.zip: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sig-ex-exp_tiny-piano00.zip' 'https://musical-artifacts.com/artifacts/402/sig-ex-exp_tiny-piano00.zip'
+@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz
+$(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz: | $(BUILD)/support/sig-ex-exp_tiny-piano00.zip
+	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) sig-ex-exp_tiny-piano00.zip
 
 fetch: $(FETCH)
 
@@ -223,9 +241,6 @@ $(BUILD)/%-format0.mid: $(SRC)/%.mid
 $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
 
-$(BUILD)/%-fluidsynth-imis-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/acoustic_piano_imis_1.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
-
 $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
@@ -235,8 +250,15 @@ $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-steinway_c.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
-$(BUILD)/%-linuxsampler-citypiano-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/City_Piano.sfz
+$(BUILD)/%-linuxsampler-tinypiano-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
+
+# hack: needs less stereo separation
+.INTERMEDIATE: $(BUILD)/%-linuxsampler-imis-raw.wav
+$(BUILD)/%-linuxsampler-imis-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/Iowa_Piano/Iowa_MIS_Piano.sfz
+	$(SRC)/bin/linuxsampler.sh $< $| $@
+$(BUILD)/%-linuxsampler-imis-uncut.wav: $(BUILD)/%-linuxsampler-imis-raw.wav
+	$(SOX) $(SOXFLAGS) $< $@ remix 1v0.6,2v0.4 1v0.4,2v0.6
 
 @linuxsampler_sfz_ogg_TRUE@$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
 @linuxsampler_sfz_ogg_TRUE@	$(SRC)/bin/linuxsampler.sh $< $| $@
@@ -245,6 +267,7 @@ $(BUILD)/%-linuxsampler-citypiano-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/s
 @linuxsampler_sfz_ogg_FALSE@	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs extra reverb
+.INTERMEDIATE: $(BUILD)/%-linuxsampler-maestro-raw.wav
 $(BUILD)/%-linuxsampler-maestro-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/maestro_concert_grand_v2.gig
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 $(BUILD)/%-linuxsampler-maestro-uncut.wav: $(BUILD)/%-linuxsampler-maestro-raw.wav
@@ -316,9 +339,13 @@ $(BUILD)/%.png: $(BUILD)/%.pdf $(BUILD)/%.txt
 
 
 # Cleanup
+.PHONY: tempclean
+tempclean:
+	$(RM) $(INTERMEDIATE)
+
 .PHONY: clean
-clean:
-	$(RM) $(OUTPUT) $(INTERMEDIATE) $(SECONDARY)
+clean: tempclean
+	$(RM) $(OUTPUT) $(MID_FORMAT0)
 
 .PHONY: distclean
 distclean: clean

@@ -14,6 +14,8 @@ trap 'exit 1' INT
 
 fullpath() {
 	case "$1" in
+		'')
+			;;
 		/*)
 			printf "%s\n" "$1"
 			;;

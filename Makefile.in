@@ -19,10 +19,6 @@ OUTTYPES =
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-tinypiano
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-imis
-@linuxsampler_in162_TRUE@      OUTTYPES += linuxsampler-in162
-# Uncomment these for debugging and finding good close/ambient levels.
-# @linuxsampler_in162_TRUE@      OUTTYPES += linuxsampler-in162close
-# @linuxsampler_in162_TRUE@      OUTTYPES += linuxsampler-in162ambient
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 
 # Programs we use
@@ -187,28 +183,6 @@ $(BUILD)/support/Iowa_Piano.zip: | $(BUILD)/support
 $(BUILD)/support/Iowa_Piano/Iowa_MIS_Piano.sfz: | $(BUILD)/support/Iowa_Piano.zip
 	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) 'Iowa_Piano.zip' && $(MV) 'Iowa Piano' 'Iowa_Piano' && $(MV) 'Iowa_Piano/Iowa MIS Piano.sfz' 'Iowa_Piano/Iowa_MIS_Piano.sfz'
 
-.INTERMEDIATE: $(BUILD)/support/Ivy\ Audio\ -\ Piano\ in\ 162\ sfz.zip
-$(BUILD)/support/Ivy\ Audio\ -\ Piano\ in\ 162\ sfz.zip: | $(BUILD)/support
-	@echo
-	@echo
-	@echo MANUAL TASK:
-	@echo Visit http://www.ivyaudio.com/Piano-in-162
-	@echo and download the FREE Piano set
-	@echo Piano in 162
-	@echo
-	@echo Place the downloaded file in
-	@echo $@
-	@echo to proceed.
-	@echo
-	@echo
-	@false
-@linuxsampler_in162_TRUE@ FETCH += $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Ambient.sfz $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Close.sfz
-$(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Ambient.sfz $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Close.sfz: | $(BUILD)/support/Ivy\ Audio\ -\ Piano\ in\ 162\ sfz.zip
-	cd $(BUILD)/support && $(SEVENZIP) x $(SEVENZIPFLAGS) 'Ivy Audio - Piano in 162 sfz.zip'
-	cd $(BUILD)/support && $(MV) 'Ivy Audio - Piano in 162 sfz' 'Ivy_Audio_-_Piano_in_162_sfz'
-$(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-%-VolumeFix.sfz: $(SRC)/fixes/IvyAudio-PianoIn162-%-VolumeFix.sfz | $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-%.sfz
-	cp $< $@
-
 .INTERMEDIATE: $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar
 $(BUILD)/support/classicpianos-pleyel_ambient_p190.giga-*.rar: | $(BUILD)/support
 	@echo
@@ -285,15 +259,6 @@ $(BUILD)/%-linuxsampler-imis-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 $(BUILD)/%-linuxsampler-imis-uncut.wav: $(BUILD)/%-linuxsampler-imis-raw.wav
 	$(SOX) $(SOXFLAGS) $< $@ remix 1v0.6,2v0.4 1v0.4,2v0.6
-
-$(BUILD)/%-linuxsampler-in162-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Ambient-VolumeFix.sfz $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Close-VolumeFix.sfz
-	$(SRC)/bin/linuxsampler.sh $< '$(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Ambient-VolumeFix.sfz=0.5 $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Close-VolumeFix.sfz=0.5' $@
-
-$(BUILD)/%-linuxsampler-in162close-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Close-VolumeFix.sfz
-	$(SRC)/bin/linuxsampler.sh $< $| $@
-
-$(BUILD)/%-linuxsampler-in162ambient-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/Ivy_Audio_-_Piano_in_162_sfz/IvyAudio-PianoIn162-Ambient-VolumeFix.sfz
-	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 @linuxsampler_sfz_ogg_TRUE@$(BUILD)/%-linuxsampler-salamander-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/SalamanderGrandPianoV2_OggVorbis/SalamanderGrandPianoV3.sfz
 @linuxsampler_sfz_ogg_TRUE@	$(SRC)/bin/linuxsampler.sh $< $| $@

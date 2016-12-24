@@ -13,7 +13,7 @@ OUTTYPES =
 @flac_TRUE@                    OUTFORMATS += flac
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-hispasonic
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-hsdamped
 @fluidsynth_sbelmont_TRUE@     OUTTYPES += fluidsynth-sbelmont
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
@@ -269,7 +269,7 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
-$(BUILD)/%-fluidsynth-hispasonic-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
+$(BUILD)/%-fluidsynth-hsdamped-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-sbelmont-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/1961_Kawai_600-Stereo.sf2

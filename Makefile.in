@@ -179,7 +179,7 @@ $(BUILD)/support/SalamanderGrandPianoV2_48khz24bit/SalamanderGrandPianoV3.sfz: |
 .INTERMEDIATE: $(BUILD)/support/Iowa_Piano.zip
 $(BUILD)/support/Iowa_Piano.zip: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'Iowa_Piano.zip' 'http://www.mediafire.com/download/uv2ehmh8qdvfno1/Iowa_Piano.zip'
-@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/Iowa_MIS_Piano.sfz
+@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/Iowa_Piano/Iowa_MIS_Piano.sfz
 $(BUILD)/support/Iowa_Piano/Iowa_MIS_Piano.sfz: | $(BUILD)/support/Iowa_Piano.zip
 	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) 'Iowa_Piano.zip' && $(MV) 'Iowa Piano' 'Iowa_Piano' && $(MV) 'Iowa_Piano/Iowa MIS Piano.sfz' 'Iowa_Piano/Iowa_MIS_Piano.sfz'
 

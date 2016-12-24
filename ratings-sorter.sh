@@ -34,7 +34,7 @@ decide_real()
 
 	drs=-1
 	while :; do
-		mpv -af volume=replaygain-track=yes -audio-file="a.$ext" "b.$ext"
+		mpv -input-conf=ratings-sorter.mpv-input.conf -af volume=replaygain-track=yes -audio-file="a.$ext" "b.$ext"
 		echo "Which was better? (1/2)"
 		read -r ab
 		case "$ab" in

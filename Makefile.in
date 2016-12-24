@@ -13,6 +13,7 @@ OUTTYPES =
 @flac_TRUE@                    OUTFORMATS += flac
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
+@fluidsynth_TRUE@              OUTTYPES += fluidsynth-hispasonic
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
@@ -141,6 +142,10 @@ $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2: | $(BUILD)/support
 $(BUILD)/support/grand-piano-YDP-20160804.sf2: | $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
 	cd $(BUILD)/support && $(TAR) xvjf 'grand-piano-YDP-20160804.tar.bz2' $(TARFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 && $(MV) $(MVFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 grand-piano-YDP-20160804.sf2
 
+@fluidsynth_TRUE@ FETCH += $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
+$(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2: | $(BUILD)/support
+	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'HS_Classic_Grand_Piano_Damped.sf2' 'http://www.soundfonts.gonet.biz/sf2/HS%20Classic%20Grand%20Piano%20Damped.sf2'
+
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
@@ -242,6 +247,9 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
 
 $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-hispasonic-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig

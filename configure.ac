@@ -98,6 +98,9 @@ RP_PROGOPTION(timidity)
 AC_ARG_WITH(fluidsynth, AS_HELP_STRING([--without-fluidsynth], [Do not use fluidsynth outputs]), [with_fluidsynth=$withval], [with_fluidsynth=check])
 RP_PROGOPTION(fluidsynth)
 
+AC_ARG_WITH(fluidsynth-sbelmont, AS_HELP_STRING([--with-fluidsynth-sbelmont], [Use 1961 Kawai 600-Stereo.sf2 by SBelmont (requires manual download from https://www.kvraudio.com/forum/viewtopic.php?t=452609)]), [with_fluidsynth_sbelmont=$withval], [with_fluidsynth_sbelmont=no])
+RP_CONDITIONAL(fluidsynth_sbelmont,[test xno != x$with_fluidsynth -a xno != x$with_fluidsynth_sbelmont])
+
 AC_ARG_WITH(linuxsampler, AS_HELP_STRING([--without-linuxsampler], [Do not use LinuxSampler outputs]), [with_linuxsampler=$withval], [with_linuxsampler=check])
 RP_PROGOPTION(linuxsampler)
 

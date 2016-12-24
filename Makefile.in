@@ -14,6 +14,7 @@ OUTTYPES =
 
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-hispasonic
+@fluidsynth_sbelmont_TRUE@     OUTTYPES += fluidsynth-sbelmont
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
@@ -146,6 +147,25 @@ $(BUILD)/support/grand-piano-YDP-20160804.sf2: | $(BUILD)/support/grand-piano-YD
 $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'HS_Classic_Grand_Piano_Damped.sf2' 'http://www.soundfonts.gonet.biz/sf2/HS%20Classic%20Grand%20Piano%20Damped.sf2'
 
+.INTERMEDIATE: $(BUILD)/support/1961\ Kawai\ 600-Stereo.sf2
+$(BUILD)/support/1961\ Kawai\ 600-Stereo.sf2: | $(BUILD)/support
+	@echo
+	@echo
+	@echo MANUAL TASK:
+	@echo Visit https://www.kvraudio.com/forum/viewtopic.php?t=452609
+	@echo locate the Google Drive link and download the FREE SoundFont
+	@echo 1960\'s Kawai Grand Piano Soundfont/SFZ
+	@echo
+	@echo Place the downloaded file in
+	@echo $@
+	@echo to proceed.
+	@echo
+	@echo
+	@false
+@fluidsynth_sbelmont_TRUE@ FETCH += $(BUILD)/support/1961_Kawai_600-Stereo.sf2
+$(BUILD)/support/1961_Kawai_600-Stereo.sf2: | $(BUILD)/support/1961\ Kawai\ 600-Stereo.sf2
+	cd $(BUILD)/support && $(MV) 1961\ Kawai\ 600-Stereo.sf2 1961_Kawai_600-Stereo.sf2
+
 .INTERMEDIATE: $(BUILD)/support/maestro_concert_grand_v2.rar
 $(BUILD)/support/maestro_concert_grand_v2.rar: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'maestro_concert_grand_v2.rar' 'http://download.linuxsampler.org/instruments/pianos/maestro_concert_grand_v2.rar'
@@ -250,6 +270,9 @@ $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/g
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-fluidsynth-hispasonic-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
+	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+
+$(BUILD)/%-fluidsynth-sbelmont-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/1961_Kawai_600-Stereo.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-pleyel_ambient_p190.gig

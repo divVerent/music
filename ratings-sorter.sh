@@ -34,15 +34,15 @@ decide_real()
 
 	drs=-1
 	while :; do
-		mpv -af volume=replaygain-track=yes "a.$ext" "b.$ext"
-		echo "Which was better? (a/b)"
+		mpv -af volume=replaygain-track=yes -audio-file="a.$ext" "b.$ext"
+		echo "Which was better? (1/2)"
 		read -r ab
 		case "$ab" in
-			a)
+			2)  # a.$ext
 				drs=0
 				break
 				;;
-			b)
+			1)  # b.$ext
 				drs=1
 				break
 				;;

@@ -269,8 +269,11 @@ $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/suppor
 $(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
-$(BUILD)/%-fluidsynth-hsdamped-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
+.INTERMEDIATE: $(BUILD)/%-fluidsynth-hsdamped-raw.wav
+$(BUILD)/%-fluidsynth-hsdamped-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
+$(BUILD)/%-fluidsynth-hsdamped-uncut.wav: $(BUILD)/%-fluidsynth-hsdamped-raw.wav
+	$(SOX) $(SOXFLAGS) $< $@ reverb 50 50 60 100 0 0
 
 $(BUILD)/%-fluidsynth-sbelmont-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/1961_Kawai_600-Stereo.sf2
 	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<

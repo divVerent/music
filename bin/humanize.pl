@@ -90,50 +90,33 @@ sub jitter($) {
 	my $r = $dist{$mode}->();
 	$tick = sec2tick(tick2sec($tick) + $r * $strength_abs);
 	$tick += $r * $strength_rel * $ticksperquarter;
+	return int $tick;
 }
 
-# collect all timecodes
-my %timecodes = ();
-for ($opus->tracks()) {
-	for my $ev(abstime $_->events()) {
-		$timecodes{$ev->[1]} = $ev->[1];
-	}
-}
-
-# remap timecodes
-# TODO can we somehow do this at the events instead, as long as no dependency is violated?
-again:
-for (;;) {
-	my $previn = -1;
-	my $prevout = -1;
-	for my $in(sort { $a <=> $b } keys %timecodes) {
-		my $out = int(jitter($in));
-		if ($out <= $prevout) {
-			warn "jitter may be too strong: previous was $previn -> $prevout, got $in -> $out - retrying\n";
-			#next again;
-			$out = $prevout + 1;
-		}
-		$timecodes{$in} = $out;
-		$previn = $in;
-		$prevout = $out;
-		printf "%d\n", $out-$in;
-	}
-	last;
-}
-for my $in(sort { $a <=> $b } keys %timecodes) {
-	my $out = $timecodes{$in};
-	print "$in -> $out\n";
-}
-
-# edit the tracks
+# TODO We assume here that we can safely jitter each track independently.
+# This is not true if multiple tracks use the same MIDI channel!
+# Dependency handling: we allow rearranging events of the same type.
 for ($opus->tracks()) {
 	my @events;
+	my @eventgroup;
+	my $mintime = 0;
 	for my $ev(abstime $_->events()) {
 		my ($cmd, $time, @data) = @$ev;
-		$time = $timecodes{$time}
-			if exists $timecodes{$time};
-		push @events, [$cmd, $time, @data];
+		if (@eventgroup and $cmd ne $eventgroup[-1][0]) {
+			# Flush the event group.
+			@eventgroup = sort { $a->[1] <=> $b->[1] } @eventgroup;
+			$mintime = $eventgroup[-1][1];
+			push @events, @eventgroup;
+			@eventgroup = ();
+		}
+		$time = jitter $time;
+		$time = $mintime
+			if $time < $mintime;
+		push @eventgroup, [$cmd, $time, @data];
 	}
+	# Flush the event group.
+	@eventgroup = sort { $a->[1] <=> $b->[1] } @eventgroup;
+	push @events, @eventgroup;
 	$_->events(reltime @events);
 }
 

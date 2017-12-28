@@ -1,0 +1,18 @@
+--- sonatina9.ly.orig	2017-12-28 15:20:17.755453587 -0500
++++ sonatina9.ly	2017-12-28 15:22:11.872446809 -0500
+@@ -14,15 +14,6 @@
+ }
+ globalTempo = {
+     \tempo 4 = 140  \skip 1*44 
+-    \override Score.MetronomeMark #'transparent = ##t
+-    \tempo 4 = 160  \skip 1*8 \skip 1*6 
+-    \tempo 4 = 100  \skip 1*2 \skip 1*16 
+-    \tempo 4 = 140  \skip 1*5 \skip 1 \skip 1*43 
+-    \tempo 4 = 160  \skip 1*8 \skip 1*6 
+-    \tempo 4 = 100  \skip 1*2 \skip 1*16 
+-    \tempo 4 = 140  \skip 1*5 \skip 1 \skip 1*65 \skip 1*7 
+-    \tempo 4 = 120  \skip 1 \skip 1*16 
+-    \tempo 4 = 140  
+ }
+ \score {
+     << % common

@@ -6,3 +6,4 @@ sonatina5/sonatina5 linuxsampler-salamander fluidsynth-hsdamped linuxsampler-ste
 sonatina6/sonatina6 linuxsampler-steinwayc fluidsynth-hsdamped fluidsynth-sbelmont linuxsampler-imis linuxsampler-salamander timidity-freepats linuxsampler-maestro linuxsampler-pleyelp190 fluidsynth-ydp linuxsampler-tinypiano
 sonatina7/sonatina7 linuxsampler-salamander fluidsynth-sbelmont linuxsampler-steinwayc linuxsampler-pleyelp190 fluidsynth-hsdamped linuxsampler-imis linuxsampler-maestro timidity-freepats fluidsynth-ydp linuxsampler-tinypiano
 sonatina8/sonatina8 fluidsynth-hsdamped linuxsampler-pleyelp190 fluidsynth-sbelmont linuxsampler-salamander linuxsampler-imis fluidsynth-ydp timidity-freepats linuxsampler-maestro linuxsampler-steinwayc linuxsampler-tinypiano
+sonatina9/sonatina9 linuxsampler-pleyelp190 linuxsampler-salamander fluidsynth-hsdamped fluidsynth-sbelmont linuxsampler-maestro linuxsampler-steinwayc fluidsynth-ydp timidity-freepats linuxsampler-tinypiano

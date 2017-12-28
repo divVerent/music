@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 s=$1
 t=$2

@@ -84,7 +84,7 @@ TAR = @tar@
 TARFLAGS = @tar_flags@
 
 # Source files
-RG = $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg $(SRC)/sonatina7/sonatina7.rg $(SRC)/sonatina8/sonatina8.rg $(SRC)/sonatina9/sonatina9.rg
+RG = $(SRC)/rondo1/rondo1.rg $(SRC)/sonatina1/sonatina1.rg $(SRC)/sonatina2/sonatina2.rg $(SRC)/sonatina3/sonatina3.rg $(SRC)/sonatina4/sonatina4.rg $(SRC)/sonatina5/sonatina5.rg $(SRC)/sonatina6/sonatina6.rg $(SRC)/sonatina7/sonatina7.rg $(SRC)/sonatina8/sonatina8.rg $(SRC)/sonatina9/sonatina9.rg
 LY_DIFF = $(patsubst $(SRC)/%.rg,$(SRC)/%.ly.diff,$(RG))
 
 # Saved intermediate files (part of the source distribution)

@@ -19,7 +19,6 @@ OUTTYPES =
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-salamander
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
-@linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-tinypiano
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-imis
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 
@@ -247,13 +246,6 @@ $(BUILD)/support/classicpianos-steinway_c.giga-*.rar: | $(BUILD)/support
 $(BUILD)/support/classicpianos-steinway_c.gig: | $(BUILD)/support/classicpianos-steinway_c.giga-*.rar
 	cd $(BUILD)/support && $(UNRAR) x $(UNRARFLAGS) classicpianos-steinway_c.giga-*.rar 'Steinway C.gig' && $(MV) $(MVFLAGS) 'Steinway C.gig' 'classicpianos-steinway_c.gig'
 
-.INTERMEDIATE: $(BUILD)/support/sig-ex-exp_tiny-piano00.zip
-$(BUILD)/support/sig-ex-exp_tiny-piano00.zip: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'sig-ex-exp_tiny-piano00.zip' 'https://musical-artifacts.com/artifacts/402/sig-ex-exp_tiny-piano00.zip'
-@linuxsampler_sfz_TRUE@ FETCH += $(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz
-$(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz: | $(BUILD)/support/sig-ex-exp_tiny-piano00.zip
-	cd $(BUILD)/support && $(UNPKZIP) $(UNPKZIPFLAGS) sig-ex-exp_tiny-piano00.zip
-
 fetch: $(FETCH)
 
 
@@ -283,9 +275,6 @@ $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-steinway_c.gig
-	$(SRC)/bin/linuxsampler.sh $< $| $@
-
-$(BUILD)/%-linuxsampler-tinypiano-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/sig-ex-exp_tiny-piano00/tiny-piano.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs less stereo separation

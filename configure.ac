@@ -74,6 +74,7 @@ AC_SUBST($1[_flags],[[$]m4_toupper($1)[FLAGS]])
 AS_IF([test -z $LAMEFLAGS],[LAMEFLAGS="--preset standard"])
 AS_IF([test -z $OGGENCFLAGS],[OGGENCFLAGS="-q3"])
 AS_IF([test -z $FLACFLAGS],[FLACFLAGS="--replay-gain -8"])
+AS_IF([test -z $FLACDFLAGS],[FLACDFLAGS=""])
 AS_IF([test -z $NCATFLAGS],[NCATFLAGS="-i30"])
 AS_IF([test -z $JACKDFLAGS],[JACKDFLAGS="-r"])
 
@@ -91,6 +92,7 @@ RP_PROGOPTION(vorbisgain)
 
 AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=check])
 RP_PROGOPTION(flac)
+AC_SUBST(flacd_flags,[$FLACDFLAGS])
 
 AC_ARG_WITH(timidity, AS_HELP_STRING([--without-timidity], [Do not use timidity outputs]), [with_timidity=$withval], [with_timidity=check])
 RP_PROGOPTION(timidity)

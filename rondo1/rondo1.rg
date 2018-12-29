@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="16.06" format-version-major="1" format-version-minor="6" format-version-point="3">
-<composition recordtracks="0" pointer="532181" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="768000" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
+<composition recordtracks="0" pointer="244337" defaultTempo="120.0000" compositionDefaultTempo="12000000" startMarker="0" endMarker="537600" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0">
 
 
   <track id="0" label="Dextra" shortLabel="" position="0" muted="false" archived="false" solo="false" instrument="2000" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0" inputDevice="10001" inputChannel="-1" thruRouting="0"/>
@@ -14,12 +14,12 @@
   <tempo time="126720" bph="7200" tempo="12000000" target="0"/>
   <tempo time="149760" bph="8640" tempo="14400000"/>
   <tempo time="238080" bph="5760" tempo="9600000"/>
-  <tempo time="318720" bph="8640" tempo="14400000"/>
-  <tempo time="399360" bph="7200" tempo="12000000"/>
-  <tempo time="430080" bph="7200" tempo="12000000" target="0"/>
-  <tempo time="453120" bph="8640" tempo="14400000"/>
-  <tempo time="522240" bph="8640" tempo="14400000" target="0"/>
-  <tempo time="529920" bph="5760" tempo="9600000"/>
+  <tempo time="322560" bph="8670" tempo="14450000"/>
+  <tempo time="403200" bph="7200" tempo="12000000"/>
+  <tempo time="433920" bph="7200" tempo="12000000" target="0"/>
+  <tempo time="456960" bph="8640" tempo="14400000"/>
+  <tempo time="526080" bph="8640" tempo="14400000" target="0"/>
+  <tempo time="533760" bph="5760" tempo="9600000"/>
 
 <metadata>
 <property name="copyright" value="Copyright (c) 2018 Rudolf Polzer [2018-12-28]"/>
@@ -42,7 +42,7 @@
 
 
 <configuration>
-    <zoomlevel type="Int">192000</zoomlevel>
+    <zoomlevel type="Int">76800</zoomlevel>
     <transportmode type="String">RealMode</transportmode>
 </configuration>
 
@@ -53,7 +53,6 @@
 <segment track="0" start="0" label="Introduction" endmarker="15360">
 	<event type="clefchange" subordering="-250" absoluteTime="0"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200" absoluteTime="0"><property name="key" string="Ab major"/></event>
-	<event type="text" subordering="-70" absoluteTime="0"><property name="text" string="Vivace"/><property name="type" string="tempo"/></event>
 	<event type="text" subordering="-70" absoluteTime="0"><property name="text" string="f"/><property name="type" string="dynamic"/></event>
 	<event type="note" duration="1440" absoluteTime="0"><property name="pitch" int="68"/><property name="velocity" int="117"/><property name="accidental" string="flat"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="1"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="240"><property name="pitch" int="67"/><property name="velocity" int="105"/><property name="groupid" int="1"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="2"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
@@ -371,7 +370,7 @@
 	<event type="note" duration="240"><property name="pitch" int="67"/><property name="velocity" int="77"/><property name="groupid" int="27"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="2"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="1920"><property name="pitch" int="63"/><property name="velocity" int="86"/><property name="accidental" string="flat"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="0"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="0" start="157440" label="A&apos;" endmarker="238080">
+<segment track="0" start="157440" label="A&apos;" endmarker="241920">
 	<event type="clefchange" subordering="-250"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Eb major"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
@@ -595,13 +594,18 @@
 	<event type="note" duration="480"><property name="pitch" int="65"/><property name="velocity" int="110"/><property name="groupid" int="48"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="77"/><property name="velocity" int="114"/><property name="groupid" int="49"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="65"/><property name="velocity" int="110"/><property name="groupid" int="49"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="77"/><property name="velocity" int="123"/><property name="groupid" int="0"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="65"/><property name="velocity" int="110"/><property name="groupid" int="0"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="77"/><property name="velocity" int="114"/><property name="groupid" int="1"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="65"/><property name="velocity" int="110"/><property name="groupid" int="1"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="text" subordering="-70"><property name="text" string="Andante"/><property name="type" string="local_tempo"/></event>
 	<event type="note" duration="960"><property name="pitch" int="77"/><property name="velocity" int="118"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="960"><property name="pitch" int="77"/><property name="velocity" int="114"/><property name="marks" int="1"/><property name="mark1" string="staccato"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="rest" duration="1920" subordering="10"><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/></event>
 </segment>
-<segment track="0" start="238080" label="C" endmarker="318720">
+<segment track="0" start="241920" label="C" endmarker="322560">
 	<event type="clefchange" subordering="-250"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="F major"/></event>
-	<event type="text" subordering="-70"><property name="text" string="Andante"/><property name="type" string="local_tempo"/></event>
 	<event type="text" subordering="-70"><property name="text" string="p"/><property name="type" string="dynamic"/></event>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="65"/><property name="velocity" int="67"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/></event>
@@ -834,7 +838,7 @@
 	<event type="note" duration="1920"><property name="pitch" int="62"/><property name="velocity" int="64"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="3840"><property name="pitch" int="63"/><property name="velocity" int="67"/><property name="accidental" string="flat"/><nproperty name="notetype" int="6"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="0"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="0" start="318720" label="A&apos;&apos;" endmarker="399360">
+<segment track="0" start="322560" label="A&apos;&apos;" endmarker="403200">
 	<event type="clefchange" subordering="-250"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Eb major"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
@@ -1062,7 +1066,7 @@
 	<event type="text" subordering="-70"><property name="text" string="mp"/><property name="type" string="dynamic"/></event>
 	<event type="note" duration="480"><property name="pitch" int="63"/><property name="velocity" int="105"/><property name="accidental" string="flat"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="0"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="0" start="399360" label="B&apos;" endmarker="460800">
+<segment track="0" start="403200" label="B&apos;" endmarker="464640">
 	<event type="clefchange" subordering="-250"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
 	<event type="text" subordering="-70"><property name="text" string="Moderato"/><property name="type" string="local_tempo"/></event>
@@ -1132,7 +1136,7 @@
 	<event type="note" duration="240"><property name="pitch" int="72"/><property name="velocity" int="77"/><property name="groupid" int="83"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="2"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="5"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="1920"><property name="pitch" int="68"/><property name="velocity" int="86"/><property name="accidental" string="flat"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="0" start="460800" label="A&apos;&apos;&apos;" endmarker="533760">
+<segment track="0" start="464640" label="A&apos;&apos;&apos;" endmarker="537600">
 	<event type="clefchange" subordering="-250"><property name="clef" string="treble"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
 	<event type="text" subordering="-70"><property name="text" string="Tempo Primo"/><property name="type" string="local_tempo"/></event>
@@ -1635,7 +1639,7 @@
 	<event type="note" duration="480"><property name="pitch" int="39"/><property name="velocity" int="83"/><property name="accidental" string="flat"/><property name="groupid" int="210"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="39"/><property name="velocity" int="80"/><property name="accidental" string="flat"/><property name="groupid" int="210"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="1" start="157440" label="A&apos;" endmarker="238080">
+<segment track="1" start="157440" label="A&apos;" endmarker="241920">
 	<event type="clefchange" subordering="-250"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Eb major"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
@@ -1817,10 +1821,15 @@
 	<event type="note" duration="480"><property name="pitch" int="53"/><property name="velocity" int="123"/><property name="groupid" int="275"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="48"/><property name="velocity" int="110"/><property name="groupid" int="275"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="45"/><property name="velocity" int="114"/><property name="groupid" int="276"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
-	<event type="note" duration="480"><property name="pitch" int="36"/><property name="velocity" int="110"/><property name="groupid" int="276"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-4"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="41"/><property name="velocity" int="110"/><property name="groupid" int="276"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="36"/><property name="velocity" int="123"/><property name="groupid" int="0"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-4"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="33"/><property name="velocity" int="110"/><property name="groupid" int="0"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-6"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="29"/><property name="velocity" int="114"/><property name="groupid" int="1"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-8"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="note" duration="480"><property name="pitch" int="24"/><property name="velocity" int="110"/><property name="groupid" int="1"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-11"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="1920"><property name="pitch" int="41"/><property name="velocity" int="118"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="OttavaShift" int="0"/></event>
+	<event type="rest" duration="1920" subordering="10"><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/></event>
 </segment>
-<segment track="1" start="238080" label="C" endmarker="318720">
+<segment track="1" start="241920" label="C" endmarker="322560">
 	<event type="clefchange" subordering="-250"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="F major"/></event>
 	<event type="text" subordering="-70"><property name="text" string="p"/><property name="type" string="dynamic"/></event>
@@ -2076,7 +2085,7 @@
 	<event type="note" duration="3840"><property name="pitch" int="51"/><property name="velocity" int="67"/><property name="accidental" string="flat"/><nproperty name="notetype" int="6"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="5"/><nproperty name="OttavaShift" int="0"/></event>
 </chord>
 </segment>
-<segment track="1" start="318720" label="A&apos;&apos;" endmarker="399360">
+<segment track="1" start="322560" label="A&apos;&apos;" endmarker="403200">
 	<event type="clefchange" subordering="-250"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Eb major"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
@@ -2260,7 +2269,7 @@
 	<event type="note" duration="480"><property name="pitch" int="48"/><property name="velocity" int="105"/><property name="groupid" int="384"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="3"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="false"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="1920"><property name="pitch" int="44"/><property name="velocity" int="113"/><property name="accidental" string="flat"/><property name="tiedforward" bool="true"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="1" start="399360" label="B&apos;" endmarker="460800">
+<segment track="1" start="403200" label="B&apos;" endmarker="464640">
 	<event type="clefchange" subordering="-250"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
 	<event type="text" subordering="-70"><property name="text" string="mp"/><property name="type" string="dynamic"/></event>
@@ -2342,7 +2351,7 @@
 	<event type="note" duration="480"><property name="pitch" int="44"/><property name="velocity" int="83"/><property name="accidental" string="flat"/><property name="groupid" int="416"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="44"/><property name="velocity" int="80"/><property name="accidental" string="flat"/><property name="groupid" int="416"/><property name="grouptype" string="beamed"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/></event>
 </segment>
-<segment track="1" start="460800" label="A&apos;&apos;&apos;" endmarker="533760">
+<segment track="1" start="464640" label="A&apos;&apos;&apos;" endmarker="537600">
 	<event type="clefchange" subordering="-250"><property name="clef" string="bass"/><property name="octaveoffset" int="0"/></event>
 	<event type="keychange" subordering="-200"><property name="key" string="Ab major"/></event>
 	<event type="text" subordering="-70"><property name="text" string="mf"/><property name="type" string="dynamic"/></event>
@@ -2872,7 +2881,7 @@
     </device>
 
 
-    <device id="0" name="General MIDI Device" direction="play" variation="" connection="130:0 TiMidity port 0 (write)" type="midi">
+    <device id="0" name="General MIDI Device" direction="play" variation="" connection="128:0 TiMidity port 0 (write)" type="midi">
 
         <librarian name="Michael McIntyre" email="dmmcintyr@users.sourceforge.net"/>
         <metronome instrument="2009" barpitch="37" beatpitch="37" subbeatpitch="37" depth="2" barvelocity="120" beatvelocity="100" subbeatvelocity="80"/>

@@ -1,5 +1,5 @@
-*.orig
 */*-format0.mid
+*/*-ramp.rg
 */*.flac
 */*.ly
 */*.mp3

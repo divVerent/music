@@ -316,7 +316,8 @@ $(SRC)/%.mid: | $(BUILD)/%-ramp.rg
 	@echo
 	@echo
 	@echo MANUAL TASK:
-	@echo Please export to MIDI as $@
+	@echo Please join all segments on each channel, interpret all, and
+	@echo export to MIDI as $@
 	@echo
 	@echo
 	$(ROSEGARDEN) $(ROSEGARDENFLAGS) $| >/dev/null 2>&1
@@ -387,7 +388,7 @@ distclean: clean
 	$(RM) $(FETCH) Makefile config.status config.log
 
 .PHONY: realclean
-realclean: disclean
+realclean: distclean
 	$(RM) $(SECONDARY)
 
 

@@ -11,6 +11,7 @@ Makefile
 a.mp3
 autom4te.cache/
 b.mp3
+compressed/
 config.log
 config.status
 configure

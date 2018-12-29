@@ -1,3 +1,4 @@
+rondo1/rondo1 linuxsampler-salamander linuxsampler-pleyelp190 fluidsynth-hsdamped linuxsampler-maestro linuxsampler-steinwayc timidity-freepats fluidsynth-ydp fluidsynth-sbelmont linuxsampler-imis linuxsampler-tinypiano
 sonatina1/sonatina1 linuxsampler-salamander fluidsynth-hsdamped linuxsampler-maestro linuxsampler-imis linuxsampler-tinypiano timidity-freepats linuxsampler-pleyelp190 cps700 linuxsampler-steinwayc fluidsynth-sbelmont fluidsynth-ydp
 sonatina2/sonatina2 linuxsampler-pleyelp190 fluidsynth-hsdamped cps700 linuxsampler-maestro fluidsynth-sbelmont linuxsampler-salamander linuxsampler-imis linuxsampler-steinwayc fluidsynth-ydp linuxsampler-tinypiano timidity-freepats
 sonatina3/sonatina3 linuxsampler-steinwayc linuxsampler-salamander fluidsynth-hsdamped linuxsampler-maestro cps700 fluidsynth-sbelmont linuxsampler-imis linuxsampler-pleyelp190 timidity-freepats linuxsampler-tinypiano fluidsynth-ydp

@@ -30,10 +30,6 @@ license choices may become limited by the licenses of the other works.
 Especially, the included Makefile may create works restricted further by
 the licenses of the sample sets that were used:
 
-- fluidsynth-ydp: only the CC licenses (choice "c" or "d") may be
-  used; credit the author according to
-  http://freepats.zenvoid.org/Piano/acoustic-grand-piano.html, of course
-
 - fluidsynth-hsdamped: only the CC licenses (choice "c" or "d") may be
   used; make sure to credit
   [Hispasonic](http://www.hispasonic.com/noticias/dsk-music-presenta-hispasonic-sampled-series/3685)
@@ -58,9 +54,6 @@ the licenses of the sample sets that were used:
 - linuxsampler-steinwayc: only the CC licenses (choice "c" or "d") may be
   used; credit the author Nikko as described on
   http://tickets.nikkoid.com/knowledgebase.php?article=23
-
-- linuxsampler-tinypiano: only the CC licenses (choice "c" or "d") may be used;
-  credit Signal Experiments (http://sig-ex.com/) appropriately, of course.
 
 - timidity-freepats: no restrictions at all; you should still give the Freepats
   Project credit :)

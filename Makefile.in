@@ -12,7 +12,6 @@ OUTTYPES =
 @oggenc_TRUE@                  OUTFORMATS += ogg
 @flac_TRUE@                    OUTFORMATS += flac
 
-@fluidsynth_TRUE@              OUTTYPES += fluidsynth-ydp
 @fluidsynth_TRUE@              OUTTYPES += fluidsynth-hsdamped
 @fluidsynth_sbelmont_TRUE@     OUTTYPES += fluidsynth-sbelmont
 @linuxsampler_TRUE@            OUTTYPES += linuxsampler-maestro
@@ -137,13 +136,6 @@ FETCH =
 $(BUILD)/support/000_Acoustic_Grand_Piano.pat: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O '000_Acoustic_Grand_Piano.pat' 'https://github.com/rism-ch/midi-player/raw/master/freepats/Tone_000/000_Acoustic_Grand_Piano.pat'
 
-.INTERMEDIATE: $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
-$(BUILD)/support/grand-piano-YDP-20160804.tar.bz2: | $(BUILD)/support
-	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'grand-piano-YDP-20160804.tar.bz2' 'http://freepats.zenvoid.org/Piano/YDP-GrandPiano/grand-piano-YDP-20160804.tar.bz2'
-@fluidsynth_TRUE@ FETCH += $(BUILD)/support/grand-piano-YDP-20160804.sf2
-$(BUILD)/support/grand-piano-YDP-20160804.sf2: | $(BUILD)/support/grand-piano-YDP-20160804.tar.bz2
-	cd $(BUILD)/support && $(TAR) xvjf 'grand-piano-YDP-20160804.tar.bz2' $(TARFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 && $(MV) $(MVFLAGS) grand-piano-YDP-20160804/grand-piano-YDP-20160804.sf2 grand-piano-YDP-20160804.sf2
-
 @fluidsynth_TRUE@ FETCH += $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2
 $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2: | $(BUILD)/support
 	cd $(BUILD)/support && $(WGET) $(WGETFLAGS) -O 'HS_Classic_Grand_Piano_Damped.sf2' 'http://www.soundfonts.gonet.biz/sf2/HS%20Classic%20Grand%20Piano%20Damped.sf2'
@@ -259,9 +251,6 @@ $(BUILD)/%-format0.mid: $(SRC)/%.mid
 
 $(BUILD)/%-timidity-freepats-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/000_Acoustic_Grand_Piano.pat
 	$(TIMIDITY) $(TIMIDITYFLAGS) $(TIMIDITY_SETGUSPATCH_PRE)  $| $(TIMIDITY_SETGUSPATCH_POST)  -EI0 -EFreverb=G,40 -EFchorus=n,30 -Ow2 -o $@ $<
-
-$(BUILD)/%-fluidsynth-ydp-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/grand-piano-YDP-20160804.sf2
-	$(FLUIDSYNTH) $(FLUIDSYNTHFLAGS) -O float -F $@ $| $<
 
 .INTERMEDIATE: $(BUILD)/%-fluidsynth-hsdamped-raw.wav
 $(BUILD)/%-fluidsynth-hsdamped-raw.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/HS_Classic_Grand_Piano_Damped.sf2

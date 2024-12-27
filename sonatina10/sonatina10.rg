@@ -43,10 +43,8 @@
   <tempo time="0" bph="7200" tempo="12000000"/>
 
 <metadata>
-<property name="copyright" value="Copyright (c) xxxx Copyright Holder"/>
-<property name="title" value="Not Yet Titled"/>
-<property name="subtitle" value="not yet subtitled"/>
-<property name="author" value="Unknown"/>
+<property name="copyright" value="Copyright (c) 2024 Rudolf Polzer"/>
+<property name="title" value="Sonatina 10 in E"/>
 
 
 </metadata>

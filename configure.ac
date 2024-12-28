@@ -118,6 +118,9 @@ RP_CONDITIONAL(linuxsampler_sfz,[test xno != x$with_linuxsampler -a xno != x$wit
 AC_ARG_WITH(linuxsampler-sfz-ogg, AS_HELP_STRING([--with-linuxsampler-sfz-ogg], [Allow using lossy .sfz samples with LinuxSampler (requires LinuxSampler after 1.0.0)]), [with_linuxsampler_sfz_ogg=$withval], [with_linuxsampler_sfz_ogg=no])
 RP_CONDITIONAL(linuxsampler_sfz_ogg,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_sfx -a xno != x$with_linuxsampler_sfz_ogg])
 
+AC_ARG_WITH(linuxsampler-cps700, AS_HELP_STRING([--with-linuxsampler-cps700], [Use CPS-700 samples (not available online)]), [with_linuxsampler_cps700=$withval], [with_linuxsampler_cps700=no])
+RP_CONDITIONAL(linuxsampler_cps700,[test xno != x$with_linuxsampler -a xno != x$with_linuxsampler_cps700])
+
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
 

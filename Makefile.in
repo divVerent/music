@@ -19,6 +19,7 @@ OUTTYPES =
 @linuxsampler_pleyelp190_TRUE@ OUTTYPES += linuxsampler-pleyelp190
 @linuxsampler_steinwayc_TRUE@  OUTTYPES += linuxsampler-steinwayc
 @linuxsampler_sfz_TRUE@        OUTTYPES += linuxsampler-imis
+@linuxsampler_cps700_TRUE@     OUTTYPES += linuxsampler-cps700
 @timidity_TRUE@                OUTTYPES += timidity-freepats
 
 # Programs we use
@@ -265,6 +266,9 @@ $(BUILD)/%-linuxsampler-pleyelp190-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 $(BUILD)/%-linuxsampler-steinwayc-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/classicpianos-steinway_c.gig
+	$(SRC)/bin/linuxsampler.sh $< $| $@
+
+$(BUILD)/%-linuxsampler-cps700-uncut.wav: $(BUILD)/%-format0.mid | $(BUILD)/support/cps700/cps700.sfz
 	$(SRC)/bin/linuxsampler.sh $< $| $@
 
 # hack: needs less stereo separation

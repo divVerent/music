@@ -87,8 +87,8 @@ RP_PROGOPTION(mp3gain)
 AC_ARG_WITH(oggenc, AS_HELP_STRING([--without-oggenc], [Do not use vorbis-tools to make .ogg output files]), [with_oggenc=$withval], [with_oggenc=check])
 RP_PROGOPTION(oggenc)
 
-AC_ARG_WITH(vorbisgain, AS_HELP_STRING([--without-vorbisgain], [Do not use vorbisgain to fix .ogg output file level]), [with_vorbisgain=$withval], [with_vorbisgain=check])
-RP_PROGOPTION(vorbisgain)
+AC_ARG_WITH(loudgain, AS_HELP_STRING([--without-loudgain], [Do not use loudgain to fix .ogg and .flac output file level]), [with_loudgain=$withval], [with_loudgain=check])
+RP_PROGOPTION(loudgain)
 
 AC_ARG_WITH(flac, AS_HELP_STRING([--without-flac], [Do not use flac to make .flac output files]), [with_flac=$withval], [with_flac=check])
 RP_PROGOPTION(flac)

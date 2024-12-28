@@ -62,8 +62,8 @@ ROSEGARDEN = @rosegarden@
 ROSEGARDENFLAGS = @rosegarden_flags@
 MP3GAIN = @mp3gain@
 MP3GAINFLAGS = @mp3gain_flags@
-VORBISGAIN = @vorbisgain@
-VORBISGAINFLAGS = @vorbisgain_flags@
+LOUDGAIN = @loudgain@
+LOUDGAINFLAGS = @loudgain_flags@
 PERL = @perl@
 PERLFLAGS = @perl_flags@
 JACKD = @jackd@
@@ -325,6 +325,7 @@ $(BUILD)/%-cut.wav: $(BUILD)/%-uncut.wav
 
 $(BUILD)/%.flac: $(BUILD)/%-cut.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
+@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -k $@
 
 @flac_FALSE@$(BUILD)/%.mp3: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(LAME) $(LAMEFLAGS) $< $@
@@ -336,7 +337,7 @@ $(BUILD)/%.flac: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
 @flac_TRUE@$(BUILD)/%.ogg: $(BUILD)/%.flac
 @flac_TRUE@	$(FLAC) $(FLACDFLAGS) -d -f -o - $< | $(OGGENC) $(OGGENCFLAGS) -o $@ -
-@vorbisgain_TRUE@	$(VORBISGAIN) $(VORBISGAINFLAGS) $@
+@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -k $@
 
 # PDF making
 $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig

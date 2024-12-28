@@ -8,4 +8,4 @@ sonatina6/sonatina6 linuxsampler-steinwayc fluidsynth-hsdamped linuxsampler-cps7
 sonatina7/sonatina7 linuxsampler-salamander linuxsampler-cps700 fluidsynth-sbelmont linuxsampler-steinwayc linuxsampler-pleyelp190 fluidsynth-hsdamped linuxsampler-imis linuxsampler-maestro timidity-freepats
 sonatina8/sonatina8 fluidsynth-hsdamped linuxsampler-pleyelp190 fluidsynth-sbelmont linuxsampler-salamander linuxsampler-cps700 linuxsampler-imis timidity-freepats linuxsampler-maestro linuxsampler-steinwayc
 sonatina9/sonatina9 linuxsampler-pleyelp190 linuxsampler-salamander fluidsynth-hsdamped fluidsynth-sbelmont linuxsampler-maestro linuxsampler-steinwayc linuxsampler-cps700 timidity-freepats linuxsampler-imis
-sonatina10/sonatina10 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander fluidsynth-sbelmont timidity-freepats linuxsampler-steinwayc fluidsynth-hsdamped linuxsampler-imis
+sonatina10/sonatina10 linuxsampler-pleyelp190 linuxsampler-maestro linuxsampler-salamander fluidsynth-sbelmont timidity-freepats linuxsampler-steinwayc fluidsynth-hsdamped linuxsampler-cps700 linuxsampler-imis

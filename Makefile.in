@@ -325,19 +325,19 @@ $(BUILD)/%-cut.wav: $(BUILD)/%-uncut.wav
 
 $(BUILD)/%.flac: $(BUILD)/%-cut.wav
 	$(FLAC) $(FLACFLAGS) -f -o $@ $< && touch $@
-@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -k $@
+@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -d -5 -K 0 $@
 
 @flac_FALSE@$(BUILD)/%.mp3: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(LAME) $(LAMEFLAGS) $< $@
 @flac_TRUE@$(BUILD)/%.mp3: $(BUILD)/%.flac
 @flac_TRUE@	$(FLAC) $(FLACDFLAGS) -d -f -o - $< | $(LAME) $(LAMEFLAGS) - $@
-@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -r -k $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -d -5 -k $@
 
 @flac_FALSE@$(BUILD)/%.ogg: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
 @flac_TRUE@$(BUILD)/%.ogg: $(BUILD)/%.flac
 @flac_TRUE@	$(FLAC) $(FLACDFLAGS) -d -f -o - $< | $(OGGENC) $(OGGENCFLAGS) -o $@ -
-@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -k $@
+@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -d -5 -K 0 $@
 
 # PDF making
 $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig

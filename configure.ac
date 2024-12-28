@@ -124,6 +124,9 @@ RP_CONDITIONAL(linuxsampler_cps700,[test xno != x$with_linuxsampler -a xno != x$
 AC_ARG_WITH(lilypond, AS_HELP_STRING([--without-lilypond], [Do not use lilypond to generate PDF scores]), [with_lilypond=$withval], [with_lilypond=check])
 RP_PROGOPTION(lilypond)
 
+AC_ARG_WITH(convert-ly, AS_HELP_STRING([--without-convert-ly], [Do not use lilypond to generate PDF scores]), [with_convertly=$withval], [with_convertly=check])
+RP_PROGOPTION(convertly,convert-ly)
+
 AS_IF([test x != x$linuxsampler],
 	[
 		RP_NEEDPROG(jackd)

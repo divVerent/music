@@ -31,6 +31,8 @@ PATCH = @patch@
 PATCHFLAGS = @patch_flags@
 LILYPOND = @lilypond@
 LILYPONDFLAGS = @lilypond_flags@
+CONVERTLY = @convertly@
+CONVERTLYFLAGS = @convertly_flags@
 TIMIDITY = @timidity@
 TIMIDITYFLAGS = @timidity_flags@
 TIMIDITY_SETSOUNDFONT_PRE = -x "dir /\nsoundfont
@@ -345,8 +347,11 @@ $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig
 	set -- $^ && $(CP) $(CPFLAGS) $$2 $@
 	set -- $^ && $(PATCH) $(PATCHFLAGS) $@ $$1
 
-$(BUILD)/%.pdf: $(BUILD)/%.ly
-	$(LILYPOND) $(LILYPONDFLAGS) -o $* $<
+$(BUILD)/%.ly.conv: $(BUILD)/%.ly
+	$(CONVERTLY) $(CONVERTLYFLAGS) $< > $@
+
+$(BUILD)/%.pdf: $(BUILD)/%.ly.conv
+	$(LILYPOND) $(LILYPONDFLAGS) -o $@ $<
 
 
 # For maintainer: song art making.

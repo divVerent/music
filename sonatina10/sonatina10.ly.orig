@@ -9,7 +9,7 @@
 \paper {
     ragged-bottom=##t
 }
-#(set-global-staff-size 23)
+#(set-global-staff-size 21)
 #(set-default-paper-size "a4")
 global = { 
     \time 1/4
@@ -40,7 +40,7 @@ globalTempo = {
             \repeat volta 2 {
                 \clef "treble"
                 \key e \major
-                b' 4 -\mf  |
+                b' 4 -\mf ^\markup { \bold \large "Allegro moderato" }  |
                                 \once \override Staff.TimeSignature #'style = #'numbered 
                 \time 3/4
                 < e'' gis' > 4. _~ < gis'' gis' > 8 < e'' b' > 4  |
@@ -338,7 +338,7 @@ globalTempo = {
 %% 35
                                 \once \override Staff.TimeSignature #'style = #'numbered 
                 \time 6/8
-                < fis b, > 8 -\accent r r b, -\mf fis dis  |
+                < fis b, > 8 -\accent r r b, -\mp fis dis  |
                 b, 8 fis dis e gis ais,  |
                 dis 8 fis ais b ais fis  |
                 b, 8 fis dis b, fis dis  |
@@ -474,7 +474,7 @@ globalTempo = {
             < b, e, > 2.  |
                         \once \override Staff.TimeSignature #'style = #'numbered 
             \time 6/8
-            < b, e, > 8 -\accent r r e, -\mf b, gis,  |
+            < b, e, > 8 -\accent r r e, -\mp b, gis,  |
             e, 8 b, gis, a, cis dis,  |
             gis, 8 b, dis e dis b,  |
             e, 8 b, gis, e, b, gis,  |

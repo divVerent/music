@@ -33,6 +33,7 @@ extracommands=$4
 export JACK_DEFAULT_SERVER=midiconvert.$$
 export LSCP_PORT=$((($RANDOM + $$ + 8888 - 1024) % 64512 + 1024))
 logfile=`mktemp -t midiconvert.XXXXXX`
+echo "JACK log file: $logfile"
 
 echo "Finding free port..."
 # TODO(rpolzer): Switch to ncat here too.

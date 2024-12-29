@@ -333,13 +333,16 @@ $(BUILD)/%.flac: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(LAME) $(LAMEFLAGS) $< $@
 @flac_TRUE@$(BUILD)/%.mp3: $(BUILD)/%.flac
 @flac_TRUE@	$(FLAC) $(FLACDFLAGS) -d -f -o - $< | $(LAME) $(LAMEFLAGS) - $@
-@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -d -5 -k $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -r $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) -s d $@
+@mp3gain_TRUE@	$(MP3GAIN) $(MP3GAINFLAGS) $@
 
 @flac_FALSE@$(BUILD)/%.ogg: $(BUILD)/%-cut.wav
 @flac_FALSE@	$(OGGENC) $(OGGENCFLAGS) -o $@ $<
 @flac_TRUE@$(BUILD)/%.ogg: $(BUILD)/%.flac
 @flac_TRUE@	$(FLAC) $(FLACDFLAGS) -d -f -o - $< | $(OGGENC) $(OGGENCFLAGS) -o $@ -
-@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) -d -5 -K 0 $@
+@loudgain_TRUE@	$(LOUDGAIN) $(LOUDGAINFLAGS) $@
 
 # PDF making
 $(BUILD)/%.ly: $(SRC)/%.ly.diff $(SRC)/%.ly.orig

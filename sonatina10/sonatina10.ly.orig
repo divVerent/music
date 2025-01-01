@@ -520,9 +520,9 @@ globalTempo = {
 %% 215
             < b, fis, > 4 _~ < fis, a, > < b, a >  |
             < b e > 8 -\ff \sustainOn g, b, r r4  |
-            < b e > 8 e, b, r r r  |
+            < b e > 8 e, b, r r4  |
             < b b, > 8 \sustainOn dis, fis, r r4  |
-            < a b, > 8 fis, a, r r r  |
+            < a b, > 8 fis, a, r r4  |
 %% 220
             < gis e > 8 \sustainOn gis,, b,, e, gis, b,  |
             R2.  |

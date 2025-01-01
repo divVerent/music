@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="22.12.1" format-version-major="1" format-version-minor="6" format-version-point="9">
-<composition recordtracks="" pointer="635346" defaultTempo="120.0000" compositionDefaultTempo="12000000" islooping="0" loopmode="0" loopstart2="0" loopend2="0" startMarker="0" endMarker="637440" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0" notationspacing="85" editorfollowplayback="1" mainfollowplayback="1">
+<composition recordtracks="" pointer="621546" defaultTempo="120.0000" compositionDefaultTempo="12000000" islooping="0" loopmode="0" loopstart2="0" loopend2="0" startMarker="0" endMarker="637440" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0" notationspacing="85" editorfollowplayback="1" mainfollowplayback="1">
 
 
   <track id="0" label="" shortLabel="" position="0" muted="false" archived="false" solo="false" instrument="2000" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0" inputDevice="10001" inputChannel="-1" thruRouting="0"/>
@@ -2373,8 +2373,7 @@
 	<event type="note" duration="480"><property name="pitch" int="40"/><property name="velocity" int="110"/><property name="groupid" int="33"/><property name="grouptype" string="beamed"/><nproperty name="HeightOnStaff" int="-2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="47"/><property name="velocity" int="114"/><property name="groupid" int="33"/><property name="grouptype" string="beamed"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
-	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
-	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
+	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="controller" subordering="-5" timeOffset="-60"><property name="number" int="64"/><property name="value" int="0"/></event>
 	<event type="controller" subordering="-5" timeOffset="60"><property name="number" int="64"/><property name="value" int="127"/></event>
 <chord>
@@ -2392,8 +2391,7 @@
 	<event type="note" duration="480"><property name="pitch" int="42"/><property name="velocity" int="110"/><property name="groupid" int="33"/><property name="grouptype" string="beamed"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
 	<event type="note" duration="480"><property name="pitch" int="45"/><property name="velocity" int="114"/><property name="groupid" int="33"/><property name="grouptype" string="beamed"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="Beamed" bool="true"/><nproperty name="BeamAbove" bool="true"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
 	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
-	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
-	<event type="rest" duration="480" subordering="10"><nproperty name="notetype" int="3"/><nproperty name="notedots" int="0"/></event>
+	<event type="rest" duration="960" subordering="10"><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 	<event type="controller" subordering="-5" timeOffset="-60"><property name="number" int="64"/><property name="value" int="0"/></event>
 	<event type="controller" subordering="-5" timeOffset="60"><property name="number" int="64"/><property name="value" int="127"/></event>
 <chord>

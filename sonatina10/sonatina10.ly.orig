@@ -122,13 +122,13 @@ globalTempo = {
                 fis'' 8 gis'' a'' fis' gis' ais'  |
                 b' 8 cis'' dis'' b' cis'' dis''  |
                 e'' 8 fis'' gis'' e'' fis'' gis''  |
-                fis'' 8 e'' dis'' e'' 4.  |
+                fis'' 8 cis'' dis'' e'' 4.  |
                                 \once \override Staff.TimeSignature #'style = #'numbered 
                 \time 3/4
                 < fis'' dis'' > 2. -\f  |
 %% 65
-                < e'' e' > 2. _\markup { \bold \italic "ritard." } _~  |
-                < e'' e' > 2 < dis'' fis' > 4  |
+                < cis'' e' > 2. _\markup { \bold \italic "ritard." } _~  |
+                < cis'' e' > 2 < dis'' fis' > 4  |
                 < e'' gis' > 2. _~  |
                 < e'' gis' > 2 _\markup { \bold \italic "a tempo" }  |
             } % close repeat
@@ -255,14 +255,14 @@ globalTempo = {
 %% 210
             gis'' 8 a'' b'' gis'' a'' b''  |
             e'' 8 fis'' gis'' e'' fis'' gis''  |
-            fis'' 8 e'' dis'' e'' 4.  |
+            fis'' 8 cis'' dis'' e'' 4.  |
                         \once \override Staff.TimeSignature #'style = #'numbered 
             \time 3/4
             < fis'' dis'' > 2. -\f _\markup { \bold \italic "ritard." } \!  |
-            < e'' e' > 2. _~  |
+            < cis'' e' > 2. _~  |
 %% 215
-            < e'' e' > 2 < dis'' fis' > 4  |
-            < e' g' > 8 -\ff \sustainOn r r b' e'' g''  |
+            < cis'' e' > 2 < dis'' fis' > 4  |
+            < e' g' e'' > 8 -\ff \sustainOn r r b' e'' g''  |
             < b' d' > 8 r r d'' e'' b''  |
             < dis' fis' > 8 \sustainOn r r b' dis'' fis''  |
             < b' dis' > 8 r r dis'' fis'' b''  |
@@ -512,7 +512,7 @@ globalTempo = {
 %% 210
             e 8 gis b cis' b gis  |
             e 8 b gis b fis' dis'  |
-            b 8 a fis e 4.  |
+            b 8 gis fis e 4.  |
                         \once \override Staff.TimeSignature #'style = #'numbered 
             \time 3/4
             < b, fis > 2. -\f \!  |

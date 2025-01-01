@@ -269,9 +269,15 @@ globalTempo = {
 %% 220
             e' 2. \sustainOn  |
             gis' 8 b' e'' gis'' b'' e'''  |
-            < e' b > 8 r \sustainOff r4  |
+            < e' b > 8 -\accent r \sustainOff r4  |
             \bar "|."
         } % Voice
+        \new Lyrics \with {alignBelowContext="track 1"} \lyricsto "voice 3" { \lyricmode {
+            \override LyricText #'self-alignment-X = #CENTER
+            \set ignoreMelismata = ##t
+             _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "ко-" _ _ _ "заць-" _ _ _ "ко-" _ _ _ "го" _ _ _ "ро-" _ _ _ _ _ _ "ду." 
+            \unset ignoreMelismata
+        }} % Lyrics 1
     >> % Staff ends
 
     \context Staff = "track 2" << 
@@ -520,7 +526,7 @@ globalTempo = {
 %% 220
             < gis e > 8 \sustainOn gis,, b,, e, gis, b,  |
             R2.  |
-            < gis e > 8 r \sustainOff r4  |
+            < gis e > 8 -\accent r \sustainOff r4  |
             \bar "|."
         } % Voice
     >> % Staff (final) ends
@@ -529,6 +535,7 @@ globalTempo = {
 
 \layout {
     \context { \Staff \RemoveEmptyStaves }
+    \context { \GrandStaff \accepts "Lyrics" }
 }
 % uncomment to enable generating midi file from the lilypond source
 %     \midi {

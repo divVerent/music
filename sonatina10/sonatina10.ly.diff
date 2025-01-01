@@ -1,0 +1,330 @@
+--- sonatina10.ly.orig	2025-01-01 07:42:27.998878777 -0500
++++ sonatina10.ly	2025-01-01 18:31:01.938834560 -0500
+@@ -7,23 +7,20 @@
+     tagline = "Created using Rosegarden 22.12.1 and LilyPond"
+ }
+ \paper {
+-    ragged-bottom=##t
+ }
+-#(set-global-staff-size 21)
++#(set-global-staff-size 22)
+ #(set-default-paper-size "a4")
+-global = { 
++global = {
+     \time 1/4
+-    
++
+ }
+ globalTempo = {
+-    \tempo 4 = 120  \skip 4*2 \skip 2.*22 \skip 4*2 \skip 4*3 \skip 4*2 \skip 2.*38 \skip 4 \skip 4*2 \skip 2.*2 \skip 4 \skip 4*2 \skip 2.*23 \skip 4 \skip 4*3 \skip 4*2 \skip 2.*38 \skip 4 \skip 4*2 \skip 2.*2 \skip 4 \skip 8 \skip 4. \skip 2.*14 \skip 8*2 \skip 4. \skip 2. \skip 4. \skip 8 \skip 4*2 \skip 2.*23 \skip 8 \skip 4*3 \skip 4*2 \skip 2.*35 \skip 4 \skip 4*2 \skip 2.*2 \skip 4 
+-    \tempo 4 = 90  \skip 4*2 \skip 2.*5 \skip 4 
+-    \tempo 4 = 80  
++    \tempo 4 = 120
+ }
+ \score {
+     << % common
+ 
+-    \context Staff = "track 1" << 
++    \context Staff = "track 1" <<
+         \set Staff.midiInstrument = "Acoustic Grand Piano"
+         \set Score.skipBars = ##t
+         \set Staff.printKeyCancellation = ##t
+@@ -34,14 +31,14 @@
+             % Segment: Exposition
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+-            \once \override Staff.TimeSignature #'style = #'numbered 
++            \once \override Staff.TimeSignature #'style = #'numbered
+             \time 1/4
+-            
++
+             \repeat volta 2 {
+                 \clef "treble"
+                 \key e \major
+                 b' 4 -\mf ^\markup { \bold \large "Allegro moderato" }  |
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 3/4
+                 < e'' gis' > 4. _~ < gis'' gis' > 8 < e'' b' > 4  |
+                 < b' gis' > 4 _~ < e'' gis' > < cis'' e' >  |
+@@ -57,7 +54,7 @@
+                 < b' gis' > 4 _~ < e'' gis' > < cis'' e' >  |
+                 < e'' cis'' > 4. _~ < a'' cis'' > 8 < e'' b' > 4  |
+                 < cis'' fis' > 4 _~ < cis'' a' > < b' gis' >  |
+-                < e'' gis' > 4. \< _~ < gis'' gis' > 8 < e'' b' > 4 
++                < e'' gis' > 4. \< _~ < gis'' gis' > 8 < e'' b' > 4
+                 % warning: overlong bar truncated here |
+ %% 15
+                 < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis'' > 4  |
+@@ -85,7 +82,7 @@
+                 < e' cis'' > 8 _~ < e' b' > 4. _~ < e' b' > 8 _~ < e' ais' >  |
+                 < b' dis' > 2.  |
+ %% 35
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 6/8
+                 < b' dis' > 8 -\accent r r b' -\mp -\staccato b' -\staccato b' -\staccato  |
+                 b' 8 cis'' dis'' b' cis'' cisis''  |
+@@ -107,7 +104,7 @@
+ %% 50
+                 cis'' 8 dis'' e'' cis'' dis'' e''  |
+                 dis'' 8 cis'' ais' b' 4.  |
+-                b' 8 -\p cis'' dis'' b' \< cis'' cisis'' 
++                b' 8 -\p cis'' dis'' b' \< cis'' cisis''
+                 % warning: overlong bar truncated here |
+                 dis'' 8 e'' fis'' dis'' e'' fis''  |
+                 b' 8 cis'' dis'' b' cis'' dis''  |
+@@ -123,13 +120,14 @@
+                 b' 8 cis'' dis'' b' cis'' dis''  |
+                 e'' 8 fis'' gis'' e'' fis'' gis''  |
+                 fis'' 8 cis'' dis'' e'' 4.  |
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 3/4
+                 < fis'' dis'' > 2. -\f  |
+ %% 65
+                 < cis'' e' > 2. _\markup { \bold \italic "ritard." } _~  |
+                 < cis'' e' > 2 < dis'' fis' > 4  |
+                 < e'' gis' > 2. _~  |
++                \partial 2
+                 < e'' gis' > 2 _\markup { \bold \italic "a tempo" }  |
+             } % close repeat
+         } % Voice
+@@ -139,12 +137,13 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 4*201 
++            \skip 4*201
+ %% 135
+             \clef "treble"
+-            \key e \major
++            %\key e \major
++            \partial 4
+             b' 4 -\mf  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 6/8
+             \key e \minor
+             e'' 8 fis'' g'' e'' fis'' g''  |
+@@ -166,6 +165,8 @@
+ %% 150
+             < fis'' dis'' b' > 2 _\markup { \bold \italic "ritard." } < e'' b' g' > 4 _~  |
+             < e'' b' g' > 4 < d'' b' a' > 2  |
++            \key e \major
++            \partial 2
+             < e'' b' gis' > 2 _\markup { \bold \italic "a tempo" }  |
+         } % Voice
+ 
+@@ -174,11 +175,11 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 4*252 
++            \skip 4*252
+             \clef "treble"
+-            \key e \major
++            \partial 4
+             b' 4 -\mf  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 3/4
+             < e'' gis' > 4. _~ < gis'' gis' > 8 < e'' b' > 4  |
+             < b' gis' > 4 _~ < e'' gis' > < cis'' e' >  |
+@@ -195,7 +196,7 @@
+             < e'' cis'' > 4. _~ < a'' cis'' > 8 < e'' b' > 4  |
+             < cis'' fis' > 4 _~ < cis'' a' > < b' gis' >  |
+ %% 165
+-            < e'' gis' > 4. \< _~ < gis'' gis' > 8 < e'' b' > 4 
++            < e'' gis' > 4. \< _~ < gis'' gis' > 8 < e'' b' > 4
+             % warning: overlong bar truncated here |
+             < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis'' > 4  |
+             < b'' e'' > 8 -\f \! _~ < a'' e'' > _~ < a'' fis'' > _~ < a'' fis'' > _~ a'' dis''  |
+@@ -221,7 +222,7 @@
+             < a' fis'' > 8 _~ < a' e'' > 4. _~ < a' e'' > 8 _~ < a' dis'' >  |
+ %% 185
+             < e'' gis' > 2.  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 6/8
+             < e' gis > 8 -\accent r r e' -\mp -\staccato e' -\staccato e' -\staccato  |
+             e' 8 fis' gis' e' fis' fisis'  |
+@@ -243,7 +244,7 @@
+             a' 8 b' cis'' a' b' cis''  |
+             fis' 8 gis' a' fis' gis' a'  |
+             gis' 8 fis' dis' e' 4.  |
+-            e' 8 -\p fis' gis' e' \< fis' fisis' 
++            e' 8 -\p fis' gis' e' \< fis' fisis'
+             % warning: overlong bar truncated here |
+             gis' 8 a' b' gis' a' b'  |
+ %% 205
+@@ -256,7 +257,7 @@
+             gis'' 8 a'' b'' gis'' a'' b''  |
+             e'' 8 fis'' gis'' e'' fis'' gis''  |
+             fis'' 8 cis'' dis'' e'' 4.  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 3/4
+             < fis'' dis'' > 2. -\f _\markup { \bold \italic "ritard." } \!  |
+             < cis'' e' > 2. _~  |
+@@ -269,18 +270,19 @@
+ %% 220
+             e' 2. \sustainOn  |
+             gis' 8 b' e'' gis'' b'' e'''  |
++            \partial 2
+             < e' b > 8 -\accent r \sustainOff r4  |
+             \bar "|."
+         } % Voice
+         \new Lyrics \with {alignBelowContext="track 1"} \lyricsto "voice 3" { \lyricmode {
+             \override LyricText #'self-alignment-X = #CENTER
+             \set ignoreMelismata = ##t
+-             _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "ко-" _ _ _ "заць-" _ _ _ "ко-" _ _ _ "го" _ _ _ "ро-" _ _ _ _ _ _ "ду." 
++             _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ "ко-" _ _ _ "заць-" _ _ _ "ко-" _ _ _ "го" _ _ _ "ро-" _ _ _ _ _ _ "ду."
+             \unset ignoreMelismata
+         }} % Lyrics 1
+     >> % Staff ends
+ 
+-    \context Staff = "track 2" << 
++    \context Staff = "track 2" <<
+         \set Staff.midiInstrument = "Acoustic Grand Piano"
+         \set Score.skipBars = ##t
+         \set Staff.printKeyCancellation = ##t
+@@ -291,15 +293,15 @@
+             % Segment: Exposition
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+-            \once \override Staff.TimeSignature #'style = #'numbered 
++            \once \override Staff.TimeSignature #'style = #'numbered
+             \time 1/4
+-            
++
+             \repeat volta 2 {
+                 \clef "bass"
+                 \key e \major
+-                R4-\mp  
++                R4-\mp
+                 % warning: overlong bar truncated here |
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 3/4
+                 < e b > 2 < e gis > 4  |
+                 < e d' > 2 < cis' a > 4  |
+@@ -342,7 +344,7 @@
+                 < fis ais > 2 _~ < ais fis > 8 _~ < cis ais >  |
+                 < fis b, > 2.  |
+ %% 35
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 6/8
+                 < fis b, > 8 -\accent r r b, -\mp fis dis  |
+                 b, 8 fis dis e gis ais,  |
+@@ -364,7 +366,7 @@
+ %% 50
+                 cis' 8 gis e cis e gis  |
+                 b 8 fis cis b, 4.  |
+-                b, 8 -\p fis dis e \< gis ais, 
++                b, 8 -\p fis dis e \< gis ais,
+                 % warning: overlong bar truncated here |
+                 dis 8 fis ais b ais fis  |
+                 b, 8 fis dis b, fis dis  |
+@@ -380,13 +382,14 @@
+                 fis' 8 dis' b fis dis b,  |
+                 e 8 b gis b fis' dis'  |
+                 b 8 a fis e 4.  |
+-                                \once \override Staff.TimeSignature #'style = #'numbered 
++                                \once \override Staff.TimeSignature #'style = #'numbered
+                 \time 3/4
+                 < b, fis > 2. -\f  |
+ %% 65
+                 < a, cis > 4 _~ < cis gis, > _~ < gis, b, > _~  |
+                 < fis, b, > 4 _~ < fis, a, > < b, a >  |
+                 < e gis e, > 2. _~  |
++                \partial 2
+                 < gis e e, > 2  |
+             } % close repeat
+         } % Voice
+@@ -396,12 +399,13 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 4*201 
++            \skip 4*201
+ %% 135
+             \clef "bass"
+-            \key e \major
++            %\key e \major
++            \partial 4
+             r4  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 6/8
+             \key e \minor
+             r4 r fis, -\mf  |
+@@ -423,6 +427,8 @@
+ %% 150
+             a 4. g 8 e 4  |
+             b 8 -\ff a 2 dis 8  |
++            \key e \major
++            \partial 2
+             e 2  |
+         } % Voice
+ 
+@@ -431,12 +437,12 @@
+             \override Voice.TextScript #'padding = #2.0
+             \override MultiMeasureRest #'expand-limit = 1
+ 
+-            \skip 4*252 
++            \skip 4*252
+             \clef "bass"
+-            \key e \major
+-            r4-\mp  
++            \partial 4
++            r4-\mp
+             % warning: overlong bar truncated here |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 3/4
+             < e b > 2 < e gis > 4  |
+             < e d' > 2 < cis' a > 4  |
+@@ -478,7 +484,7 @@
+             < b dis > 2 _~ < dis b > 8 _~ < fis, dis >  |
+ %% 185
+             < b, e, > 2.  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 6/8
+             < b, e, > 8 -\accent r r e, -\mp b, gis,  |
+             e, 8 b, gis, a, cis dis,  |
+@@ -500,7 +506,7 @@
+             a, 8 cis e fis eis cis  |
+             fis 8 cis a, fis, a, cis  |
+             e 8 b, fis, e, 4.  |
+-            e, 8 -\p b, gis, a, \< cis dis, 
++            e, 8 -\p b, gis, a, \< cis dis,
+             % warning: overlong bar truncated here |
+             gis, 8 b, dis e dis b,  |
+ %% 205
+@@ -513,7 +519,7 @@
+             e 8 gis b cis' b gis  |
+             e 8 b gis b fis' dis'  |
+             b 8 gis fis e 4.  |
+-                        \once \override Staff.TimeSignature #'style = #'numbered 
++                        \once \override Staff.TimeSignature #'style = #'numbered
+             \time 3/4
+             < b, fis > 2. -\f \!  |
+             < a, cis > 4 _~ < gis, cis > _~ < gis, b, > _~  |
+@@ -526,6 +532,7 @@
+ %% 220
+             < gis e > 8 \sustainOn gis,, b,, e, gis, b,  |
+             R2.  |
++            \partial 2
+             < gis e > 8 -\accent r \sustainOff r4  |
+             \bar "|."
+         } % Voice
+@@ -539,5 +546,5 @@
+ }
+ % uncomment to enable generating midi file from the lilypond source
+ %     \midi {
+-%     } 
++%     }
+ } % score

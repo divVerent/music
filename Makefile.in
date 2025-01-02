@@ -386,6 +386,17 @@ distclean: clean
 realclean: distclean
 	$(RM) $(SECONDARY)
 
+dist: $(OUTPUT) ratings.txt
+	$(RM) -r $@
+	mkdir -p $@
+	while read -r track best _; do \
+		$(CP) -v "$$track.pdf" "$@"/; \
+		$(CP) -v "$$track.png" "$@"/; \
+		$(CP) -v "$$track.txt" "$@"/; \
+		for f in $(OUTFORMATS); do \
+			$(CP) -v "$$track-$$best.$$f" "$@"/; \
+		done; \
+	done < ratings.txt
 
 # global options
 .EXPORT_ALL_VARIABLES:

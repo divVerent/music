@@ -49,7 +49,7 @@ globalTempo = {
 %% 5
                 < cis'' fis' > 4 _~ < cis'' a' > < b' gis' >  |
                 < e'' gis' > 4. _~ < gis'' gis' > 8 < e'' b' > 4  |
-                < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis' > 4  |
+                < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis'' > 4  |
                 < dis'' dis' > 4 < fis'' cis' > < dis'' fis' >  |
                 < e'' e' > 2 b' 4  |
 %% 10
@@ -186,7 +186,7 @@ globalTempo = {
             < e'' cis'' > 4. _~ < a'' cis'' > 8 < e'' b' > 4  |
             < cis'' fis' > 4 _~ < cis'' a' > < b' gis' >  |
             < e'' gis' > 4. _~ < gis'' gis' > 8 < e'' b' > 4  |
-            < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis' > 4  |
+            < a'' cis'' > 4. _~ < gis'' cis'' > 8 < fis'' dis'' > 4  |
             < dis'' dis' > 4 < fis'' cis' > < dis'' fis' >  |
 %% 160
             < e'' e' > 2 b' 4  |

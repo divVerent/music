@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rosegarden-data>
 <rosegarden-data version="22.12.1" format-version-major="1" format-version-minor="6" format-version-point="9">
-<composition recordtracks="" pointer="478578" defaultTempo="120.0000" compositionDefaultTempo="12000000" islooping="0" loopmode="0" loopstart2="0" loopend2="0" startMarker="0" endMarker="637440" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0" notationspacing="85" editorfollowplayback="1" mainfollowplayback="1">
+<composition recordtracks="" pointer="528015" defaultTempo="120.0000" compositionDefaultTempo="12000000" islooping="0" loopmode="0" loopstart2="0" loopend2="0" startMarker="0" endMarker="637440" selected="0" playmetronome="0" recordmetronome="1" nexttriggerid="0" panlaw="0" notationspacing="85" editorfollowplayback="1" mainfollowplayback="1">
 
 
   <track id="0" label="" shortLabel="" position="0" muted="false" archived="false" solo="false" instrument="2000" defaultLabel="" defaultClef="0" defaultTranspose="0" defaultColour="0" defaultHighestPlayable="127" defaultLowestPlayable="0" staffSize="0" staffBracket="0" inputDevice="10001" inputChannel="-1" thruRouting="0"/>
@@ -168,7 +168,7 @@
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="78"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
-	<event type="note" duration="960"><property name="pitch" int="63"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
+	<event type="note" duration="960"><property name="pitch" int="75"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="75"/><property name="velocity" int="100"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
@@ -810,7 +810,7 @@
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="78"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="8"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
-	<event type="note" duration="960"><property name="pitch" int="63"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="-1"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
+	<event type="note" duration="960"><property name="pitch" int="75"/><property name="velocity" int="93"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="75"/><property name="velocity" int="100"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>

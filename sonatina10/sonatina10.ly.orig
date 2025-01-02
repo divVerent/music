@@ -382,7 +382,7 @@ globalTempo = {
                 b 8 a fis e 4.  |
                                 \once \override Staff.TimeSignature #'style = #'numbered 
                 \time 3/4
-                < b, fis > 2. -\f  |
+                < b, dis > 2. -\f  |
 %% 65
                 < a, cis > 4 _~ < cis gis, > _~ < gis, b, > _~  |
                 < fis, b, > 4 _~ < fis, a, > < b, a >  |
@@ -515,7 +515,7 @@ globalTempo = {
             b 8 gis fis e 4.  |
                         \once \override Staff.TimeSignature #'style = #'numbered 
             \time 3/4
-            < b, fis > 2. -\f \!  |
+            < b, dis > 2. -\f \!  |
             < a, cis > 4 _~ < gis, cis > _~ < gis, b, > _~  |
 %% 215
             < b, fis, > 4 _~ < fis, a, > < b, a >  |

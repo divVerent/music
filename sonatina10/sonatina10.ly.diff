@@ -1,5 +1,5 @@
---- sonatina10.ly.orig	2025-01-01 19:40:38.585672076 -0500
-+++ sonatina10.ly	2025-01-01 19:43:49.328357769 -0500
+--- sonatina10.ly.orig	2025-01-01 21:24:26.100326466 -0500
++++ sonatina10.ly	2025-01-01 21:25:01.628634905 -0500
 @@ -7,23 +7,20 @@
      tagline = "Created using Rosegarden 22.12.1 and LilyPond"
  }
@@ -234,7 +234,7 @@
 -                                \once \override Staff.TimeSignature #'style = #'numbered 
 +                                \once \override Staff.TimeSignature #'style = #'numbered
                  \time 3/4
-                 < b, fis > 2. -\f  |
+                 < b, dis > 2. -\f  |
  %% 65
                  < a, cis > 4 _~ < cis gis, > _~ < gis, b, > _~  |
                  < fis, b, > 4 _~ < fis, a, > < b, a >  |
@@ -311,7 +311,7 @@
 -                        \once \override Staff.TimeSignature #'style = #'numbered 
 +                        \once \override Staff.TimeSignature #'style = #'numbered
              \time 3/4
-             < b, fis > 2. -\f \!  |
+             < b, dis > 2. -\f \!  |
              < a, cis > 4 _~ < gis, cis > _~ < gis, b, > _~  |
 @@ -526,6 +532,7 @@
  %% 220

@@ -1754,7 +1754,7 @@
 	<event type="text" subordering="-70"><property name="text" string="f"/><property name="type" string="dynamic"/></event>
 <chord>
 	<event type="note" duration="2880"><property name="pitch" int="47"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
-	<event type="note" duration="2880"><property name="pitch" int="54"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
+	<event type="note" duration="2880"><property name="pitch" int="51"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="4"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="45"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
@@ -2321,7 +2321,7 @@
 	<event type="text" subordering="-70"><property name="text" string="f"/><property name="type" string="dynamic"/></event>
 <chord>
 	<event type="note" duration="2880"><property name="pitch" int="47"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="2"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
-	<event type="note" duration="2880"><property name="pitch" int="54"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="6"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
+	<event type="note" duration="2880"><property name="pitch" int="51"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="4"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="5"/><nproperty name="notedots" int="1"/></event>
 </chord>
 <chord>
 	<event type="note" duration="960"><property name="pitch" int="45"/><property name="velocity" int="117"/><nproperty name="HeightOnStaff" int="1"/><nproperty name="OttavaShift" int="0"/><nproperty name="notetype" int="4"/><nproperty name="notedots" int="0"/></event>
